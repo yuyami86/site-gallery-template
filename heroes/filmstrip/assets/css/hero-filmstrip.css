@@ -1,0 +1,14 @@
+/* 写真が流れる（src/parts/hero/filmstrip） */
+.hv-film{padding:64px 0 72px}
+.hv-film-head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,5vw,80px);align-items:end}
+.hv-film-title,.hv-film-text{min-width:0}
+.hv-film .hv-title{margin-bottom:0;font-size:clamp(42px,5.4vw,86px)}
+.hv-film-strip{margin-top:56px;overflow:hidden}
+.hv-film-track{display:flex;width:max-content;animation:hvFilm 60s linear infinite}
+.hv-film-copy{display:flex}
+.hv-film-strip:hover .hv-film-track{animation-play-state:paused}
+.hv-film-item{flex:none;width:clamp(220px,24vw,360px);aspect-ratio:3/4;margin:0 16px 0 0;border-radius:6px}
+@keyframes hvFilm{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.hv-film-track{animation:none}.hv-film-strip{overflow-x:auto}}
+@media(max-width:860px){.hv-film-head{grid-template-columns:minmax(0,1fr);gap:20px}}
+@media(max-width:700px){.hv-film{padding:40px 0 56px}.hv-film-strip{margin-top:40px}.hv-film-item{width:62vw;margin-right:10px}}

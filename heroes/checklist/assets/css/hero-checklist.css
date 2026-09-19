@@ -1,0 +1,18 @@
+/* お悩みチェック（src/parts/hero/checklist） */
+.hv-check{padding:56px 0 80px}
+.hv-check-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(36px,5vw,80px);align-items:center}
+.hv-check-copy{min-width:0}
+.hv-check-box{margin:20px 0 28px;padding:22px 26px;border-radius:8px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px color-mix(in srgb,var(--ink) 6%,transparent)}
+.hv-check-q{margin:0 0 10px;font-size:15px;font-weight:800;color:var(--sage);overflow-wrap:anywhere}
+.hv-check-box ul{margin:0;padding:0;list-style:none}
+.hv-check-box li{position:relative;padding:7px 0 7px 32px;font-size:15px;font-weight:600;line-height:1.6;border-top:1px dashed var(--line);overflow-wrap:anywhere}
+.hv-check-box li:first-child{border-top:0}
+.hv-check-box li::before{content:"";position:absolute;left:0;top:9px;width:20px;height:20px;border-radius:5px;background:var(--sage)}
+.hv-check-box li::after{content:"";position:absolute;left:7px;top:12px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.hv-check .hv-title{margin:0 0 18px;font-size:clamp(36px,4.4vw,66px)}
+.hv-check-photo{aspect-ratio:4/5;border-radius:8px}
+@media(max-width:860px){
+  .hv-check-grid{grid-template-columns:minmax(0,1fr);gap:32px}
+  .hv-check-photo{order:-1;aspect-ratio:16/10}
+}
+@media(max-width:700px){.hv-check{padding:28px 0 60px}.hv-check-box{padding:18px 18px}.hv-check-box li{font-size:14px}.hv-check .hv-title{font-size:clamp(32px,9.4vw,46px)}}

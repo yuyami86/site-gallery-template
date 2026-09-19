@@ -1,0 +1,9 @@
+/* 2列カード（src/parts/faq/cards） */
+.fc{background:var(--paper2)}
+.fc-head{margin-left:auto;margin-right:auto;text-align:center}
+.fc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fc-card{min-width:0;padding:26px 28px;border-radius:12px;background:#fff}
+.fc-card h3{position:relative;margin:0 0 12px;padding-left:44px;font-size:17px;font-weight:700;line-height:1.6;overflow-wrap:anywhere}
+.fc-q{position:absolute;left:0;top:-2px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--sage);color:#fff;font-size:14px;font-weight:800}
+.fc-card p{margin:0;padding-left:44px;color:var(--muted);font-size:14px;line-height:1.85;overflow-wrap:anywhere}
+@media(max-width:760px){.fc-grid{grid-template-columns:minmax(0,1fr)}.fc-card{padding:20px 18px}.fc-card h3,.fc-card p{padding-left:40px}}

@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Section Collection｜セクションのデザイン</title>
+<meta name="description" content="ファーストビューより下の部分の見本です。セクションごとに、ほかの見本と組み合わせられます。">
+<meta name="theme-color" content="#f6f5f1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --bg:#f6f5f1;--surface:#ffffff;--ink:#161614;--muted:#64645e;--line:#e1dfd8;--chip:#ecebe5;--accent:#161614;--accent-ink:#ffffff;
+  --shadow:0 1px 2px rgba(20,20,15,.05),0 12px 32px rgba(20,20,15,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#121211;--surface:#1b1b19;--ink:#f1f0ea;--muted:#a3a29a;--line:#2c2c29;--chip:#262623;--accent:#f1f0ea;--accent-ink:#121211;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.25)}
+}
+:root[data-theme="dark"]{--bg:#121211;--surface:#1b1b19;--ink:#f1f0ea;--muted:#a3a29a;--line:#2c2c29;--chip:#262623;--accent:#f1f0ea;--accent-ink:#121211;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.25)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;line-height:1.75;overflow-wrap:anywhere}
+a{color:inherit}
+.wrap{width:min(1200px,calc(100% - 32px));margin:0 auto}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;padding-top:20px}
+.tabs a{padding:8px 14px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;color:var(--muted)}
+.tabs a[aria-current="page"]{background:var(--chip);color:var(--ink)}
+header.top{padding:56px 0 36px}
+.kicker{font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+/* 大きな見出しは英単語ひとつ */
+h1{margin:10px 0 22px;font-size:clamp(40px,12.5vw,168px);line-height:.92;letter-spacing:-.05em;font-weight:800;overflow-wrap:anywhere}
+h1 span{display:inline-block;max-width:100%}
+.lead{max-width:680px;margin:0;color:var(--muted);font-size:15px}
+.count{margin:22px 0 0;font:600 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:var(--muted)}
+.filters{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip:focus-visible,.button:focus-visible,.preview:focus-visible,.tabs a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+main{padding:32px 0 80px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.card{display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.card[hidden]{display:none}
+.preview{position:relative;display:block;aspect-ratio:16/10;background:var(--chip);overflow:hidden;border-bottom:1px solid var(--line)}
+.shot-pc{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.22,.72,.2,1)}
+.preview:hover .shot-pc{transform:scale(1.02)}
+.shot-empty{display:grid;place-items:center;height:100%;font-weight:700;color:var(--muted)}
+.phone{position:absolute;right:5%;bottom:-14%;width:22%;aspect-ratio:390/844;border:5px solid #111;border-radius:18px;overflow:hidden;background:#111;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.card-body{display:flex;flex-direction:column;gap:10px;padding:22px 24px 24px;flex:1}
+.card-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.id{font:600 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;padding:2px 8px;border-radius:6px;background:var(--chip)}
+.industry{font-size:12px;color:var(--muted);font-weight:600}
+.card h2{margin:0;font-size:22px;line-height:1.35}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.card p.need{font-size:12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0;padding:0;list-style:none}
+.tags li{font-size:12px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.card-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:10px}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
+.button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+dialog{width:min(1280px,calc(100% - 24px));height:calc(100dvh - 24px);max-height:none;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--ink)}
+dialog::backdrop{background:rgba(10,10,8,.55)}
+.viewer{display:flex;flex-direction:column;height:100%}
+.viewer-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.viewer-title{flex:1;min-width:0;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-bar .button{min-height:34px;padding:0 12px;font-size:12px}
+.viewer-bar .button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.viewer-stage{flex:1;display:flex;justify-content:center;overflow:auto;padding:16px;background:var(--chip)}
+.viewer-stage iframe{width:100%;height:100%;border:0;border-radius:10px;background:#fff;box-shadow:var(--shadow)}
+.viewer-stage.is-sp iframe{width:390px;max-width:100%;border-radius:28px;border:8px solid #111}
+@media (max-width:760px){
+  header.top{padding:36px 0 20px}
+  .chip{padding:7px 13px;font-size:12px}
+  .grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  .card-body{padding:18px 18px 20px}
+  .viewer-stage{padding:0}
+  .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
+  .viewer-mode{display:none}
+}
+</style>
+</head>
+<body>
+<nav class="wrap tabs" aria-label="一覧の切り替え">
+  <a href="/site-gallery-template/">サイト全体</a>
+  <a href="/site-gallery-template/heroes/">ファーストビュー</a>
+  <a href="/site-gallery-template/sections/" aria-current="page">セクション</a>
+</nav>
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">料金・写真・流れ・アクセスなど</div>
+    <h1><span>SECTIONS</span></h1>
+    <p class="lead">ファーストビューより下の部分の見本です。セクションごとに、ほかの見本と組み合わせられます。</p>
+  </div>
+</header>
+<nav class="filters" aria-label="業種で絞り込む">
+  <div class="wrap">
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">すべて</button>
+    <button class="chip" type="button" data-filter="concept" aria-pressed="false">考え方</button>
+    <button class="chip" type="button" data-filter="method" aria-pressed="false">特徴・こだわり</button>
+    <button class="chip" type="button" data-filter="training" aria-pressed="false">写真と一言</button>
+    <button class="chip" type="button" data-filter="trainer" aria-pressed="false">人物紹介</button>
+    <button class="chip" type="button" data-filter="flow" aria-pressed="false">流れ</button>
+    <button class="chip" type="button" data-filter="price" aria-pressed="false">料金</button>
+    <button class="chip" type="button" data-filter="menu" aria-pressed="false">メニュー表</button>
+    <button class="chip" type="button" data-filter="gallery" aria-pressed="false">写真ギャラリー</button>
+    <button class="chip" type="button" data-filter="visit" aria-pressed="false">アクセス</button>
+    <button class="chip" type="button" data-filter="faq" aria-pressed="false">よくある質問</button>
+    <button class="chip" type="button" data-filter="contact" aria-pressed="false">お問い合わせ</button>
+    <button class="chip" type="button" data-filter="journal" aria-pressed="false">ブログ・お知らせ</button>
+  </div>
+</nav>
+<main>
+  <div class="wrap grid">
+<article class="card" data-category="concept">
+  <a class="preview" href="../samples/fitness-01/#concept" aria-label="考え方：標準 を開く">
+    <img class="shot-pc" src="concept-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="concept-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">concept-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>考え方：標準</h2>
+    <p>見出しを左、3つの段落を右に並べる基本の形。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#concept">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#concept" data-title="concept-standard 考え方：標準">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="concept">
+  <a class="preview" href="../samples/beauty-01/#concept" aria-label="考え方：写真つき を開く">
+    <img class="shot-pc" src="concept-photo/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="concept-photo/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">concept-photo</span><span class="industry">例: beauty-01</span></div>
+    <h2>考え方：写真つき</h2>
+    <p>考え方の文章の横に、お店の雰囲気が伝わる写真を大きく置く。文章だけより、人柄や空気感が伝わる形。</p>
+    
+    <ul class="tags"><li>飲食店</li><li>美容室</li><li>工務店</li><li>教室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/beauty-01/#concept">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/beauty-01/#concept" data-title="concept-photo 考え方：写真つき">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="concept">
+  <a class="preview" href="../samples/apparel-01/#concept" aria-label="考え方：中央寄せ を開く">
+    <img class="shot-pc" src="concept-centered/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="concept-centered/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">concept-centered</span><span class="industry">例: apparel-01</span></div>
+    <h2>考え方：中央寄せ</h2>
+    <p>見出しと文章を中央にそろえ、上下の余白を大きくとる。想いを一つずつ、静かに伝える形。</p>
+    
+    <ul class="tags"><li>アパレル</li><li>和菓子・工芸</li><li>ネイル</li><li>士業</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/apparel-01/#concept">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/apparel-01/#concept" data-title="concept-centered 考え方：中央寄せ">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="method">
+  <a class="preview" href="../samples/fitness-01/#method" aria-label="特徴・こだわり：カード を開く">
+    <img class="shot-pc" src="method-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="method-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">method-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>特徴・こだわり：カード</h2>
+    <p>3つの特徴を、番号つきのカードで横に並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#method">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#method" data-title="method-standard 特徴・こだわり：カード">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="method">
+  <a class="preview" href="../samples/realestate-01/#method" aria-label="特徴・こだわり：写真と交互 を開く">
+    <img class="shot-pc" src="method-zigzag/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="method-zigzag/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">method-zigzag</span><span class="industry">例: realestate-01</span></div>
+    <h2>特徴・こだわり：写真と交互</h2>
+    <p>特徴ごとに写真を付け、左右を入れ替えながら並べる。こだわりやサービス内容を、写真でしっかり見せる形。</p>
+    
+    <ul class="tags"><li>不動産</li><li>飲食店</li><li>工務店</li><li>美容室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/realestate-01/#method">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/realestate-01/#method" data-title="method-zigzag 特徴・こだわり：写真と交互">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="method">
+  <a class="preview" href="../samples/apparel-01/#method" aria-label="特徴・こだわり：番号リスト を開く">
+    <img class="shot-pc" src="method-list/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="method-list/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">method-list</span><span class="industry">例: apparel-01</span></div>
+    <h2>特徴・こだわり：番号リスト</h2>
+    <p>大きな番号・見出し・説明を、線で区切って1行ずつ並べる。飾りを抑えた、シンプルで読みやすい形。</p>
+    
+    <ul class="tags"><li>士業</li><li>アパレル</li><li>設計事務所</li><li>コンサル</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/apparel-01/#method">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/apparel-01/#method" data-title="method-list 特徴・こだわり：番号リスト">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="training">
+  <a class="preview" href="../samples/fitness-01/#training" aria-label="写真と一言：写真と一言 を開く">
+    <img class="shot-pc" src="training-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="training-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">training-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>写真と一言：写真と一言</h2>
+    <p>縦長の写真と短い一言を、テーマ色の帯の上に並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#training">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#training" data-title="training-standard 写真と一言：写真と一言">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="trainer">
+  <a class="preview" href="../samples/fitness-01/#trainer" aria-label="人物紹介：写真と紹介 を開く">
+    <img class="shot-pc" src="trainer-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="trainer-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">trainer-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>人物紹介：写真と紹介</h2>
+    <p>写真の横に、名前・経歴・一言・想い（開閉式）を並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#trainer">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#trainer" data-title="trainer-standard 人物紹介：写真と紹介">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="trainer">
+  <a class="preview" href="../samples/realestate-01/#trainer" aria-label="人物紹介：代表あいさつ を開く">
+    <img class="shot-pc" src="trainer-message/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="trainer-message/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">trainer-message</span><span class="industry">例: realestate-01</span></div>
+    <h2>人物紹介：代表あいさつ</h2>
+    <p>手紙のように、一言・あいさつ文・想いを中央にまとめ、最後に写真と名前を添える。信頼感を大切にしたい業種に。</p>
+    
+    <ul class="tags"><li>士業</li><li>不動産</li><li>工務店</li><li>整体・クリニック</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/realestate-01/#trainer">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/realestate-01/#trainer" data-title="trainer-message 人物紹介：代表あいさつ">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="flow">
+  <a class="preview" href="../samples/beauty-01/#flow" aria-label="流れ：3列 を開く">
+    <img class="shot-pc" src="flow-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="flow-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">flow-standard</span><span class="industry">例: beauty-01</span></div>
+    <h2>流れ：3列</h2>
+    <p>ステップを3列の枠で横に並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/beauty-01/#flow">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/beauty-01/#flow" data-title="flow-standard 流れ：3列">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="flow">
+  <a class="preview" href="../samples/fitness-01/#flow" aria-label="流れ：縦のタイムライン を開く">
+    <img class="shot-pc" src="flow-timeline/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="flow-timeline/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">flow-timeline</span><span class="industry">例: fitness-01</span></div>
+    <h2>流れ：縦のタイムライン</h2>
+    <p>ステップを縦の線でつないで、上から順に読ませる。手順が多くても、流れがひと目でわかる形。</p>
+    
+    <ul class="tags"><li>整体・クリニック</li><li>リフォーム</li><li>ペットサロン</li><li>士業</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#flow">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#flow" data-title="flow-timeline 流れ：縦のタイムライン">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="flow">
+  <a class="preview" href="../samples/reform-01/#flow" aria-label="流れ：矢印でつなぐ を開く">
+    <img class="shot-pc" src="flow-arrows/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="flow-arrows/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">flow-arrows</span><span class="industry">例: reform-01</span></div>
+    <h2>流れ：矢印でつなぐ</h2>
+    <p>ステップのカードを矢印でつないで並べる。予約から当日までの手順を、テンポよく見せる形。</p>
+    
+    <ul class="tags"><li>学習塾</li><li>リフォーム</li><li>教室</li><li>ネット予約のお店</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/reform-01/#flow">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/reform-01/#flow" data-title="flow-arrows 流れ：矢印でつなぐ">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="price">
+  <a class="preview" href="../samples/bodycare-01/#price" aria-label="料金：暗い背景のカード を開く">
+    <img class="shot-pc" src="price-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="price-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">price-standard</span><span class="industry">例: bodycare-01</span></div>
+    <h2>料金：暗い背景のカード</h2>
+    <p>暗い背景に、料金プランのカードを並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/bodycare-01/#price">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/bodycare-01/#price" data-title="price-standard 料金：暗い背景のカード">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="price">
+  <a class="preview" href="../samples/beauty-01/#price" aria-label="料金：料金表 を開く">
+    <img class="shot-pc" src="price-table/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="price-table/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">price-table</span><span class="industry">例: beauty-01</span></div>
+    <h2>料金：料金表</h2>
+    <p>プラン名・内容・金額を、明るい背景の表で並べる。クリニックやサロンのような、きちんとした印象に。</p>
+    
+    <ul class="tags"><li>美容室・エステ</li><li>整体</li><li>士業</li><li>クリニック</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/beauty-01/#price">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/beauty-01/#price" data-title="price-table 料金：料金表">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="price">
+  <a class="preview" href="../samples/fitness-01/#price" aria-label="料金：明るいカード を開く">
+    <img class="shot-pc" src="price-simple/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="price-simple/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">price-simple</span><span class="industry">例: fitness-01</span></div>
+    <h2>料金：明るいカード</h2>
+    <p>明るい背景に白いカードで料金を並べ、おすすめのプランに帯を付ける。親しみやすく選びやすい形。</p>
+    
+    <ul class="tags"><li>ジム・教室</li><li>学習塾</li><li>ペットサロン</li><li>カフェの教室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#price">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#price" data-title="price-simple 料金：明るいカード">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="menu">
+  <a class="preview" href="../samples/food-01/#menu" aria-label="メニュー表：お品書き を開く">
+    <img class="shot-pc" src="menu-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="menu-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">menu-standard</span><span class="industry">例: food-01</span></div>
+    <h2>メニュー表：お品書き</h2>
+    <p>カテゴリごとに、品名と金額を点線でつないで並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/food-01/#menu">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/food-01/#menu" data-title="menu-standard メニュー表：お品書き">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="gallery">
+  <a class="preview" href="../samples/food-01/#gallery" aria-label="写真ギャラリー：格子 を開く">
+    <img class="shot-pc" src="gallery-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="gallery-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">gallery-standard</span><span class="industry">例: food-01</span></div>
+    <h2>写真ギャラリー：格子</h2>
+    <p>写真と説明を、同じ大きさの格子状に並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/food-01/#gallery">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/food-01/#gallery" data-title="gallery-standard 写真ギャラリー：格子">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="gallery">
+  <a class="preview" href="../samples/apparel-01/#gallery" aria-label="写真ギャラリー：高さ違いのタイル を開く">
+    <img class="shot-pc" src="gallery-masonry/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="gallery-masonry/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">gallery-masonry</span><span class="industry">例: apparel-01</span></div>
+    <h2>写真ギャラリー：高さ違いのタイル</h2>
+    <p>写真の高さを少しずつ変えて、ずらして並べる。SNSのような、にぎやかで楽しい印象。</p>
+    
+    <ul class="tags"><li>アパレル</li><li>ネイル・美容室</li><li>カフェ</li><li>写真館</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/apparel-01/#gallery">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/apparel-01/#gallery" data-title="gallery-masonry 写真ギャラリー：高さ違いのタイル">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="gallery">
+  <a class="preview" href="../samples/beauty-01/#gallery" aria-label="写真ギャラリー：横スクロール を開く">
+    <img class="shot-pc" src="gallery-carousel/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="gallery-carousel/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">gallery-carousel</span><span class="industry">例: beauty-01</span></div>
+    <h2>写真ギャラリー：横スクロール</h2>
+    <p>写真のカードを横一列に並べ、指でめくったり矢印で送ったりする。事例や商品が多くても場所をとらない形。</p>
+    
+    <ul class="tags"><li>リフォーム・工務店</li><li>不動産</li><li>アパレル</li><li>旅館</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/beauty-01/#gallery">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/beauty-01/#gallery" data-title="gallery-carousel 写真ギャラリー：横スクロール">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="visit">
+  <a class="preview" href="../samples/fitness-01/#visit" aria-label="アクセス：地図と並べる を開く">
+    <img class="shot-pc" src="visit-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="visit-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">visit-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>アクセス：地図と並べる</h2>
+    <p>所在地・営業時間などの一覧と、地図を左右に並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#visit">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#visit" data-title="visit-standard アクセス：地図と並べる">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="visit">
+  <a class="preview" href="../samples/bodycare-01/#visit" aria-label="アクセス：営業時間表つき を開く">
+    <img class="shot-pc" src="visit-schedule/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="visit-schedule/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">visit-schedule</span><span class="industry">例: bodycare-01</span></div>
+    <h2>アクセス：営業時間表つき</h2>
+    <p>曜日ごとの営業時間を○×の表で見せ、その下に地図を大きく置く。午前・午後で受付が違うお店に。</p>
+    
+    <ul class="tags"><li>整体・整骨院</li><li>クリニック・歯科</li><li>美容室</li><li>教室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/bodycare-01/#visit">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/bodycare-01/#visit" data-title="visit-schedule アクセス：営業時間表つき">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="faq">
+  <a class="preview" href="../samples/fitness-01/#faq" aria-label="よくある質問：開閉式 を開く">
+    <img class="shot-pc" src="faq-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="faq-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">faq-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>よくある質問：開閉式</h2>
+    <p>質問を押すと答えが開く一覧。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#faq">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#faq" data-title="faq-standard よくある質問：開閉式">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="faq">
+  <a class="preview" href="../samples/apparel-01/#faq" aria-label="よくある質問：2列カード を開く">
+    <img class="shot-pc" src="faq-cards/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="faq-cards/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">faq-cards</span><span class="industry">例: apparel-01</span></div>
+    <h2>よくある質問：2列カード</h2>
+    <p>質問と答えを、最初から開いた状態のカードで2列に並べる。押さなくても読めるので、よく読まれる形。最大6件。</p>
+    
+    <ul class="tags"><li>学習塾</li><li>ペットサロン</li><li>リフォーム</li><li>アパレル</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/apparel-01/#faq">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/apparel-01/#faq" data-title="faq-cards よくある質問：2列カード">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="contact">
+  <a class="preview" href="../samples/fitness-01/#contact" aria-label="お問い合わせ：標準 を開く">
+    <img class="shot-pc" src="contact-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="contact-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">contact-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>お問い合わせ：標準</h2>
+    <p>案内の項目と、問い合わせボタンを並べる。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#contact">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#contact" data-title="contact-standard お問い合わせ：標準">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="contact">
+  <a class="preview" href="../samples/food-01/#contact" aria-label="お問い合わせ：電話を大きく を開く">
+    <img class="shot-pc" src="contact-band/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="contact-band/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">contact-band</span><span class="industry">例: food-01</span></div>
+    <h2>お問い合わせ：電話を大きく</h2>
+    <p>濃い色の帯に、電話番号と受付時間を大きく表示し、その下にほかのボタンを並べる。電話でのご予約・ご相談が多いお店に。</p>
+    
+    <ul class="tags"><li>飲食店</li><li>整体・クリニック</li><li>工務店</li><li>士業</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/food-01/#contact">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/food-01/#contact" data-title="contact-band お問い合わせ：電話を大きく">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="journal">
+  <a class="preview" href="../samples/fitness-01/#journal" aria-label="ブログ・お知らせ：横スクロールのカード を開く">
+    <img class="shot-pc" src="journal-standard/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="journal-standard/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">journal-standard</span><span class="industry">例: fitness-01</span></div>
+    <h2>ブログ・お知らせ：横スクロールのカード</h2>
+    <p>ブログ記事をカードで横に並べ、矢印で送る。</p>
+    
+    <ul class="tags"></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/fitness-01/#journal">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/fitness-01/#journal" data-title="journal-standard ブログ・お知らせ：横スクロールのカード">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="journal">
+  <a class="preview" href="../samples/food-01/#journal" aria-label="ブログ・お知らせ：お知らせリスト を開く">
+    <img class="shot-pc" src="journal-list/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="journal-list/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">journal-list</span><span class="industry">例: food-01</span></div>
+    <h2>ブログ・お知らせ：お知らせリスト</h2>
+    <p>日付・カテゴリ・タイトルを1行ずつ並べる、すっきりしたお知らせ欄。営業日や入荷のお知らせが中心のお店に。</p>
+    
+    <ul class="tags"><li>飲食店・カフェ</li><li>士業</li><li>クリニック</li><li>教室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="../samples/food-01/#journal">使用例を見る</a>
+      <button class="button" type="button" data-preview="../samples/food-01/#journal" data-title="journal-list ブログ・お知らせ：お知らせリスト">スマホで見る</button>
+    </div>
+  </div>
+</article>
+  </div>
+</main>
+<footer><div class="wrap">掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</div></footer>
+<dialog id="viewer" aria-label="サンプルの表示">
+  <div class="viewer">
+    <div class="viewer-bar">
+      <span class="viewer-title" id="viewerTitle"></span>
+      <button class="button viewer-mode" type="button" data-mode="pc" aria-pressed="false">PC</button>
+      <button class="button viewer-mode" type="button" data-mode="sp" aria-pressed="true">スマホ</button>
+      <a class="button" id="viewerOpen" href="#" target="_blank" rel="noopener">新しいタブ</a>
+      <button class="button" type="button" id="viewerClose">閉じる</button>
+    </div>
+    <div class="viewer-stage is-sp" id="viewerStage"><iframe id="viewerFrame" title="サンプルサイト"></iframe></div>
+  </div>
+</dialog>
+<script>
+(() => {
+  const chips = [...document.querySelectorAll('.chip')];
+  const cards = [...document.querySelectorAll('.card')];
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    const f = chip.dataset.filter;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+    cards.forEach(card => { card.hidden = f !== 'all' && card.dataset.category !== f; });
+  }));
+  const dialog = document.getElementById('viewer');
+  const frame = document.getElementById('viewerFrame');
+  const stage = document.getElementById('viewerStage');
+  const modes = [...document.querySelectorAll('.viewer-mode')];
+  const setMode = mode => { stage.classList.toggle('is-sp', mode === 'sp'); modes.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode))); };
+  modes.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  document.querySelectorAll('[data-preview]').forEach(btn => btn.addEventListener('click', () => {
+    frame.src = btn.dataset.preview;
+    document.getElementById('viewerTitle').textContent = btn.dataset.title;
+    document.getElementById('viewerOpen').href = btn.dataset.preview;
+    setMode('sp');
+    if (typeof dialog.showModal === 'function') dialog.showModal(); else location.href = btn.dataset.preview;
+  }));
+  const close = () => { dialog.close(); frame.src = 'about:blank'; };
+  document.getElementById('viewerClose').addEventListener('click', close);
+  dialog.addEventListener('click', e => { if (e.target === dialog) close(); });
+  dialog.addEventListener('cancel', () => { frame.src = 'about:blank'; });
+})();
+</script>
+</body>
+</html>

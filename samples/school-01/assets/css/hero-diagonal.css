@@ -1,0 +1,16 @@
+/* 斜め分割（src/parts/hero/diagonal） */
+.hv-diag,.hv.is-dark.hv-diag{display:flex;align-items:center;min-height:calc(100svh - 70px);background:var(--sage)}
+.hv-diag-photo{position:absolute;top:0;right:0;bottom:0;width:58%}
+.hv-diag-panel{position:absolute;top:0;left:0;bottom:0;width:56%;background:var(--sage);clip-path:polygon(0 0,100% 0,80% 100%,0 100%)}
+.hv-diag-panel::after{content:"";position:absolute;top:0;right:0;bottom:0;width:22%;background:linear-gradient(100deg,transparent 60%,color-mix(in srgb,var(--warm) 70%,transparent) 60.5%,color-mix(in srgb,var(--warm) 70%,transparent) 63%,transparent 63.5%)}
+.hv-diag-inner{position:relative;z-index:1;padding:80px 0}
+.hv-diag-copy{max-width:min(620px,46vw)}
+.hv-diag .hv-title{font-size:clamp(42px,5.2vw,84px)}
+.hv-diag .btn.primary{background:#fff;border-color:#fff;color:var(--sage)}
+@media(max-width:860px){
+  .hv-diag,.hv.is-dark.hv-diag{display:block;min-height:0}
+  .hv-diag-photo{position:relative;width:100%;aspect-ratio:16/10;clip-path:polygon(0 0,100% 0,100% 84%,0 100%)}
+  .hv-diag-panel{display:none}
+  .hv-diag-inner{padding:32px 0 60px}
+  .hv-diag-copy{max-width:none}
+}

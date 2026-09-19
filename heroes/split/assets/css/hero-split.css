@@ -1,0 +1,12 @@
+/* 左右分割（src/parts/hero/split） */
+.hv-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:calc(100svh - 70px)}
+.hv-split-copy{display:flex;align-items:center;min-width:0;padding:80px clamp(28px,5vw,80px) 80px max(4vw,calc((100vw - 1180px) / 2))}
+.hv-split-inner{width:100%;max-width:580px}
+.hv-split .hv-title{font-size:clamp(42px,4.9vw,80px)}
+.hv-split-photo{position:relative;min-height:520px}
+.hv-split-photo img{position:absolute;inset:0}
+@media(max-width:860px){
+  .hv-split{grid-template-columns:minmax(0,1fr);min-height:0}
+  .hv-split-photo{order:-1;min-height:0;aspect-ratio:4/3}
+  .hv-split-copy{padding:44px 4vw 60px}
+}

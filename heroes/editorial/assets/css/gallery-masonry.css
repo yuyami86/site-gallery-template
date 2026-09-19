@@ -1,0 +1,14 @@
+/* 高さ違いのタイル（src/parts/gallery/masonry） */
+.gm{background:var(--paper)}
+.gm-grid{columns:3 240px;column-gap:18px}
+.gm-item{break-inside:avoid;margin:0 0 26px;min-width:0}
+.gm-photo{overflow:hidden;border-radius:6px;background:var(--paper2);aspect-ratio:4/5}
+.gm-item:nth-child(3n+2) .gm-photo{aspect-ratio:1/1}
+.gm-item:nth-child(3n) .gm-photo{aspect-ratio:3/4}
+.gm-item:nth-child(4n) .gm-photo{aspect-ratio:4/3}
+.gm-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.gm-item figcaption{padding-top:12px}
+.gm-item strong{display:block;font-size:17px;font-weight:400;line-height:1.5;overflow-wrap:anywhere}
+.gm-item span{display:block;margin-top:3px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--warm);overflow-wrap:anywhere}
+.gm-item p{margin:6px 0 0;font-size:13px;color:var(--muted);line-height:1.7;overflow-wrap:anywhere}
+@media(max-width:560px){.gm-grid{columns:2 140px;column-gap:12px}.gm-item strong{font-size:15px}.gm-item p{font-size:12px}}

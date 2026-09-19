@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9a883"/><stop offset="1" stop-color="#4b3424"/></linearGradient>
+<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="70"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .09"/></feComponentTransfer></filter>
+</defs>
+<rect width="1000" height="1000" fill="url(#bg)"/>
+<g filter="url(#blur)"><circle cx="884" cy="433" r="346" fill="#dcc1a0" opacity="0.62"/><circle cx="281" cy="225" r="263" fill="#f2dfc2" opacity="0.70"/><circle cx="297" cy="998" r="267" fill="#dcc1a0" opacity="0.58"/><circle cx="287" cy="503" r="256" fill="#f2dfc2" opacity="0.70"/><circle cx="402" cy="563" r="327" fill="#dcc1a0" opacity="0.53"/><circle cx="622" cy="650" r="201" fill="#f2dfc2" opacity="0.69"/></g>
+<rect x="701" y="0" width="4.0" height="1000" fill="#fff" opacity=".07"/><rect x="402" y="0" width="4.0" height="1000" fill="#fff" opacity=".07"/><rect x="219" y="0" width="4.0" height="1000" fill="#fff" opacity=".07"/>
+<rect width="1000" height="1000" filter="url(#grain)"/>
+<g font-family="-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif" fill="#fff" text-anchor="start">
+<text x="70" y="902.8" font-size="11" font-weight="700" letter-spacing="3.7" opacity=".7">SAMPLE PHOTO</text>
+<text x="70" y="929" font-size="17" font-weight="600" opacity=".9">パンの写真 2（正方形）</text>
+</g>
+</svg>

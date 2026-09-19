@@ -1,0 +1,12 @@
+/* 写真と交互（src/parts/method/zigzag） */
+.mz{background:#fff}
+.mz-list{display:grid;gap:clamp(48px,7vw,96px)}
+.mz-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
+.mz-row.is-reverse .mz-photo{order:2}
+.mz-photo{overflow:hidden;border-radius:6px;aspect-ratio:4/3;background:var(--paper2)}
+.mz-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.mz-text{min-width:0}
+.mz-num{display:block;font-family:var(--font-heading);font-size:clamp(48px,6vw,84px);line-height:1;color:color-mix(in srgb,var(--sage) 35%,transparent)}
+.mz-text h3{margin:10px 0 14px;font-size:clamp(26px,2.6vw,36px);font-weight:400;line-height:1.35}
+.mz-text p{margin:0;color:var(--muted);font-size:15px;line-height:1.9}
+@media(max-width:760px){.mz-row{grid-template-columns:minmax(0,1fr);gap:20px}.mz-row.is-reverse .mz-photo{order:0}}

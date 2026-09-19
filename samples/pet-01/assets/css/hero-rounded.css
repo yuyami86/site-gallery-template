@@ -1,0 +1,18 @@
+/* まるくやさしい（src/parts/hero/rounded） */
+.hv-round{padding:56px 0 88px}
+.hv-round-dot{position:absolute;border-radius:50%;pointer-events:none}
+.hv-round-dot.is-a{width:44vw;max-width:620px;aspect-ratio:1;right:-10vw;top:-12vw;background:color-mix(in srgb,var(--sage) 14%,transparent)}
+.hv-round-dot.is-b{width:18vw;max-width:260px;aspect-ratio:1;left:-5vw;bottom:-5vw;background:color-mix(in srgb,var(--warm) 22%,transparent)}
+.hv-round-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:center;min-height:calc(100svh - 270px)}
+.hv-round-copy{min-width:0}
+.hv-round .hv-title{font-size:clamp(40px,5vw,78px);letter-spacing:-.02em}
+.hv-round .btn{min-height:52px;padding:0 26px}
+.hv-round-visual{position:relative;width:min(560px,100%);justify-self:center}
+.hv-round-photo{aspect-ratio:1/1;border-radius:58% 42% 50% 50% / 52% 46% 54% 48%;box-shadow:0 26px 50px color-mix(in srgb,var(--ink) 14%,transparent)}
+.hv-round-sub{position:absolute;left:-6%;bottom:-4%;width:38%;aspect-ratio:1/1;border-radius:50%;border:6px solid var(--paper)}
+.hv-round-badge{position:absolute;right:-2%;top:6%;display:grid;place-items:center;width:30%;aspect-ratio:1/1;margin:0;padding:10px;border-radius:50%;background:var(--warm);color:#fff;font-size:clamp(11px,1.1vw,15px);font-weight:800;line-height:1.35;text-align:center;overflow-wrap:anywhere;transform:rotate(-8deg)}
+@media(max-width:860px){
+  .hv-round-grid{grid-template-columns:minmax(0,1fr);min-height:0;gap:44px}
+  .hv-round-visual{order:-1;width:min(420px,86%)}
+}
+@media(max-width:700px){.hv-round{padding:32px 0 64px}.hv-round-badge{font-size:11px}}

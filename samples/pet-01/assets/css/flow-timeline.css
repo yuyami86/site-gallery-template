@@ -1,0 +1,15 @@
+/* 縦のタイムライン（src/parts/flow/timeline） */
+.ftl{background:#fff}
+.ftl-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:start}
+.ftl-head{position:sticky;top:110px;margin-bottom:0}
+.ftl-list{position:relative;margin:0;padding:0;list-style:none}
+.ftl-list::before{content:"";position:absolute;left:31px;top:12px;bottom:12px;width:2px;background:color-mix(in srgb,var(--sage) 25%,transparent)}
+.ftl-step{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:22px;padding:0 0 34px}
+.ftl-step:last-child{padding-bottom:0}
+.ftl-num{position:relative;z-index:1;display:grid;place-items:center;align-content:center;width:64px;height:64px;border-radius:50%;background:var(--sage);color:#fff;font-size:9px;font-weight:800;letter-spacing:.12em;line-height:1}
+.ftl-num b{display:block;margin-top:2px;font-family:var(--font-heading);font-size:22px;font-weight:400;letter-spacing:0}
+.ftl-body{min-width:0;padding:14px 0 0}
+.ftl-body h3{margin:0 0 8px;font-size:22px;font-weight:400;line-height:1.4}
+.ftl-body p{margin:0;color:var(--muted);font-size:15px;line-height:1.85}
+@media(max-width:860px){.ftl-grid{grid-template-columns:minmax(0,1fr);gap:20px}.ftl-head{position:static}}
+@media(max-width:700px){.ftl-list::before{left:25px}.ftl-step{grid-template-columns:52px minmax(0,1fr);gap:16px}.ftl-num{width:52px;height:52px}.ftl-num b{font-size:18px}.ftl-body{padding-top:8px}.ftl-body h3{font-size:19px}}

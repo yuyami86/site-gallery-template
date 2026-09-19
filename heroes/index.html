@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>First View Collection｜ファーストビューのデザイン</title>
+<meta name="description" content="ページを開いて最初に目に入る部分（ファーストビュー）の見本です。どの業種のホームページにも組み合わせられます。">
+<meta name="theme-color" content="#f6f5f1">
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --bg:#f6f5f1;--surface:#ffffff;--ink:#161614;--muted:#64645e;--line:#e1dfd8;--chip:#ecebe5;--accent:#161614;--accent-ink:#ffffff;
+  --shadow:0 1px 2px rgba(20,20,15,.05),0 12px 32px rgba(20,20,15,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#121211;--surface:#1b1b19;--ink:#f1f0ea;--muted:#a3a29a;--line:#2c2c29;--chip:#262623;--accent:#f1f0ea;--accent-ink:#121211;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.25)}
+}
+:root[data-theme="dark"]{--bg:#121211;--surface:#1b1b19;--ink:#f1f0ea;--muted:#a3a29a;--line:#2c2c29;--chip:#262623;--accent:#f1f0ea;--accent-ink:#121211;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.25)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;line-height:1.75;overflow-wrap:anywhere}
+a{color:inherit}
+.wrap{width:min(1200px,calc(100% - 32px));margin:0 auto}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;padding-top:20px}
+.tabs a{padding:8px 14px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;color:var(--muted)}
+.tabs a[aria-current="page"]{background:var(--chip);color:var(--ink)}
+header.top{padding:56px 0 36px}
+.kicker{font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+/* 大きな見出しは英単語ひとつ */
+h1{margin:10px 0 22px;font-size:clamp(40px,12.5vw,168px);line-height:.92;letter-spacing:-.05em;font-weight:800;overflow-wrap:anywhere}
+h1 span{display:inline-block;max-width:100%}
+.lead{max-width:680px;margin:0;color:var(--muted);font-size:15px}
+.count{margin:22px 0 0;font:600 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:var(--muted)}
+.filters{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip:focus-visible,.button:focus-visible,.preview:focus-visible,.tabs a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+main{padding:32px 0 80px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.card{display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.card[hidden]{display:none}
+.preview{position:relative;display:block;aspect-ratio:16/10;background:var(--chip);overflow:hidden;border-bottom:1px solid var(--line)}
+.shot-pc{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.22,.72,.2,1)}
+.preview:hover .shot-pc{transform:scale(1.02)}
+.shot-empty{display:grid;place-items:center;height:100%;font-weight:700;color:var(--muted)}
+.phone{position:absolute;right:5%;bottom:-14%;width:22%;aspect-ratio:390/844;border:5px solid #111;border-radius:18px;overflow:hidden;background:#111;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.card-body{display:flex;flex-direction:column;gap:10px;padding:22px 24px 24px;flex:1}
+.card-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.id{font:600 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;padding:2px 8px;border-radius:6px;background:var(--chip)}
+.industry{font-size:12px;color:var(--muted);font-weight:600}
+.card h2{margin:0;font-size:22px;line-height:1.35}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.card p.need{font-size:12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0;padding:0;list-style:none}
+.tags li{font-size:12px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.card-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:10px}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
+.button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+dialog{width:min(1280px,calc(100% - 24px));height:calc(100dvh - 24px);max-height:none;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--ink)}
+dialog::backdrop{background:rgba(10,10,8,.55)}
+.viewer{display:flex;flex-direction:column;height:100%}
+.viewer-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.viewer-title{flex:1;min-width:0;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-bar .button{min-height:34px;padding:0 12px;font-size:12px}
+.viewer-bar .button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.viewer-stage{flex:1;display:flex;justify-content:center;overflow:auto;padding:16px;background:var(--chip)}
+.viewer-stage iframe{width:100%;height:100%;border:0;border-radius:10px;background:#fff;box-shadow:var(--shadow)}
+.viewer-stage.is-sp iframe{width:390px;max-width:100%;border-radius:28px;border:8px solid #111}
+@media (max-width:760px){
+  header.top{padding:36px 0 20px}
+  .chip{padding:7px 13px;font-size:12px}
+  .grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  .card-body{padding:18px 18px 20px}
+  .viewer-stage{padding:0}
+  .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
+  .viewer-mode{display:none}
+}
+</style>
+</head>
+<body>
+<nav class="wrap tabs" aria-label="一覧の切り替え">
+  <a href="/site-gallery-template/">サイト全体</a>
+  <a href="/site-gallery-template/heroes/" aria-current="page">ファーストビュー</a>
+  <a href="/site-gallery-template/sections/">セクション</a>
+</nav>
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">ページを開いて最初に見える部分</div>
+    <h1><span>FIRST VIEW</span></h1>
+    <p class="lead">ページを開いて最初に目に入る部分（ファーストビュー）の見本です。どの業種のホームページにも組み合わせられます。</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap grid">
+<article class="card" data-category="all">
+  <a class="preview" href="fullbleed/" aria-label="全面写真 を開く">
+    <img class="shot-pc" src="fullbleed/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="fullbleed/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">fullbleed</span><span class="industry">例: realestate-01</span></div>
+    <h2>全面写真</h2>
+    <p>写真を画面いっぱいに敷き、大きな見出しを重ねる王道の形。写真の力で雰囲気を伝えたいときに。</p>
+    <p class="need">必要なもの：写真1枚（横長 16:9）</p>
+    <ul class="tags"><li>ジム</li><li>不動産</li><li>美容室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="fullbleed/">デモを見る</a>
+      <button class="button" type="button" data-preview="fullbleed/" data-title="fullbleed 全面写真">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="split/" aria-label="左右分割 を開く">
+    <img class="shot-pc" src="split/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="split/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">split</span><span class="industry">例: beauty-01</span></div>
+    <h2>左右分割</h2>
+    <p>左に見出しと説明、右に写真を大きく。文章をしっかり読ませつつ、清潔感のある印象に。</p>
+    <p class="need">必要なもの：写真1枚（縦長〜正方形が合う）</p>
+    <ul class="tags"><li>美容室</li><li>クリニック</li><li>整体</li><li>士業</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="split/">デモを見る</a>
+      <button class="button" type="button" data-preview="split/" data-title="split 左右分割">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="minimal/" aria-label="余白たっぷり を開く">
+    <img class="shot-pc" src="minimal/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="minimal/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">minimal</span><span class="industry">例: apparel-01</span></div>
+    <h2>余白たっぷり</h2>
+    <p>中央に見出しを置き、写真は下に横長で。余白で上品さを出す、雑誌のような形。</p>
+    <p class="need">必要なもの：写真1枚（横長。上下が切れても良いもの）</p>
+    <ul class="tags"><li>アパレル</li><li>雑貨</li><li>ギャラリー</li><li>設計事務所</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="minimal/">デモを見る</a>
+      <button class="button" type="button" data-preview="minimal/" data-title="minimal 余白たっぷり">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="collage/" aria-label="コラージュ を開く">
+    <img class="shot-pc" src="collage/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="collage/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">collage</span><span class="industry">例: food-01</span></div>
+    <h2>コラージュ</h2>
+    <p>写真3枚を重ねて配置。料理・店内・人の様子を一度に見せて、にぎわいと温かさを伝える。</p>
+    <p class="need">必要なもの：写真3枚（hero.image と hero.images に2枚）</p>
+    <ul class="tags"><li>カフェ</li><li>飲食店</li><li>パン屋</li><li>教室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="collage/">デモを見る</a>
+      <button class="button" type="button" data-preview="collage/" data-title="collage コラージュ">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="typographic/" aria-label="文字が主役 を開く">
+    <img class="shot-pc" src="typographic/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="typographic/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">typographic</span><span class="industry">例: fitness-01</span></div>
+    <h2>文字が主役</h2>
+    <p>画面いっぱいの大きな見出しと、横に流れる帯。言葉の強さで印象に残す、力強い形。</p>
+    <p class="need">必要なもの：写真1枚（小さく表示）。見出しは1行7文字以内がきれい</p>
+    <ul class="tags"><li>ジム・フィットネス</li><li>スクール</li><li>士業</li><li>イベント</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="typographic/">デモを見る</a>
+      <button class="button" type="button" data-preview="typographic/" data-title="typographic 文字が主役">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="vertical/" aria-label="縦書き を開く">
+    <img class="shot-pc" src="vertical/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="vertical/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">vertical</span><span class="industry">例: food-01</span></div>
+    <h2>縦書き</h2>
+    <p>縦書きの見出しを写真の横に。和の落ち着きや、丁寧な仕事ぶりを感じさせる形。</p>
+    <p class="need">必要なもの：写真1枚（横長）。見出しは1行9文字以内</p>
+    <ul class="tags"><li>和食</li><li>和菓子</li><li>旅館</li><li>着物・呉服</li><li>整体・鍼灸</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="vertical/">デモを見る</a>
+      <button class="button" type="button" data-preview="vertical/" data-title="vertical 縦書き">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="slideshow/" aria-label="スライド を開く">
+    <img class="shot-pc" src="slideshow/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="slideshow/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">slideshow</span><span class="industry">例: apparel-01</span></div>
+    <h2>スライド</h2>
+    <p>画面いっぱいの写真がゆっくり切り替わる。店内・商品・物件など、見せたい写真が何枚もあるときに。</p>
+    <p class="need">必要なもの：写真2〜5枚（hero.image と hero.images）</p>
+    <ul class="tags"><li>不動産</li><li>アパレル</li><li>ホテル・旅館</li><li>結婚式場</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="slideshow/">デモを見る</a>
+      <button class="button" type="button" data-preview="slideshow/" data-title="slideshow スライド">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="info/" aria-label="情報つき を開く">
+    <img class="shot-pc" src="info/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="info/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">info</span><span class="industry">例: fitness-01</span></div>
+    <h2>情報つき</h2>
+    <p>見出しと写真の下に、営業時間・料金・アクセスなどを最初から表示。すぐ来店・予約したい人に親切な形。</p>
+    <p class="need">必要なもの：写真1枚、hero.facts（項目と内容を2〜4つ）</p>
+    <ul class="tags"><li>飲食店</li><li>クリニック</li><li>整骨院</li><li>体験レッスンのある教室</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="info/">デモを見る</a>
+      <button class="button" type="button" data-preview="info/" data-title="info 情報つき">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="motion/" aria-label="ゆっくり動く を開く">
+    <img class="shot-pc" src="motion/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="motion/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">motion</span><span class="industry">例: beauty-01</span></div>
+    <h2>ゆっくり動く</h2>
+    <p>写真がゆっくり寄っていき、中央の見出しが順に現れる。動画（hero.video）にも差し替えられる、印象に残る形。</p>
+    <p class="need">必要なもの：写真1枚（横長）。動画を使う場合は hero.video（mp4）</p>
+    <ul class="tags"><li>美容室・エステ</li><li>ジム</li><li>ホテル</li><li>ブライダル</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="motion/">デモを見る</a>
+      <button class="button" type="button" data-preview="motion/" data-title="motion ゆっくり動く">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="stats/" aria-label="数字で見せる を開く">
+    <img class="shot-pc" src="stats/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="stats/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">stats</span><span class="industry">例: realestate-01</span></div>
+    <h2>数字で見せる</h2>
+    <p>写真の上に、営業年数・対応件数・駅からの距離などを数字で並べる。ひと目で信頼感が伝わる形。</p>
+    <p class="need">必要なもの：写真1枚（横長）、hero.stats（数字と説明を2〜4つ。事実のみ）</p>
+    <ul class="tags"><li>不動産</li><li>士業</li><li>工務店・リフォーム</li><li>塾</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="stats/">デモを見る</a>
+      <button class="button" type="button" data-preview="stats/" data-title="stats 数字で見せる">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="offer/" aria-label="キャンペーン を開く">
+    <img class="shot-pc" src="offer/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="offer/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">offer</span><span class="industry">例: nail-01</span></div>
+    <h2>キャンペーン</h2>
+    <p>写真の上に「初回◯円」などの特典カードを大きく表示。広告やチラシから来た人を、そのまま予約へ導くLP向けの形。</p>
+    <p class="need">必要なもの：写真1枚（横長）、hero.offer（特典の見出しと価格。事実のみ）</p>
+    <ul class="tags"><li>ネイル・エステ</li><li>ジム</li><li>整体</li><li>教室の体験</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="offer/">デモを見る</a>
+      <button class="button" type="button" data-preview="offer/" data-title="offer キャンペーン">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="checklist/" aria-label="お悩みチェック を開く">
+    <img class="shot-pc" src="checklist/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="checklist/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">checklist</span><span class="industry">例: bodycare-01</span></div>
+    <h2>お悩みチェック</h2>
+    <p>「こんなお悩みありませんか？」のチェックリストから始め、見出しで答える。読む人が自分ごとにしやすい、共感から入る形。</p>
+    <p class="need">必要なもの：写真1枚、hero.worries（お悩みを3〜5つ）</p>
+    <ul class="tags"><li>整体・整骨院</li><li>学習塾</li><li>士業</li><li>ハウスクリーニング</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="checklist/">デモを見る</a>
+      <button class="button" type="button" data-preview="checklist/" data-title="checklist お悩みチェック">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="beforeafter/" aria-label="ビフォーアフター を開く">
+    <img class="shot-pc" src="beforeafter/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="beforeafter/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">beforeafter</span><span class="industry">例: reform-01</span></div>
+    <h2>ビフォーアフター</h2>
+    <p>施工前と施工後の写真を、つまみを動かして見比べる。仕上がりの違いがひと目で伝わる形。</p>
+    <p class="need">必要なもの：写真1枚（hero.image）、hero.compare（施工前・施工後の写真。実際の事例のみ）</p>
+    <ul class="tags"><li>リフォーム・工務店</li><li>ハウスクリーニング</li><li>美容室</li><li>塗装・外構</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="beforeafter/">デモを見る</a>
+      <button class="button" type="button" data-preview="beforeafter/" data-title="beforeafter ビフォーアフター">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="mosaic/" aria-label="写真タイル を開く">
+    <img class="shot-pc" src="mosaic/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="mosaic/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">mosaic</span><span class="industry">例: cafe-01</span></div>
+    <h2>写真タイル</h2>
+    <p>6枚の写真をタイルのように並べる。Instagramのように、お店の雰囲気や商品をまとめて見せる形。</p>
+    <p class="need">必要なもの：写真6枚（hero.image と hero.images に5枚）</p>
+    <ul class="tags"><li>カフェ・パン屋</li><li>ペットサロン</li><li>写真館</li><li>花屋・雑貨</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="mosaic/">デモを見る</a>
+      <button class="button" type="button" data-preview="mosaic/" data-title="mosaic 写真タイル">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="rounded/" aria-label="まるくやさしい を開く">
+    <img class="shot-pc" src="rounded/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="rounded/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">rounded</span><span class="industry">例: pet-01</span></div>
+    <h2>まるくやさしい</h2>
+    <p>丸く切り抜いた写真と、やわらかい色の丸。こどもやペット、家族向けのお店に合う、親しみやすい形。</p>
+    <p class="need">必要なもの：写真1〜2枚（2枚目は hero.images）。見出しは丸ゴシック（theme.headingFont: maru）が合う</p>
+    <ul class="tags"><li>ペットサロン</li><li>保育・こども教室</li><li>小児歯科</li><li>パン屋</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="rounded/">デモを見る</a>
+      <button class="button" type="button" data-preview="rounded/" data-title="rounded まるくやさしい">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="editorial/" aria-label="雑誌の表紙 を開く">
+    <img class="shot-pc" src="editorial/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="editorial/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">editorial</span><span class="industry">例: apparel-01</span></div>
+    <h2>雑誌の表紙</h2>
+    <p>店名を雑誌の題字のように大きく置き、縦長の写真を中央に。ファッション誌の表紙のような、おしゃれで印象に残る形。</p>
+    <p class="need">必要なもの：写真1枚（縦長）。題字は hero.masthead（英字10文字前後がきれい。無ければ店名）</p>
+    <ul class="tags"><li>アパレル</li><li>美容室・ヘアサロン</li><li>フォトスタジオ</li><li>セレクトショップ</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="editorial/">デモを見る</a>
+      <button class="button" type="button" data-preview="editorial/" data-title="editorial 雑誌の表紙">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="diagonal/" aria-label="斜め分割 を開く">
+    <img class="shot-pc" src="diagonal/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="diagonal/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">diagonal</span><span class="industry">例: school-01</span></div>
+    <h2>斜め分割</h2>
+    <p>テーマ色の面と写真を斜めに区切る。スピード感と勢いのある、スポーティーな形。</p>
+    <p class="need">必要なもの：写真1枚（人物が右寄りの写真が合う）</p>
+    <ul class="tags"><li>ジム・スポーツ</li><li>学習塾</li><li>自動車・バイク</li><li>イベント</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="diagonal/">デモを見る</a>
+      <button class="button" type="button" data-preview="diagonal/" data-title="diagonal 斜め分割">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="filmstrip/" aria-label="写真が流れる を開く">
+    <img class="shot-pc" src="filmstrip/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="filmstrip/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">filmstrip</span><span class="industry">例: cafe-01</span></div>
+    <h2>写真が流れる</h2>
+    <p>見出しの下で、写真が横にゆっくり流れ続ける。客室・店内・料理など、場所の雰囲気をたっぷり見せる形。</p>
+    <p class="need">必要なもの：写真3〜8枚（hero.image と hero.images）</p>
+    <ul class="tags"><li>旅館・ホテル</li><li>カフェ</li><li>観光・体験</li><li>結婚式場</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="filmstrip/">デモを見る</a>
+      <button class="button" type="button" data-preview="filmstrip/" data-title="filmstrip 写真が流れる">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="frame/" aria-label="額縁 を開く">
+    <img class="shot-pc" src="frame/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="frame/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">frame</span><span class="industry">例: food-01</span></div>
+    <h2>額縁</h2>
+    <p>写真を額に入れたように、余白と細い線で囲む。美術館の展示のような、静かで上質な形。</p>
+    <p class="need">必要なもの：写真1枚（縦長が合う）。写真の説明（hero.imageAlt）が展示の札に出る</p>
+    <ul class="tags"><li>和菓子・老舗</li><li>工芸・ギャラリー</li><li>呉服・着物</li><li>旅館</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="frame/">デモを見る</a>
+      <button class="button" type="button" data-preview="frame/" data-title="frame 額縁">スマホで見る</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="all">
+  <a class="preview" href="voice/" aria-label="お客様の声 を開く">
+    <img class="shot-pc" src="voice/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="voice/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="id">voice</span><span class="industry">例: office-01</span></div>
+    <h2>お客様の声</h2>
+    <p>お客様の実際の言葉をカードで並べる。「頼んでよかった」という声が、何よりの安心材料になる業種に。</p>
+    <p class="need">必要なもの：写真1枚（背景）、hero.voices（お客様の声を1〜3つ。実際にいただいた声のみ）</p>
+    <ul class="tags"><li>士業</li><li>学習塾</li><li>工務店・リフォーム</li><li>整体</li></ul>
+    <div class="card-actions">
+      <a class="button primary" href="voice/">デモを見る</a>
+      <button class="button" type="button" data-preview="voice/" data-title="voice お客様の声">スマホで見る</button>
+    </div>
+  </div>
+</article>
+  </div>
+</main>
+<footer><div class="wrap">掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</div></footer>
+<dialog id="viewer" aria-label="サンプルの表示">
+  <div class="viewer">
+    <div class="viewer-bar">
+      <span class="viewer-title" id="viewerTitle"></span>
+      <button class="button viewer-mode" type="button" data-mode="pc" aria-pressed="false">PC</button>
+      <button class="button viewer-mode" type="button" data-mode="sp" aria-pressed="true">スマホ</button>
+      <a class="button" id="viewerOpen" href="#" target="_blank" rel="noopener">新しいタブ</a>
+      <button class="button" type="button" id="viewerClose">閉じる</button>
+    </div>
+    <div class="viewer-stage is-sp" id="viewerStage"><iframe id="viewerFrame" title="サンプルサイト"></iframe></div>
+  </div>
+</dialog>
+<script>
+(() => {
+  const chips = [...document.querySelectorAll('.chip')];
+  const cards = [...document.querySelectorAll('.card')];
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    const f = chip.dataset.filter;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+    cards.forEach(card => { card.hidden = f !== 'all' && card.dataset.category !== f; });
+  }));
+  const dialog = document.getElementById('viewer');
+  const frame = document.getElementById('viewerFrame');
+  const stage = document.getElementById('viewerStage');
+  const modes = [...document.querySelectorAll('.viewer-mode')];
+  const setMode = mode => { stage.classList.toggle('is-sp', mode === 'sp'); modes.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode))); };
+  modes.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  document.querySelectorAll('[data-preview]').forEach(btn => btn.addEventListener('click', () => {
+    frame.src = btn.dataset.preview;
+    document.getElementById('viewerTitle').textContent = btn.dataset.title;
+    document.getElementById('viewerOpen').href = btn.dataset.preview;
+    setMode('sp');
+    if (typeof dialog.showModal === 'function') dialog.showModal(); else location.href = btn.dataset.preview;
+  }));
+  const close = () => { dialog.close(); frame.src = 'about:blank'; };
+  document.getElementById('viewerClose').addEventListener('click', close);
+  dialog.addEventListener('click', e => { if (e.target === dialog) close(); });
+  dialog.addEventListener('cancel', () => { frame.src = 'about:blank'; });
+})();
+</script>
+</body>
+</html>

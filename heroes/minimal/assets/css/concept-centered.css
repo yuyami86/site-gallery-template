@@ -1,0 +1,8 @@
+/* 中央寄せ（src/parts/concept/centered） */
+.cc{padding:clamp(96px,12vw,160px) 0}
+.cc-inner{max-width:760px;text-align:center}
+.cc-inner h2{margin:16px 0 0}
+.cc-rule{display:block;width:1px;height:56px;margin:28px auto;background:var(--warm)}
+.cc-inner p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:2.1;text-wrap:pretty}
+.cc-inner .cc-strong{color:var(--ink);font-family:var(--font-heading);font-size:clamp(19px,1.8vw,23px);line-height:1.8}
+@media(max-width:700px){.cc-inner{text-align:left}.cc-rule{margin:22px 0}.cc-inner p{font-size:15px}}

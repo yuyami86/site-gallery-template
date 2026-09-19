@@ -1,0 +1,15 @@
+/* コラージュ（src/parts/hero/collage） */
+.hv-collage{padding:72px 0 96px}
+.hv-collage-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(40px,5vw,72px);align-items:center;min-height:calc(100svh - 240px)}
+.hv-collage-copy{min-width:0}
+.hv-collage .hv-title{font-size:clamp(42px,5vw,80px)}
+.hv-collage-photos{position:relative;width:100%;aspect-ratio:1/1}
+.hv-collage-photos figure{position:absolute;margin:0;border-radius:6px;box-shadow:0 24px 50px color-mix(in srgb,var(--ink) 18%,transparent)}
+.hv-collage-1{left:16%;top:0;width:60%;aspect-ratio:4/5;z-index:1}
+.hv-collage-2{left:0;bottom:0;width:44%;aspect-ratio:1/1;z-index:2}
+.hv-collage-3{right:0;bottom:9%;width:38%;aspect-ratio:4/5;z-index:3}
+@media(max-width:860px){
+  .hv-collage-grid{grid-template-columns:minmax(0,1fr);gap:44px;min-height:0}
+  .hv-collage-photos{order:-1;width:min(560px,100%);margin:0 auto}
+}
+@media(max-width:700px){.hv-collage{padding:36px 0 64px}}

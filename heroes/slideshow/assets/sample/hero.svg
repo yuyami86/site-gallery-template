@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a09c95"/><stop offset="1" stop-color="#262524"/></linearGradient>
+<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="134"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .09"/></feComponentTransfer></filter>
+</defs>
+<rect width="1920" height="1080" fill="url(#bg)"/>
+<g filter="url(#blur)"><circle cx="1845" cy="672" r="605" fill="#c2bdb4" opacity="0.48"/><circle cx="1600" cy="477" r="441" fill="#e0dcd4" opacity="0.74"/><circle cx="1702" cy="423" r="453" fill="#c2bdb4" opacity="0.51"/><circle cx="163" cy="1047" r="296" fill="#e0dcd4" opacity="0.64"/><circle cx="1534" cy="368" r="394" fill="#c2bdb4" opacity="0.63"/><circle cx="307" cy="684" r="519" fill="#e0dcd4" opacity="0.48"/></g>
+<rect x="823" y="0" width="7.7" height="1080" fill="#fff" opacity=".07"/><rect x="863" y="0" width="7.7" height="1080" fill="#fff" opacity=".07"/><rect x="365" y="0" width="7.7" height="1080" fill="#fff" opacity=".07"/>
+<rect width="1920" height="1080" filter="url(#grain)"/>
+<g font-family="-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif" fill="#fff" text-anchor="end">
+<text x="1844" y="109" font-size="20" font-weight="700" letter-spacing="7.3" opacity=".7">SAMPLE PHOTO</text>
+<text x="1844" y="160" font-size="33" font-weight="600" opacity=".9">店内の写真（横長 16:9）</text>
+</g>
+</svg>
