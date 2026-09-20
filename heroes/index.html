@@ -102,6 +102,19 @@ h1.ja{font-size:clamp(27px,4.1vw,54px);line-height:1.18;letter-spacing:-.02em;fo
 .result{font:500 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.06em}
 /* カード */
 main{padding:34px 0 88px}
+/* 左に絞り込み、右に見本を並べる */
+.layout{display:grid;grid-template-columns:232px minmax(0,1fr);gap:32px;align-items:start}
+.side-inner{position:sticky;top:64px;display:flex;flex-direction:column;gap:6px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.side-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:2px 2px 8px;font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fgroup{border-top:1px solid var(--line)}
+.fgroup summary{display:flex;align-items:center;gap:8px;padding:11px 2px;font-size:14px;font-weight:700;cursor:pointer;list-style:none}
+.fgroup summary::-webkit-details-marker{display:none}
+.fgroup summary::after{content:"+";margin-left:auto;font:400 16px/1 var(--mono);color:var(--muted)}
+.fgroup[open] summary::after{content:"−"}
+.fgroup-now{font:500 11px/1 var(--mono);color:var(--hot)}
+.fgroup .group{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px}
+.fav-chip{margin-top:10px}
+.side-reset{margin-top:4px;padding:8px;border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding:0}
 .card{display:flex;flex-direction:column;min-width:0;padding:14px;background:var(--surface);border-radius:18px;outline:1px solid var(--line)}
 .card[hidden]{display:none}
@@ -194,6 +207,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   .filter-box summary::after{content:"+";margin-left:auto;font:500 16px/1 var(--mono)}
   .filter-box[open] summary::after{content:"−"}
   .filter-box summary span{font-weight:500;font-size:12px;color:var(--muted)}
+  .layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  .side-inner{position:static;padding:10px 12px}
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
   .viewer-stage{padding:0}
   .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
@@ -228,32 +243,32 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   </div>
 </header>
 
-<nav class="filters" aria-label="絞り込み">
-  <div class="wrap">
-    
-    
-    
-    <div class="group"><span class="group-label">Saved</span><button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 候補だけ見る（<span id="favCount">0</span>）</button><span class="result" id="result"></span></div>
-  </div>
-</nav>
 <main>
-  <div class="wrap grid" id="grid">
+  <div class="wrap layout">
+    <aside class="side" aria-label="絞り込み">
+      <div class="side-inner">
+        <div class="side-head"><span>絞り込む</span><span class="result" id="result"></span></div>
+        
+        <button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 保存した見本（<span id="favCount">0</span>）</button>
+        <button class="side-reset" type="button" id="resetFilters">絞り込みを外す</button>
+      </div>
+    </aside>
+    <div class="grid" id="grid">
 <article class="card" data-id="fullbleed">
   <a class="preview" href="fullbleed/" aria-label="全面写真 の見本を開く">
     <img class="shot-pc" src="fullbleed/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
     <span class="phone"><img src="fullbleed/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">01</span><span class="id">fullbleed</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="fullbleed" aria-pressed="false" aria-label="全面写真 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>全面写真</h2>
     <p class="pitch">写真を画面いっぱいに敷き、大きな見出しを重ねる王道の形。写真の力で雰囲気を伝えたいときに。</p>
-    <p class="need"><span>準備するもの</span>横長の写真1枚（店内・外観など）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：ジム・不動産・美容室</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>横長の写真1枚（店内・外観など）</p><p class="meta">向いているお店：ジム・不動産・美容室</p></div></details>
     <div class="card-actions">
       <a class="button" href="fullbleed/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="fullbleed" data-consult-title="全面写真">このデザインで相談</button>
-      <button class="link" type="button" data-preview="fullbleed/" data-title="fullbleed　全面写真">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="fullbleed" data-consult-title="全面写真">相談する</button>
+      <button class="link" type="button" data-preview="fullbleed/" data-title="fullbleed　全面写真">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -263,16 +278,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="split/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">02</span><span class="id">split</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="split" aria-pressed="false" aria-label="左右分割 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>左右分割</h2>
     <p class="pitch">左に見出しと説明、右に写真を大きく。文章をしっかり読ませつつ、清潔感のある印象に。</p>
-    <p class="need"><span>準備するもの</span>写真1枚（縦長〜正方形が合います）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：美容室・クリニック・整体・士業</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚（縦長〜正方形が合います）</p><p class="meta">向いているお店：美容室・クリニック・整体・士業</p></div></details>
     <div class="card-actions">
       <a class="button" href="split/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="split" data-consult-title="左右分割">このデザインで相談</button>
-      <button class="link" type="button" data-preview="split/" data-title="split　左右分割">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="split" data-consult-title="左右分割">相談する</button>
+      <button class="link" type="button" data-preview="split/" data-title="split　左右分割">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -282,16 +296,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="minimal/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">03</span><span class="id">minimal</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="minimal" aria-pressed="false" aria-label="余白たっぷり を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>余白たっぷり</h2>
     <p class="pitch">中央に見出しを置き、写真は下に横長で。余白で上品さを出す、雑誌のような形。</p>
-    <p class="need"><span>準備するもの</span>横長の写真1枚</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：アパレル・雑貨・ギャラリー・設計事務所</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>横長の写真1枚</p><p class="meta">向いているお店：アパレル・雑貨・ギャラリー・設計事務所</p></div></details>
     <div class="card-actions">
       <a class="button" href="minimal/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="minimal" data-consult-title="余白たっぷり">このデザインで相談</button>
-      <button class="link" type="button" data-preview="minimal/" data-title="minimal　余白たっぷり">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="minimal" data-consult-title="余白たっぷり">相談する</button>
+      <button class="link" type="button" data-preview="minimal/" data-title="minimal　余白たっぷり">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -301,16 +314,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="collage/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">04</span><span class="id">collage</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="collage" aria-pressed="false" aria-label="コラージュ を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>コラージュ</h2>
     <p class="pitch">写真3枚を重ねて配置。料理・店内・人の様子を一度に見せて、にぎわいと温かさを伝える。</p>
-    <p class="need"><span>準備するもの</span>写真3枚（料理・店内・人の様子など）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：カフェ・飲食店・パン屋・教室</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真3枚（料理・店内・人の様子など）</p><p class="meta">向いているお店：カフェ・飲食店・パン屋・教室</p></div></details>
     <div class="card-actions">
       <a class="button" href="collage/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="collage" data-consult-title="コラージュ">このデザインで相談</button>
-      <button class="link" type="button" data-preview="collage/" data-title="collage　コラージュ">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="collage" data-consult-title="コラージュ">相談する</button>
+      <button class="link" type="button" data-preview="collage/" data-title="collage　コラージュ">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -320,16 +332,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="typographic/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">05</span><span class="id">typographic</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="typographic" aria-pressed="false" aria-label="文字が主役 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>文字が主役</h2>
     <p class="pitch">画面いっぱいの大きな見出しと、横に流れる帯。言葉の強さで印象に残す、力強い形。</p>
-    <p class="need"><span>準備するもの</span>写真1枚。短く言い切るキャッチコピー</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：ジム・フィットネス・スクール・士業・イベント</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚。短く言い切るキャッチコピー</p><p class="meta">向いているお店：ジム・フィットネス・スクール・士業・イベント</p></div></details>
     <div class="card-actions">
       <a class="button" href="typographic/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="typographic" data-consult-title="文字が主役">このデザインで相談</button>
-      <button class="link" type="button" data-preview="typographic/" data-title="typographic　文字が主役">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="typographic" data-consult-title="文字が主役">相談する</button>
+      <button class="link" type="button" data-preview="typographic/" data-title="typographic　文字が主役">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -339,16 +350,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="vertical/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">06</span><span class="id">vertical</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="vertical" aria-pressed="false" aria-label="縦書き を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>縦書き</h2>
     <p class="pitch">縦書きの見出しを写真の横に。和の落ち着きや、丁寧な仕事ぶりを感じさせる形。</p>
-    <p class="need"><span>準備するもの</span>横長の写真1枚。短いキャッチコピー（縦書きになります）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：和食・和菓子・旅館・着物・呉服・整体・鍼灸</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>横長の写真1枚。短いキャッチコピー（縦書きになります）</p><p class="meta">向いているお店：和食・和菓子・旅館・着物・呉服・整体・鍼灸</p></div></details>
     <div class="card-actions">
       <a class="button" href="vertical/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="vertical" data-consult-title="縦書き">このデザインで相談</button>
-      <button class="link" type="button" data-preview="vertical/" data-title="vertical　縦書き">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="vertical" data-consult-title="縦書き">相談する</button>
+      <button class="link" type="button" data-preview="vertical/" data-title="vertical　縦書き">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -358,16 +368,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="slideshow/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">07</span><span class="id">slideshow</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="slideshow" aria-pressed="false" aria-label="スライド を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>スライド</h2>
     <p class="pitch">画面いっぱいの写真がゆっくり切り替わる。店内・商品・物件など、見せたい写真が何枚もあるときに。</p>
-    <p class="need"><span>準備するもの</span>写真2〜5枚</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：不動産・アパレル・ホテル・旅館・結婚式場</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真2〜5枚</p><p class="meta">向いているお店：不動産・アパレル・ホテル・旅館・結婚式場</p></div></details>
     <div class="card-actions">
       <a class="button" href="slideshow/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="slideshow" data-consult-title="スライド">このデザインで相談</button>
-      <button class="link" type="button" data-preview="slideshow/" data-title="slideshow　スライド">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="slideshow" data-consult-title="スライド">相談する</button>
+      <button class="link" type="button" data-preview="slideshow/" data-title="slideshow　スライド">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -377,16 +386,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="info/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">08</span><span class="id">info</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="info" aria-pressed="false" aria-label="情報つき を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>情報つき</h2>
     <p class="pitch">見出しと写真の下に、営業時間・料金・アクセスなどを最初から表示。すぐ来店・予約したい人に親切な形。</p>
-    <p class="need"><span>準備するもの</span>写真1枚と、最初に見せたい情報2〜4つ（営業時間・料金など）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：飲食店・クリニック・整骨院・体験レッスンのある教室</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚と、最初に見せたい情報2〜4つ（営業時間・料金など）</p><p class="meta">向いているお店：飲食店・クリニック・整骨院・体験レッスンのある教室</p></div></details>
     <div class="card-actions">
       <a class="button" href="info/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="info" data-consult-title="情報つき">このデザインで相談</button>
-      <button class="link" type="button" data-preview="info/" data-title="info　情報つき">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="info" data-consult-title="情報つき">相談する</button>
+      <button class="link" type="button" data-preview="info/" data-title="info　情報つき">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -396,16 +404,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="motion/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">09</span><span class="id">motion</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="motion" aria-pressed="false" aria-label="ゆっくり動く を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>ゆっくり動く</h2>
     <p class="pitch">写真がゆっくり寄っていき、中央の見出しが順に現れる。動画にも差し替えられる、印象に残る形。</p>
-    <p class="need"><span>準備するもの</span>横長の写真1枚（動画でも作れます）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：美容室・エステ・ジム・ホテル・ブライダル</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>横長の写真1枚（動画でも作れます）</p><p class="meta">向いているお店：美容室・エステ・ジム・ホテル・ブライダル</p></div></details>
     <div class="card-actions">
       <a class="button" href="motion/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="motion" data-consult-title="ゆっくり動く">このデザインで相談</button>
-      <button class="link" type="button" data-preview="motion/" data-title="motion　ゆっくり動く">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="motion" data-consult-title="ゆっくり動く">相談する</button>
+      <button class="link" type="button" data-preview="motion/" data-title="motion　ゆっくり動く">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -415,16 +422,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="stats/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">10</span><span class="id">stats</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="stats" aria-pressed="false" aria-label="数字で見せる を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>数字で見せる</h2>
     <p class="pitch">写真の上に、営業年数・対応件数・駅からの距離などを数字で並べる。ひと目で信頼感が伝わる形。</p>
-    <p class="need"><span>準備するもの</span>横長の写真1枚と、実績の数字2〜4つ（営業年数など。事実のみ）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：不動産・士業・工務店・リフォーム・塾</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>横長の写真1枚と、実績の数字2〜4つ（営業年数など。事実のみ）</p><p class="meta">向いているお店：不動産・士業・工務店・リフォーム・塾</p></div></details>
     <div class="card-actions">
       <a class="button" href="stats/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="stats" data-consult-title="数字で見せる">このデザインで相談</button>
-      <button class="link" type="button" data-preview="stats/" data-title="stats　数字で見せる">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="stats" data-consult-title="数字で見せる">相談する</button>
+      <button class="link" type="button" data-preview="stats/" data-title="stats　数字で見せる">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -434,16 +440,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="offer/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">11</span><span class="id">offer</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="offer" aria-pressed="false" aria-label="キャンペーン を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>キャンペーン</h2>
     <p class="pitch">写真の上に「初回◯円」などの特典カードを大きく表示。広告やチラシから来た人を、そのまま予約へ導く形。</p>
-    <p class="need"><span>準備するもの</span>写真1枚と、初回特典の内容・価格</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：ネイル・エステ・ジム・整体・教室の体験</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚と、初回特典の内容・価格</p><p class="meta">向いているお店：ネイル・エステ・ジム・整体・教室の体験</p></div></details>
     <div class="card-actions">
       <a class="button" href="offer/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="offer" data-consult-title="キャンペーン">このデザインで相談</button>
-      <button class="link" type="button" data-preview="offer/" data-title="offer　キャンペーン">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="offer" data-consult-title="キャンペーン">相談する</button>
+      <button class="link" type="button" data-preview="offer/" data-title="offer　キャンペーン">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -453,16 +458,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="checklist/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">12</span><span class="id">checklist</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="checklist" aria-pressed="false" aria-label="お悩みチェック を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>お悩みチェック</h2>
     <p class="pitch">「こんなお悩みありませんか？」のチェックリストから始め、見出しで答える。読む人が自分ごとにしやすい、共感から入る形。</p>
-    <p class="need"><span>準備するもの</span>写真1枚と、お客様によくあるお悩み3〜5つ</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：整体・整骨院・学習塾・士業・ハウスクリーニング</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚と、お客様によくあるお悩み3〜5つ</p><p class="meta">向いているお店：整体・整骨院・学習塾・士業・ハウスクリーニング</p></div></details>
     <div class="card-actions">
       <a class="button" href="checklist/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="checklist" data-consult-title="お悩みチェック">このデザインで相談</button>
-      <button class="link" type="button" data-preview="checklist/" data-title="checklist　お悩みチェック">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="checklist" data-consult-title="お悩みチェック">相談する</button>
+      <button class="link" type="button" data-preview="checklist/" data-title="checklist　お悩みチェック">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -472,16 +476,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="beforeafter/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">13</span><span class="id">beforeafter</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="beforeafter" aria-pressed="false" aria-label="ビフォーアフター を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>ビフォーアフター</h2>
     <p class="pitch">施工前と施工後の写真を、つまみを動かして見比べる。仕上がりの違いがひと目で伝わる形。</p>
-    <p class="need"><span>準備するもの</span>同じ場所の、施工前と施工後の写真</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：リフォーム・工務店・ハウスクリーニング・美容室・塗装・外構</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>同じ場所の、施工前と施工後の写真</p><p class="meta">向いているお店：リフォーム・工務店・ハウスクリーニング・美容室・塗装・外構</p></div></details>
     <div class="card-actions">
       <a class="button" href="beforeafter/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="beforeafter" data-consult-title="ビフォーアフター">このデザインで相談</button>
-      <button class="link" type="button" data-preview="beforeafter/" data-title="beforeafter　ビフォーアフター">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="beforeafter" data-consult-title="ビフォーアフター">相談する</button>
+      <button class="link" type="button" data-preview="beforeafter/" data-title="beforeafter　ビフォーアフター">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -491,16 +494,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="mosaic/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">14</span><span class="id">mosaic</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="mosaic" aria-pressed="false" aria-label="写真タイル を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>写真タイル</h2>
     <p class="pitch">6枚の写真をタイルのように並べる。Instagramのように、お店の雰囲気や商品をまとめて見せる形。</p>
-    <p class="need"><span>準備するもの</span>写真6枚</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：カフェ・パン屋・ペットサロン・写真館・花屋・雑貨</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真6枚</p><p class="meta">向いているお店：カフェ・パン屋・ペットサロン・写真館・花屋・雑貨</p></div></details>
     <div class="card-actions">
       <a class="button" href="mosaic/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="mosaic" data-consult-title="写真タイル">このデザインで相談</button>
-      <button class="link" type="button" data-preview="mosaic/" data-title="mosaic　写真タイル">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="mosaic" data-consult-title="写真タイル">相談する</button>
+      <button class="link" type="button" data-preview="mosaic/" data-title="mosaic　写真タイル">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -510,16 +512,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="rounded/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">15</span><span class="id">rounded</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="rounded" aria-pressed="false" aria-label="まるくやさしい を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>まるくやさしい</h2>
     <p class="pitch">丸く切り抜いた写真と、やわらかい色の丸。こどもやペット、家族向けのお店に合う、親しみやすい形。</p>
-    <p class="need"><span>準備するもの</span>写真1〜2枚（正方形が合います）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：ペットサロン・保育・こども教室・小児歯科・パン屋</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1〜2枚（正方形が合います）</p><p class="meta">向いているお店：ペットサロン・保育・こども教室・小児歯科・パン屋</p></div></details>
     <div class="card-actions">
       <a class="button" href="rounded/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="rounded" data-consult-title="まるくやさしい">このデザインで相談</button>
-      <button class="link" type="button" data-preview="rounded/" data-title="rounded　まるくやさしい">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="rounded" data-consult-title="まるくやさしい">相談する</button>
+      <button class="link" type="button" data-preview="rounded/" data-title="rounded　まるくやさしい">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -529,16 +530,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="editorial/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">16</span><span class="id">editorial</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="editorial" aria-pressed="false" aria-label="雑誌の表紙 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>雑誌の表紙</h2>
     <p class="pitch">店名を雑誌の題字のように大きく置き、縦長の写真を中央に。ファッション誌の表紙のような、おしゃれで印象に残る形。</p>
-    <p class="need"><span>準備するもの</span>縦長の写真1枚。英字の店名があると映えます</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：アパレル・美容室・ヘアサロン・フォトスタジオ・セレクトショップ</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>縦長の写真1枚。英字の店名があると映えます</p><p class="meta">向いているお店：アパレル・美容室・ヘアサロン・フォトスタジオ・セレクトショップ</p></div></details>
     <div class="card-actions">
       <a class="button" href="editorial/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="editorial" data-consult-title="雑誌の表紙">このデザインで相談</button>
-      <button class="link" type="button" data-preview="editorial/" data-title="editorial　雑誌の表紙">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="editorial" data-consult-title="雑誌の表紙">相談する</button>
+      <button class="link" type="button" data-preview="editorial/" data-title="editorial　雑誌の表紙">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -548,16 +548,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="diagonal/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">17</span><span class="id">diagonal</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="diagonal" aria-pressed="false" aria-label="斜め分割 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>斜め分割</h2>
     <p class="pitch">テーマ色の面と写真を斜めに区切る。スピード感と勢いのある、スポーティーな形。</p>
-    <p class="need"><span>準備するもの</span>写真1枚（人物が右寄りのもの）</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：ジム・スポーツ・学習塾・自動車・バイク・イベント</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚（人物が右寄りのもの）</p><p class="meta">向いているお店：ジム・スポーツ・学習塾・自動車・バイク・イベント</p></div></details>
     <div class="card-actions">
       <a class="button" href="diagonal/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="diagonal" data-consult-title="斜め分割">このデザインで相談</button>
-      <button class="link" type="button" data-preview="diagonal/" data-title="diagonal　斜め分割">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="diagonal" data-consult-title="斜め分割">相談する</button>
+      <button class="link" type="button" data-preview="diagonal/" data-title="diagonal　斜め分割">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -567,16 +566,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="filmstrip/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">18</span><span class="id">filmstrip</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="filmstrip" aria-pressed="false" aria-label="写真が流れる を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>写真が流れる</h2>
     <p class="pitch">見出しの下で、写真が横にゆっくり流れ続ける。客室・店内・料理など、場所の雰囲気をたっぷり見せる形。</p>
-    <p class="need"><span>準備するもの</span>写真3〜8枚</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：旅館・ホテル・カフェ・観光・体験・結婚式場</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真3〜8枚</p><p class="meta">向いているお店：旅館・ホテル・カフェ・観光・体験・結婚式場</p></div></details>
     <div class="card-actions">
       <a class="button" href="filmstrip/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="filmstrip" data-consult-title="写真が流れる">このデザインで相談</button>
-      <button class="link" type="button" data-preview="filmstrip/" data-title="filmstrip　写真が流れる">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="filmstrip" data-consult-title="写真が流れる">相談する</button>
+      <button class="link" type="button" data-preview="filmstrip/" data-title="filmstrip　写真が流れる">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -586,16 +584,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="frame/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">19</span><span class="id">frame</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="frame" aria-pressed="false" aria-label="額縁 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>額縁</h2>
     <p class="pitch">写真を額に入れたように、余白と細い線で囲む。美術館の展示のような、静かで上質な形。</p>
-    <p class="need"><span>準備するもの</span>縦長の写真1枚</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：和菓子・老舗・工芸・ギャラリー・呉服・着物・旅館</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>縦長の写真1枚</p><p class="meta">向いているお店：和菓子・老舗・工芸・ギャラリー・呉服・着物・旅館</p></div></details>
     <div class="card-actions">
       <a class="button" href="frame/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="frame" data-consult-title="額縁">このデザインで相談</button>
-      <button class="link" type="button" data-preview="frame/" data-title="frame　額縁">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="frame" data-consult-title="額縁">相談する</button>
+      <button class="link" type="button" data-preview="frame/" data-title="frame　額縁">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -605,20 +602,20 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="voice/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">20</span><span class="id">voice</span><span class="eyebrow">ファーストビュー</span>
+    <div class="card-meta"><span class="eyebrow">ファーストビュー</span>
       <button class="fav" type="button" data-fav="voice" aria-pressed="false" aria-label="お客様の声 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>お客様の声</h2>
     <p class="pitch">お客様の実際の言葉をカードで並べる。「頼んでよかった」という声が、何よりの安心材料になる業種に。</p>
-    <p class="need"><span>準備するもの</span>写真1枚と、実際にいただいたお客様の声1〜3つ</p>
-    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：士業・学習塾・工務店・リフォーム・整体</p></div></details>
+    <details class="card-more"><summary>くわしく</summary><div><p class="need"><span>準備するもの</span>写真1枚と、実際にいただいたお客様の声1〜3つ</p><p class="meta">向いているお店：士業・学習塾・工務店・リフォーム・整体</p></div></details>
     <div class="card-actions">
       <a class="button" href="voice/">デモを見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="voice" data-consult-title="お客様の声">このデザインで相談</button>
-      <button class="link" type="button" data-preview="voice/" data-title="voice　お客様の声">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="voice" data-consult-title="お客様の声">相談する</button>
+      <button class="link" type="button" data-preview="voice/" data-title="voice　お客様の声">スマホ表示</button>
     </div>
   </div>
 </article>
-    <div class="empty" id="empty" hidden><p>この組み合わせに合う見本は、まだありません。</p><p class="empty-sub">近いものをお探しします。<button class="chip" type="button" id="resetFilters">絞り込みをすべて外す</button>か、<button class="chip" type="button" data-consult="" data-consult-title="">そのまま相談する</button>をどうぞ。</p></div>
+      <div class="empty" id="empty" hidden><p>この組み合わせに合う見本はありません。</p><p class="empty-sub"><button class="chip" type="button" data-consult="" data-consult-title="">そのまま相談する</button></p></div>
+    </div>
   </div>
 </main>
 <footer><div class="wrap">掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</div></footer>
@@ -671,9 +668,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
 </dialog>
 <script>
 (() => {
-  // 絞り込みは、PCでは開いた状態、スマホでは閉じた状態から始める
-  const box = document.getElementById('filterBox');
-  if (box && window.matchMedia('(min-width: 761px)').matches) box.open = true;
+  // スマホでは、最初はすべて閉じておく（タップで開く）
+  if (!window.matchMedia('(min-width: 761px)').matches) document.querySelectorAll('.fgroup[open]').forEach(d => { d.open = false; });
   const STUDIO = {"email":null,"instagram":null};
   const PAGE_URL = location.href.split('#')[0];
   // 候補（この端末のブラウザにだけ保存）
@@ -702,6 +698,10 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     document.getElementById('empty').hidden = shown > 0;
     document.getElementById('result').textContent = shown + ' / ' + cards.length;
     paintCounts();
+    document.querySelectorAll('.fgroup[data-fgroup]').forEach(d => {
+      const now = d.querySelector('.fgroup-now');
+      if (now) now.textContent = state[d.dataset.fgroup] || '';
+    });
   };
   // それぞれの条件を押したら何件になるかを出し、0件になる条件は押せなくする
   const paintCounts = () => {

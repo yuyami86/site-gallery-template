@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Design Collection｜業種別ウェブサイトデザイン</title>
-<meta name="description" content="全国どこのお店でもお作りします。1ページのホームページを、写真と文章の整理までお引き受けします。納期は1〜2週間。下の見本から近いものを選ぶだけで大丈夫です。">
+<meta name="description" content="全国対応。写真や文章がそろっていなくても大丈夫です。">
 <meta name="theme-color" content="#f3f2ee">
 <meta name="robots" content="noindex,nofollow">
 <style>
@@ -102,6 +102,19 @@ h1.ja{font-size:clamp(27px,4.1vw,54px);line-height:1.18;letter-spacing:-.02em;fo
 .result{font:500 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.06em}
 /* カード */
 main{padding:34px 0 88px}
+/* 左に絞り込み、右に見本を並べる */
+.layout{display:grid;grid-template-columns:232px minmax(0,1fr);gap:32px;align-items:start}
+.side-inner{position:sticky;top:64px;display:flex;flex-direction:column;gap:6px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.side-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:2px 2px 8px;font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fgroup{border-top:1px solid var(--line)}
+.fgroup summary{display:flex;align-items:center;gap:8px;padding:11px 2px;font-size:14px;font-weight:700;cursor:pointer;list-style:none}
+.fgroup summary::-webkit-details-marker{display:none}
+.fgroup summary::after{content:"+";margin-left:auto;font:400 16px/1 var(--mono);color:var(--muted)}
+.fgroup[open] summary::after{content:"−"}
+.fgroup-now{font:500 11px/1 var(--mono);color:var(--hot)}
+.fgroup .group{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px}
+.fav-chip{margin-top:10px}
+.side-reset{margin-top:4px;padding:8px;border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding:0}
 .card{display:flex;flex-direction:column;min-width:0;padding:14px;background:var(--surface);border-radius:18px;outline:1px solid var(--line)}
 .card[hidden]{display:none}
@@ -194,6 +207,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   .filter-box summary::after{content:"+";margin-left:auto;font:500 16px/1 var(--mono)}
   .filter-box[open] summary::after{content:"−"}
   .filter-box summary span{font-weight:500;font-size:12px;color:var(--muted)}
+  .layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  .side-inner{position:static;padding:10px 12px}
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
   .viewer-stage{padding:0}
   .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
@@ -221,15 +236,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <div class="title-row is-offer">
       <p class="wordmark">SAMPLES</p>
       <h1 class="ja"><span>お店のホームページを、</span><span>5万円から。</span></h1>
-      <p class="lead">全国どこのお店でもお作りします。1ページのホームページを、写真と文章の整理までお引き受けします。納期は1〜2週間。下の見本から近いものを選ぶだけで大丈夫です。</p>
+      <p class="lead">全国対応。写真や文章がそろっていなくても大丈夫です。</p>
       <dl class="offer-facts"><div><dt>制作費</dt><dd>5万円〜</dd></div><div><dt>納期</dt><dd>1〜2週間</dd></div><div><dt>つくるもの</dt><dd>1ページ・スマホ対応</dd></div></dl>
       <div class="offer-cta"><button class="button primary" type="button" data-consult="" data-consult-title="">まず相談する（見本が決まっていなくても大丈夫です）</button><a class="button" href="#grid">見本を見る<span aria-hidden="true">↓</span></a></div>
     </div>
   </div>
 </header>
-<section class="picks" aria-label="迷ったら、この3つから">
+<section class="picks" aria-label="迷ったら、この3つ">
   <div class="wrap">
-    <p class="picks-title">迷ったら、この3つから</p>
+    <p class="picks-title">迷ったら、この3つ</p>
     <div class="picks-row">
       <a class="pick" href="samples/beauty-01/"><span class="pick-thumb"><img src="samples/beauty-01/thumb-pc.jpg" alt="" loading="lazy"></span><span class="pick-body"><b>予約を増やしたいお店に</b><span>hair atelier KOMOREBI</span></span></a>
       <a class="pick" href="samples/food-01/"><span class="pick-thumb"><img src="samples/food-01/thumb-pc.jpg" alt="" loading="lazy"></span><span class="pick-body"><b>来店と電話につなげたいお店に</b><span>町の食堂 こめとゆげ</span></span></a>
@@ -237,34 +252,34 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     </div>
   </div>
 </section>
-<nav class="filters" aria-label="絞り込み">
-  <div class="wrap">
-    <details class="filter-box" id="filterBox"><summary>絞り込む<span>業種・雰囲気・目的</span></summary>
-    <div class="group" data-group="industry"><span class="group-label">業種</span><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="fitness" aria-pressed="false">運動・フィットネス<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="beauty" aria-pressed="false">美容<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="food" aria-pressed="false">飲食<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="apparel" aria-pressed="false">アパレル<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="realestate" aria-pressed="false">不動産<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="bodycare" aria-pressed="false">整体・治療院<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="home" aria-pressed="false">住まい・リフォーム<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="school" aria-pressed="false">教育・スクール<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="office" aria-pressed="false">士業・事務所<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="pet" aria-pressed="false">ペット<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="clean" aria-pressed="false">掃除・修理<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="shop" aria-pressed="false">花・ギフト<span class="chip-n" aria-hidden="true"></span></button></div>
-    <div class="group" data-group="mood"><span class="group-label">雰囲気</span><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="元気・力強い" aria-pressed="false">元気・力強い<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="やさしい・ナチュラル" aria-pressed="false">やさしい・ナチュラル<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="上品・落ち着き" aria-pressed="false">上品・落ち着き<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="親しみ・かわいい" aria-pressed="false">親しみ・かわいい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="おしゃれ・個性的" aria-pressed="false">おしゃれ・個性的<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="誠実・信頼" aria-pressed="false">誠実・信頼<span class="chip-n" aria-hidden="true"></span></button></div>
-    <div class="group" data-group="goal"><span class="group-label">目的</span><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="予約を増やしたい" aria-pressed="false">予約を増やしたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="来店してほしい" aria-pressed="false">来店してほしい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="電話・相談を受けたい" aria-pressed="false">電話・相談を受けたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="商品を見せたい" aria-pressed="false">商品を見せたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="信頼を伝えたい" aria-pressed="false">信頼を伝えたい<span class="chip-n" aria-hidden="true"></span></button></div>
-    </details>
-    <div class="group"><span class="group-label">Saved</span><button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 候補だけ見る（<span id="favCount">0</span>）</button><span class="result" id="result"></span></div>
-  </div>
-</nav>
 <main>
-  <div class="wrap grid" id="grid">
+  <div class="wrap layout">
+    <aside class="side" aria-label="絞り込み">
+      <div class="side-inner">
+        <div class="side-head"><span>絞り込む</span><span class="result" id="result"></span></div>
+        <details class="fgroup" data-fgroup="industry" open><summary>業種<span class="fgroup-now"></span></summary><div class="group" data-group="industry"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="fitness" aria-pressed="false">運動・フィットネス<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="beauty" aria-pressed="false">美容<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="food" aria-pressed="false">飲食<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="apparel" aria-pressed="false">アパレル<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="realestate" aria-pressed="false">不動産<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="bodycare" aria-pressed="false">整体・治療院<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="home" aria-pressed="false">住まい・リフォーム<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="school" aria-pressed="false">教育・スクール<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="office" aria-pressed="false">士業・事務所<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="pet" aria-pressed="false">ペット<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="clean" aria-pressed="false">掃除・修理<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="shop" aria-pressed="false">花・ギフト<span class="chip-n" aria-hidden="true"></span></button></div></details>
+        <details class="fgroup" data-fgroup="mood"><summary>雰囲気<span class="fgroup-now"></span></summary><div class="group" data-group="mood"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="元気・力強い" aria-pressed="false">元気・力強い<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="やさしい・ナチュラル" aria-pressed="false">やさしい・ナチュラル<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="上品・落ち着き" aria-pressed="false">上品・落ち着き<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="親しみ・かわいい" aria-pressed="false">親しみ・かわいい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="おしゃれ・個性的" aria-pressed="false">おしゃれ・個性的<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="誠実・信頼" aria-pressed="false">誠実・信頼<span class="chip-n" aria-hidden="true"></span></button></div></details>
+        <details class="fgroup" data-fgroup="goal"><summary>目的<span class="fgroup-now"></span></summary><div class="group" data-group="goal"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="予約を増やしたい" aria-pressed="false">予約を増やしたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="来店してほしい" aria-pressed="false">来店してほしい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="電話・相談を受けたい" aria-pressed="false">電話・相談を受けたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="商品を見せたい" aria-pressed="false">商品を見せたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="信頼を伝えたい" aria-pressed="false">信頼を伝えたい<span class="chip-n" aria-hidden="true"></span></button></div></details>
+        <button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 保存した見本（<span id="favCount">0</span>）</button>
+        <button class="side-reset" type="button" id="resetFilters">絞り込みを外す</button>
+      </div>
+    </aside>
+    <div class="grid" id="grid">
 <article class="card" data-industry="fitness" data-mood="元気・力強い|やさしい・ナチュラル" data-goal="予約を増やしたい" data-id="fitness-01">
   <a class="preview" href="samples/fitness-01/" aria-label="少人数の、体験から始めるスタジオ向け の見本を開く">
     <img class="shot-pc" src="samples/fitness-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
     <span class="phone"><img src="samples/fitness-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">01</span><span class="id">fitness-01</span><span class="eyebrow">運動・フィットネス</span>
+    <div class="card-meta"><span class="eyebrow">運動・フィットネス</span>
       <button class="fav" type="button" data-fav="fitness-01" aria-pressed="false" aria-label="少人数の、体験から始めるスタジオ向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>少人数の、体験から始めるスタジオ向け</h2>
     <p class="pitch">体験レッスンから通ってもらいたい、ジム・ヨガ・ピラティスに。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：Pilates Studio NAGI</p><p class="meta">グリーン系／ゴシック体／LINE予約</p><ul class="tags"><li>元気・力強い</li><li>やさしい・ナチュラル</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/fitness-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="fitness-01" data-consult-title="少人数の、体験から始めるスタジオ向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/fitness-01/" data-title="fitness-01　少人数の、体験から始めるスタジオ向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="fitness-01" data-consult-title="少人数の、体験から始めるスタジオ向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/fitness-01/" data-title="fitness-01　少人数の、体験から始めるスタジオ向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -274,16 +289,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/beauty-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">02</span><span class="id">beauty-01</span><span class="eyebrow">美容</span>
+    <div class="card-meta"><span class="eyebrow">美容</span>
       <button class="fav" type="button" data-fav="beauty-01" aria-pressed="false" aria-label="落ち着いた、一人サロン向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>落ち着いた、一人サロン向け</h2>
     <p class="pitch">お店の雰囲気と美容師の人柄を伝えたい方に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：hair atelier KOMOREBI</p><p class="meta">ベージュ系／明朝体／LINE・電話予約</p><ul class="tags"><li>上品・落ち着き</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/beauty-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="beauty-01" data-consult-title="落ち着いた、一人サロン向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/beauty-01/" data-title="beauty-01　落ち着いた、一人サロン向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="beauty-01" data-consult-title="落ち着いた、一人サロン向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/beauty-01/" data-title="beauty-01　落ち着いた、一人サロン向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -293,16 +307,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/food-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">03</span><span class="id">food-01</span><span class="eyebrow">飲食</span>
+    <div class="card-meta"><span class="eyebrow">飲食</span>
       <button class="fav" type="button" data-fav="food-01" aria-pressed="false" aria-label="毎日通ってもらう、町の食堂向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>毎日通ってもらう、町の食堂向け</h2>
     <p class="pitch">お品書きと営業時間を、ひと目で伝えたい飲食店に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：町の食堂 こめとゆげ</p><p class="meta">れんが色／明朝体／電話・地図</p><ul class="tags"><li>やさしい・ナチュラル</li><li>親しみ・かわいい</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/food-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="food-01" data-consult-title="毎日通ってもらう、町の食堂向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/food-01/" data-title="food-01　毎日通ってもらう、町の食堂向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="food-01" data-consult-title="毎日通ってもらう、町の食堂向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/food-01/" data-title="food-01　毎日通ってもらう、町の食堂向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -312,16 +325,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/apparel-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">04</span><span class="id">apparel-01</span><span class="eyebrow">アパレル</span>
+    <div class="card-meta"><span class="eyebrow">アパレル</span>
       <button class="fav" type="button" data-fav="apparel-01" aria-pressed="false" aria-label="余白を生かした、セレクトショップ向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>余白を生かした、セレクトショップ向け</h2>
     <p class="pitch">商品の写真を主役に、通販や在庫の問い合わせへつなげたい方に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：YOHAKU</p><p class="meta">白黒／ゴシック体／通販・LINE</p><ul class="tags"><li>おしゃれ・個性的</li><li>上品・落ち着き</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/apparel-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="apparel-01" data-consult-title="余白を生かした、セレクトショップ向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/apparel-01/" data-title="apparel-01　余白を生かした、セレクトショップ向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="apparel-01" data-consult-title="余白を生かした、セレクトショップ向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/apparel-01/" data-title="apparel-01　余白を生かした、セレクトショップ向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -331,16 +343,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/realestate-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">05</span><span class="id">realestate-01</span><span class="eyebrow">不動産</span>
+    <div class="card-meta"><span class="eyebrow">不動産</span>
       <button class="fav" type="button" data-fav="realestate-01" aria-pressed="false" aria-label="相談から始める、地域の不動産会社向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>相談から始める、地域の不動産会社向け</h2>
     <p class="pitch">物件検索ではなく、売却・購入・空き家の相談を受けたい会社に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：まちのわ不動産</p><p class="meta">紺系／ゴシック体／電話・メール</p><ul class="tags"><li>誠実・信頼</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/realestate-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="realestate-01" data-consult-title="相談から始める、地域の不動産会社向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/realestate-01/" data-title="realestate-01　相談から始める、地域の不動産会社向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="realestate-01" data-consult-title="相談から始める、地域の不動産会社向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/realestate-01/" data-title="realestate-01　相談から始める、地域の不動産会社向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -350,16 +361,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/bodycare-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">06</span><span class="id">bodycare-01</span><span class="eyebrow">整体・治療院</span>
+    <div class="card-meta"><span class="eyebrow">整体・治療院</span>
       <button class="fav" type="button" data-fav="bodycare-01" aria-pressed="false" aria-label="お悩みから入る、整体・治療院向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>お悩みから入る、整体・治療院向け</h2>
     <p class="pitch">「こんなお悩みありませんか？」から始めて、初回の予約につなげたい方に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：ととのえ整体院</p><p class="meta">青緑系／ゴシック体／電話・LINE</p><ul class="tags"><li>誠実・信頼</li><li>やさしい・ナチュラル</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/bodycare-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="bodycare-01" data-consult-title="お悩みから入る、整体・治療院向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/bodycare-01/" data-title="bodycare-01　お悩みから入る、整体・治療院向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="bodycare-01" data-consult-title="お悩みから入る、整体・治療院向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/bodycare-01/" data-title="bodycare-01　お悩みから入る、整体・治療院向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -369,16 +379,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/reform-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">07</span><span class="id">reform-01</span><span class="eyebrow">住まい・リフォーム</span>
+    <div class="card-meta"><span class="eyebrow">住まい・リフォーム</span>
       <button class="fav" type="button" data-fav="reform-01" aria-pressed="false" aria-label="仕上がりを見せたい、工務店・リフォーム向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>仕上がりを見せたい、工務店・リフォーム向け</h2>
     <p class="pitch">施工前と施工後、事例の写真で、腕の良さを伝えたい方に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：やまき工務店</p><p class="meta">木の茶色／ゴシック体／電話・LINE・メール</p><ul class="tags"><li>誠実・信頼</li><li>親しみ・かわいい</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/reform-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="reform-01" data-consult-title="仕上がりを見せたい、工務店・リフォーム向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/reform-01/" data-title="reform-01　仕上がりを見せたい、工務店・リフォーム向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="reform-01" data-consult-title="仕上がりを見せたい、工務店・リフォーム向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/reform-01/" data-title="reform-01　仕上がりを見せたい、工務店・リフォーム向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -388,16 +397,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/nail-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">08</span><span class="id">nail-01</span><span class="eyebrow">美容</span>
+    <div class="card-meta"><span class="eyebrow">美容</span>
       <button class="fav" type="button" data-fav="nail-01" aria-pressed="false" aria-label="初回の特典で集客する、ネイル・エステ向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>初回の特典で集客する、ネイル・エステ向け</h2>
     <p class="pitch">広告やチラシから来た人を、初回の予約につなげたい方に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：nail room Ciel</p><p class="meta">ローズ系／明朝体／LINE予約</p><ul class="tags"><li>上品・落ち着き</li><li>やさしい・ナチュラル</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/nail-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="nail-01" data-consult-title="初回の特典で集客する、ネイル・エステ向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/nail-01/" data-title="nail-01　初回の特典で集客する、ネイル・エステ向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="nail-01" data-consult-title="初回の特典で集客する、ネイル・エステ向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/nail-01/" data-title="nail-01　初回の特典で集客する、ネイル・エステ向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -407,16 +415,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/school-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">09</span><span class="id">school-01</span><span class="eyebrow">教育・スクール</span>
+    <div class="card-meta"><span class="eyebrow">教育・スクール</span>
       <button class="fav" type="button" data-fav="school-01" aria-pressed="false" aria-label="保護者に安心を伝える、塾・教室向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>保護者に安心を伝える、塾・教室向け</h2>
     <p class="pitch">料金と入塾までの流れを分かりやすく見せたい塾・習い事に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：個別指導 あおば塾</p><p class="meta">青とオレンジ／ゴシック体／LINE・電話</p><ul class="tags"><li>元気・力強い</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/school-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="school-01" data-consult-title="保護者に安心を伝える、塾・教室向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/school-01/" data-title="school-01　保護者に安心を伝える、塾・教室向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="school-01" data-consult-title="保護者に安心を伝える、塾・教室向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/school-01/" data-title="school-01　保護者に安心を伝える、塾・教室向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -426,16 +433,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/office-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">10</span><span class="id">office-01</span><span class="eyebrow">士業・事務所</span>
+    <div class="card-meta"><span class="eyebrow">士業・事務所</span>
       <button class="fav" type="button" data-fav="office-01" aria-pressed="false" aria-label="相談しやすさを伝える、士業・事務所向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>相談しやすさを伝える、士業・事務所向け</h2>
     <p class="pitch">お客様の声と料金の目安で、最初の相談の不安をなくしたい方に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：みなと税理士事務所</p><p class="meta">紺グレー／明朝体／電話・予約フォーム</p><ul class="tags"><li>誠実・信頼</li><li>上品・落ち着き</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/office-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="office-01" data-consult-title="相談しやすさを伝える、士業・事務所向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/office-01/" data-title="office-01　相談しやすさを伝える、士業・事務所向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="office-01" data-consult-title="相談しやすさを伝える、士業・事務所向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/office-01/" data-title="office-01　相談しやすさを伝える、士業・事務所向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -445,16 +451,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/cafe-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">11</span><span class="id">cafe-01</span><span class="eyebrow">飲食</span>
+    <div class="card-meta"><span class="eyebrow">飲食</span>
       <button class="fav" type="button" data-fav="cafe-01" aria-pressed="false" aria-label="写真で雰囲気を伝える、カフェ・パン屋向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>写真で雰囲気を伝える、カフェ・パン屋向け</h2>
     <p class="pitch">たくさんの写真で、行ってみたくなる気持ちを引き出したいお店に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：bakery &amp; coffee KOMUGI</p><p class="meta">ミルクティー色／明朝体／地図・電話</p><ul class="tags"><li>やさしい・ナチュラル</li><li>おしゃれ・個性的</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/cafe-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="cafe-01" data-consult-title="写真で雰囲気を伝える、カフェ・パン屋向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/cafe-01/" data-title="cafe-01　写真で雰囲気を伝える、カフェ・パン屋向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="cafe-01" data-consult-title="写真で雰囲気を伝える、カフェ・パン屋向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/cafe-01/" data-title="cafe-01　写真で雰囲気を伝える、カフェ・パン屋向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -464,16 +469,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/pet-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">12</span><span class="id">pet-01</span><span class="eyebrow">ペット</span>
+    <div class="card-meta"><span class="eyebrow">ペット</span>
       <button class="fav" type="button" data-fav="pet-01" aria-pressed="false" aria-label="やさしさを伝える、ペット・こども向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>やさしさを伝える、ペット・こども向け</h2>
     <p class="pitch">丸い形とやわらかい色で、はじめての方の不安をやわらげたいお店に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：dog salon こはる</p><p class="meta">ピーチ系／丸ゴシック／LINE・電話</p><ul class="tags"><li>親しみ・かわいい</li><li>やさしい・ナチュラル</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/pet-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="pet-01" data-consult-title="やさしさを伝える、ペット・こども向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/pet-01/" data-title="pet-01　やさしさを伝える、ペット・こども向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="pet-01" data-consult-title="やさしさを伝える、ペット・こども向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/pet-01/" data-title="pet-01　やさしさを伝える、ペット・こども向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -483,16 +487,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/clean-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">13</span><span class="id">clean-01</span><span class="eyebrow">掃除・修理</span>
+    <div class="card-meta"><span class="eyebrow">掃除・修理</span>
       <button class="fav" type="button" data-fav="clean-01" aria-pressed="false" aria-label="見積もりの相談がほしい、出張仕事の業種向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>見積もりの相談がほしい、出張仕事の業種向け</h2>
     <p class="pitch">料金と対応エリアを最初に伝えて、問い合わせのハードルを下げたいお店に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：おそうじ屋 みずいろ</p><p class="meta">深緑／ゴシック体／LINE・電話</p><ul class="tags"><li>誠実・信頼</li><li>やさしい・ナチュラル</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/clean-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="clean-01" data-consult-title="見積もりの相談がほしい、出張仕事の業種向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/clean-01/" data-title="clean-01　見積もりの相談がほしい、出張仕事の業種向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="clean-01" data-consult-title="見積もりの相談がほしい、出張仕事の業種向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/clean-01/" data-title="clean-01　見積もりの相談がほしい、出張仕事の業種向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -502,16 +505,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/flower-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">14</span><span class="id">flower-01</span><span class="eyebrow">花・ギフト</span>
+    <div class="card-meta"><span class="eyebrow">花・ギフト</span>
       <button class="fav" type="button" data-fav="flower-01" aria-pressed="false" aria-label="季節の商品を、写真で見せたいお店向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>季節の商品を、写真で見せたいお店向け</h2>
     <p class="pitch">季節ごとに見せたいものが変わるお店に。写真を入れ替えるだけで印象が変わります。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：花屋 ハルノヒ</p><p class="meta">若草色／明朝体／電話・Instagram</p><ul class="tags"><li>やさしい・ナチュラル</li><li>上品・落ち着き</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/flower-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="flower-01" data-consult-title="季節の商品を、写真で見せたいお店向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/flower-01/" data-title="flower-01　季節の商品を、写真で見せたいお店向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="flower-01" data-consult-title="季節の商品を、写真で見せたいお店向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/flower-01/" data-title="flower-01　季節の商品を、写真で見せたいお店向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -521,16 +523,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/izakaya-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">15</span><span class="id">izakaya-01</span><span class="eyebrow">飲食</span>
+    <div class="card-meta"><span class="eyebrow">飲食</span>
       <button class="fav" type="button" data-fav="izakaya-01" aria-pressed="false" aria-label="夜のお店・和の落ち着きを出したいお店向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>夜のお店・和の落ち着きを出したいお店向け</h2>
     <p class="pitch">料理の写真と営業時間を、落ち着いた雰囲気のまま伝えたい飲食店に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：炭火と酒 いろり</p><p class="meta">墨色／明朝体／電話・Instagram</p><ul class="tags"><li>上品・落ち着き</li><li>おしゃれ・個性的</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/izakaya-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="izakaya-01" data-consult-title="夜のお店・和の落ち着きを出したいお店向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/izakaya-01/" data-title="izakaya-01　夜のお店・和の落ち着きを出したいお店向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="izakaya-01" data-consult-title="夜のお店・和の落ち着きを出したいお店向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/izakaya-01/" data-title="izakaya-01　夜のお店・和の落ち着きを出したいお店向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -540,16 +541,15 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/piano-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">16</span><span class="id">piano-01</span><span class="eyebrow">教育・スクール</span>
+    <div class="card-meta"><span class="eyebrow">教育・スクール</span>
       <button class="fav" type="button" data-fav="piano-01" aria-pressed="false" aria-label="先生ひとりの、個人の教室向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>先生ひとりの、個人の教室向け</h2>
     <p class="pitch">月謝と体験レッスンを分かりやすく見せて、問い合わせを増やしたい教室に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：ピアノ教室 ひなた</p><p class="meta">藤色／丸ゴシック／LINE・電話</p><ul class="tags"><li>やさしい・ナチュラル</li><li>親しみ・かわいい</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/piano-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="piano-01" data-consult-title="先生ひとりの、個人の教室向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/piano-01/" data-title="piano-01　先生ひとりの、個人の教室向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="piano-01" data-consult-title="先生ひとりの、個人の教室向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/piano-01/" data-title="piano-01　先生ひとりの、個人の教室向け">スマホ表示</button>
     </div>
   </div>
 </article>
@@ -559,20 +559,20 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <span class="phone"><img src="samples/wagashi-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
   </a>
   <div class="card-body">
-    <div class="card-meta"><span class="no">17</span><span class="id">wagashi-01</span><span class="eyebrow">飲食</span>
+    <div class="card-meta"><span class="eyebrow">飲食</span>
       <button class="fav" type="button" data-fav="wagashi-01" aria-pressed="false" aria-label="老舗・工芸など、格を伝えたいお店向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>老舗・工芸など、格を伝えたいお店向け</h2>
     <p class="pitch">長く続けてきたことを、落ち着いた見た目で伝えたいお店に。</p>
-    
     <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：御菓子司 みどりや</p><p class="meta">抹茶色／明朝体／電話・Instagram</p><ul class="tags"><li>上品・落ち着き</li><li>誠実・信頼</li></ul></div></details>
     <div class="card-actions">
       <a class="button" href="samples/wagashi-01/">見本を見る<span aria-hidden="true">→</span></a>
-      <button class="button primary" type="button" data-consult="wagashi-01" data-consult-title="老舗・工芸など、格を伝えたいお店向け">このデザインで相談</button>
-      <button class="link" type="button" data-preview="samples/wagashi-01/" data-title="wagashi-01　老舗・工芸など、格を伝えたいお店向け">スマホで見る</button>
+      <button class="button primary" type="button" data-consult="wagashi-01" data-consult-title="老舗・工芸など、格を伝えたいお店向け">相談する</button>
+      <button class="link" type="button" data-preview="samples/wagashi-01/" data-title="wagashi-01　老舗・工芸など、格を伝えたいお店向け">スマホ表示</button>
     </div>
   </div>
 </article>
-    <div class="empty" id="empty" hidden><p>この組み合わせに合う見本は、まだありません。</p><p class="empty-sub">近いものをお探しします。<button class="chip" type="button" id="resetFilters">絞り込みをすべて外す</button>か、<button class="chip" type="button" data-consult="" data-consult-title="">そのまま相談する</button>をどうぞ。</p></div>
+      <div class="empty" id="empty" hidden><p>この組み合わせに合う見本はありません。</p><p class="empty-sub"><button class="chip" type="button" data-consult="" data-consult-title="">そのまま相談する</button></p></div>
+    </div>
   </div>
 </main>
 <footer><div class="wrap">掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</div></footer>
@@ -625,9 +625,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
 </dialog>
 <script>
 (() => {
-  // 絞り込みは、PCでは開いた状態、スマホでは閉じた状態から始める
-  const box = document.getElementById('filterBox');
-  if (box && window.matchMedia('(min-width: 761px)').matches) box.open = true;
+  // スマホでは、最初はすべて閉じておく（タップで開く）
+  if (!window.matchMedia('(min-width: 761px)').matches) document.querySelectorAll('.fgroup[open]').forEach(d => { d.open = false; });
   const STUDIO = {"email":null,"instagram":null};
   const PAGE_URL = location.href.split('#')[0];
   // 候補（この端末のブラウザにだけ保存）
@@ -656,6 +655,10 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     document.getElementById('empty').hidden = shown > 0;
     document.getElementById('result').textContent = shown + ' / ' + cards.length;
     paintCounts();
+    document.querySelectorAll('.fgroup[data-fgroup]').forEach(d => {
+      const now = d.querySelector('.fgroup-now');
+      if (now) now.textContent = state[d.dataset.fgroup] || '';
+    });
   };
   // それぞれの条件を押したら何件になるかを出し、0件になる条件は押せなくする
   const paintCounts = () => {
