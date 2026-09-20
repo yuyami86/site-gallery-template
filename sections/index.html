@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Section Collection｜セクションのデザイン</title>
-<meta name="description" content="料金・写真・流れ・アクセスなど、ファーストビューより下の部分の見本です。セクションごとに入れ替えられます。">
+<meta name="description" content="料金表・写真・流れ・アクセスなど、最初の画面より下の部分の見本です。部分ごとに入れ替えられます（希望があれば、で大丈夫です）。">
 <meta name="theme-color" content="#f3f2ee">
 <meta name="robots" content="noindex,nofollow">
 <style>
 :root{
-  --bg:#f3f2ee;--surface:#fbfaf7;--ink:#141412;--muted:#6b6a64;--line:#d9d7cf;--chip:#e8e6df;--accent:#141412;--accent-ink:#fbfaf7;--hot:#e2552d;
+  --bg:#f3f2ee;--surface:#fbfaf7;--ink:#141412;--muted:#57564f;--line:#d9d7cf;--chip:#e8e6df;--accent:#141412;--accent-ink:#fbfaf7;--hot:#e2552d;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){
@@ -38,6 +38,19 @@ button{font:inherit;color:inherit}
 .topnav-link:hover{color:var(--ink)}
 .topnav-cta{border:1px solid var(--ink);background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:7px 16px;font-size:12.5px;font-weight:700;cursor:pointer}
 .facts-block{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.consult h4{margin:18px 0 8px;font-size:13px;letter-spacing:.02em}
+.term-list{margin:0;display:grid;gap:8px}
+.term-list>div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;font-size:12.5px;line-height:1.7}
+.term-list dt{color:var(--muted)}
+.term-list dd{margin:0}
+.about-name{margin:4px 0 10px;font-size:20px;font-weight:800}
+.about-name span{display:block;margin-top:2px;font-size:12px;font-weight:600;color:var(--muted)}
+.flow-list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.flow-list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:baseline}
+.flow-list b{font:500 11px/1.6 var(--mono);color:var(--hot)}
+.flow-list strong{display:block;font-size:13.5px}
+.flow-list span{display:block;font-size:12.5px;color:var(--muted);line-height:1.7}
+.lead-note{display:inline-block;margin-top:6px;font-size:12.5px}
 .facts-block dd{font-size:20px}
 .term-points{margin:0 0 14px;padding-left:1.1em;color:var(--muted);font-size:13px;line-height:1.9}
 .masthead{border-bottom:1px solid var(--ink)}
@@ -82,7 +95,7 @@ main{padding:28px 0 80px}
 .card-meta{display:flex;align-items:center;gap:10px;min-width:0;font:500 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.04em}
 .card-meta .no{color:var(--hot)}
 .card-meta .eyebrow{min-width:0;font-family:inherit}
-.fav{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--line);border-radius:50%;background:transparent;cursor:pointer}
+.fav{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid color-mix(in srgb,var(--ink) 35%,transparent);border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
 .fav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
 .fav[aria-pressed="true"]{border-color:var(--hot);color:var(--hot)}
 .fav[aria-pressed="true"] svg{fill:currentColor}
@@ -90,6 +103,7 @@ main{padding:28px 0 80px}
 .card p{margin:0}
 .pitch{color:var(--muted);font-size:13.5px}
 .meta{font-size:12px;color:var(--muted)}
+.meta.shop{font-size:11.5px;opacity:.85}
 .need{font-size:12.5px}
 .need span{display:inline-block;margin-right:8px;padding:1px 8px;border-radius:4px;background:var(--chip);font-size:11px;font-weight:700}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
@@ -156,10 +170,11 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   <div class="wrap topbar-inner">
     <a class="brand" href="/site-gallery-template/">／Samples</a>
     <nav class="topnav" aria-label="メニュー">
-      <a href="/site-gallery-template/"><b>01</b>サイト全体から選ぶ<small>12</small></a>
-      <a href="/site-gallery-template/heroes/"><b>02</b>ファーストビューを変える<small>20</small></a>
-      <a href="/site-gallery-template/sections/" aria-current="page"><b>03</b>セクションを変える<small>27</small></a>
+      <a href="/site-gallery-template/"><b>01</b>完成した見本から選ぶ<small>12</small></a>
+      <a href="/site-gallery-template/heroes/"><b>02</b>最初の画面を変える<small>20</small></a>
+      <a href="/site-gallery-template/sections/" aria-current="page"><b>03</b>料金表・写真などの部分を変える<small>27</small></a>
       <button class="topnav-link" type="button" id="termsOpen">料金・納期</button>
+      <button class="topnav-link" type="button" id="aboutOpen">つくる人</button>
       <button class="topnav-cta" type="button" data-consult="" data-consult-title="">相談する</button>
     </nav>
   </div>
@@ -169,7 +184,7 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <div class="bar"><span>Step 3 — Sections</span><span>12 sites · 20 first views · 27 sections</span></div>
     <div class="title-row">
       <h1><span>SECTIONS</span></h1>
-      <p class="lead">料金・写真・流れ・アクセスなど、ファーストビューより下の部分の見本です。セクションごとに入れ替えられます。</p>
+      <p class="lead">料金表・写真・流れ・アクセスなど、最初の画面より下の部分の見本です。部分ごとに入れ替えられます（希望があれば、で大丈夫です）。<br><span class="lead-note">02と03は、希望があれば変えられます。まずは01から選ぶだけで大丈夫です。</span></p>
     </div>
   </div>
 </header>
@@ -744,9 +759,24 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="result">Price &amp; Schedule</p>
     <h3 id="termsTitle">料金・納期</h3>
     <dl class="facts facts-block"><div><dt>制作費</dt><dd>5万円〜</dd></div><div><dt>納期</dt><dd>1〜2週間</dd></div></dl>
-    <ul class="term-points"><li>色・写真・文章は自由に変更</li><li>ほかの業種の見本も使えます</li><li>ファーストビューやセクションを組み合わせ</li><li>スマホ対応・お知らせ機能つき</li></ul>
-    <p class="small">内容によって変わります。お店の写真や文章がそろっていない場合も、一緒に考えながら進められます。</p>
+    <p class="small">表示はすべて税込です。金額は内容によって変わります。お見積もりは無料です。 納期は、文章と写真がそろってから1〜2週間です。</p>
+    <h4>基本料金に含まれるもの</h4>
+    <dl class="term-list"><div><dt>ページ数</dt><dd>1ページ（お知らせのページは記事ごとに自動で作られます）</dd></div><div><dt>修正</dt><dd>公開前に2回まで無料（それ以降は1回 5,500円）</dd></div><div><dt>写真・文章</dt><dd>お店の写真と文章に差し替え。文章は原案からお手伝いします</dd></div><div><dt>スマホ対応</dt><dd>含まれます（PC・スマホどちらも確認して納品）</dd></div><div><dt>お知らせ機能</dt><dd>含まれます。公開後はご自身で記事を追加できます</dd></div><div><dt>公開</dt><dd>GitHub Pagesで公開（サーバー代 無料）</dd></div></dl>
+    <h4>別料金・対応していないこと</h4>
+    <dl class="term-list"><div><dt>独自ドメイン</dt><dd>取得・設定は 11,000円（ドメイン代 年1,500円前後は実費）</dd></div><div><dt>公開後の更新代行</dt><dd>1回 3,300円〜（ご自身での更新は無料）</dd></div><div><dt>予約・決済の機能</dt><dd>外部サービス（LINE・予約サイトなど）へのボタン設置まで</dd></div><div><dt>写真撮影</dt><dd>行っていません。ご用意が難しい場合は無料素材でご提案します</dd></div></dl>
     <button class="button consult-close" type="button" id="termsClose">閉じる</button>
+  </div>
+</dialog>
+<dialog id="about" aria-labelledby="aboutTitle">
+  <div class="consult">
+    <p class="result">About</p>
+    <h3 id="aboutTitle">つくる人と、進め方</h3>
+    <p class="about-name">【お名前】<span>ホームページ制作（フリーランス）</span></p>
+    <p class="small">地域のお店のホームページを、見本をもとに手早く・安く作っています。写真や文章がそろっていなくても、一緒に考えながら進められます。</p>
+    <dl class="term-list"><div><dt>対応地域</dt><dd>三重県を中心に、オンラインで全国対応</dd></div><div><dt>返信の目安</dt><dd>ご相談への返信は、24時間以内を目安にしています</dd></div></dl>
+    <h4>相談から公開までの流れ</h4>
+    <ol class="flow-list"><li><b>01</b><div><strong>相談</strong><span>見本の番号と、お店のことを教えてください（メール・Instagram）</span></div></li><li><b>02</b><div><strong>見積もり</strong><span>内容を伺い、金額と納期をお伝えします（無料）</span></div></li><li><b>03</b><div><strong>材料をお預かり</strong><span>写真・文章・ロゴなどをお預かりします</span></div></li><li><b>04</b><div><strong>制作・ご確認</strong><span>できたものを見てもらい、2回まで直します</span></div></li><li><b>05</b><div><strong>公開</strong><span>公開して完了。更新の方法もお伝えします</span></div></li></ol>
+    <button class="button consult-close" type="button" id="aboutClose">閉じる</button>
   </div>
 </dialog>
 <dialog id="consult" aria-labelledby="consultTitle">
@@ -819,6 +849,10 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   // このデザインで相談（見本の番号を自動で引き継ぐ）
   const consult = document.getElementById('consult');
   const copy = text => navigator.clipboard?.writeText(text).then(() => true, () => false) ?? Promise.resolve(false);
+  const about = document.getElementById('about');
+  document.getElementById('aboutOpen').addEventListener('click', () => { if (typeof about.showModal === 'function') about.showModal(); });
+  document.getElementById('aboutClose').addEventListener('click', () => about.close());
+  about.addEventListener('click', e => { if (e.target === about) about.close(); });
   const terms = document.getElementById('terms');
   document.getElementById('termsOpen').addEventListener('click', () => { if (typeof terms.showModal === 'function') terms.showModal(); });
   document.getElementById('termsClose').addEventListener('click', () => terms.close());
@@ -831,7 +865,10 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     const box = document.getElementById('consultActions'); box.innerHTML = '';
     if (STUDIO.email) {
       const subject = id ? '【見本 ' + id + '】ホームページ制作の相談' : 'ホームページ制作の相談';
-      const body = (id ? '見本の番号：' + id + '（' + title + '）\n' : '') + '見本の一覧：' + PAGE_URL + '\n\n■ お店の名前：\n■ 業種：\n■ ご希望の公開時期：\n■ 気になっていること：\n';
+      const saved = [...favs].filter(f => f !== id);
+      const body = (id ? '見本の番号：' + id + '（' + title + '）\n' : '')
+        + (saved.length ? '候補に保存した見本：' + saved.join('、') + '\n' : '')
+        + '見本の一覧：' + PAGE_URL + '\n\n■ お店の名前：\n■ 業種：\n■ ご希望の公開時期：\n■ 気になっていること：\n';
       const a = document.createElement('a'); a.className = 'button primary'; a.textContent = 'メールで相談する';
       a.href = 'mailto:' + STUDIO.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); box.append(a);
     }
@@ -846,6 +883,13 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   document.getElementById('consultCopy').addEventListener('click', async e => { const ok = await copy(document.getElementById('consultId').textContent); e.target.textContent = ok ? 'コピーしました' : 'コピーできませんでした'; setTimeout(() => { e.target.textContent = '番号をコピー'; }, 1600); });
   document.getElementById('consultClose').addEventListener('click', () => consult.close());
   consult.addEventListener('click', e => { if (e.target === consult) consult.close(); });
+  // 見本のページから「この見本で制作を相談する」で戻ってきたとき（?consult=見本の番号）
+  const wanted = new URLSearchParams(location.search).get('consult');
+  if (wanted) {
+    const btn = document.querySelector('[data-consult="' + CSS.escape(wanted) + '"]');
+    (btn || document.querySelector('.topnav-cta'))?.click();
+    document.querySelector('.card[data-id="' + CSS.escape(wanted) + '"]')?.scrollIntoView({ block: 'center' });
+  }
 })();
 </script>
 </body>

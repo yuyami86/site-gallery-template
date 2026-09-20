@@ -1366,6 +1366,7 @@ h1,h2,h3{word-break:keep-all;word-break:auto-phrase;overflow-wrap:break-word}
 .sample-bar{display:flex;justify-content:space-between;align-items:center;gap:6px 16px;flex-wrap:wrap;padding:8px max(4vw,16px);background:var(--ink);color:#fff;font-size:11px;letter-spacing:.04em;line-height:1.5}
 .sample-bar a{font-weight:700}
 .sample-bar span{opacity:.72;min-width:0;overflow-wrap:anywhere}
+.sample-bar-cta{margin-left:auto;padding:6px 14px;border-radius:999px;background:#fff;color:var(--ink);font-weight:800;white-space:nowrap}
 
 /* ==========================================================================
    ヒーロー部品の共通（src/parts/hero/*）
