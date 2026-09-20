@@ -120,7 +120,7 @@ main{padding:34px 0 88px}
 .side .chip-n{margin-left:auto;font:500 11px/1 var(--mono);opacity:.65}
 .side .fav-chip{margin-top:10px;border:1px solid var(--line);border-radius:9px;justify-content:center}
 .side-reset{margin-top:6px;padding:8px;border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
-.filter-tab,.side-backdrop{display:none}
+.filter-tab,.side-backdrop,.side-links{display:none}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding:0}
 .card{display:flex;flex-direction:column;min-width:0;padding:14px;background:var(--surface);border-radius:18px;outline:1px solid var(--line)}
 .card[hidden]{display:none}
@@ -215,11 +215,25 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   .filter-box summary span{font-weight:500;font-size:12px;color:var(--muted)}
   .layout{grid-template-columns:minmax(0,1fr);gap:16px}
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
+  /* 上のメニューは「相談する」だけにして、他は引き出しの中へ */
+  .topnav a.topnav-step,.topnav .topnav-link{display:none}
+  .topbar-inner{padding:10px 0}
+  .side-links{display:flex;flex-direction:column;gap:2px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .side-links a,.side-links button{padding:9px 10px;border:0;border-radius:9px;background:transparent;color:var(--ink);font-size:13.5px;font-weight:600;text-align:left;text-decoration:none;cursor:pointer}
+  h1.ja{font-size:26px}
+  .title-row.is-offer .lead{margin-top:12px}
+  .offer-cta{margin-top:16px}
+  .offer-cta .button{font-size:13px;padding:11px 14px}
+  .picks .wrap{padding:12px 0}
+  .card{padding:10px}
+  .card h2{font-size:18px}
+  .pitch{font-size:13.5px}
   /* スマホでは左端から引き出す */
   .side{position:fixed;left:0;top:0;bottom:0;width:min(300px,86vw);z-index:60;transform:translateX(-100%);transition:transform .24s ease;overflow:auto;background:var(--surface);border-right:1px solid var(--line);box-shadow:0 0 40px rgba(0,0,0,.4)}
   .side.is-open{transform:none}
   .side-inner{position:static;height:100%;border:0;border-radius:0;padding:14px 14px 32px}
-  .filter-tab{display:flex;align-items:center;gap:6px;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:55;padding:14px 10px;border:1px solid var(--line);border-left:0;border-radius:0 12px 12px 0;background:var(--ink);color:var(--bg);font-size:12px;font-weight:700;writing-mode:vertical-rl;letter-spacing:.14em;cursor:pointer}
+  /* 絞り込みは本文に重ならないよう、左下に丸いボタンで置く */
+  .filter-tab{display:flex;align-items:center;gap:6px;position:fixed;left:0;bottom:18px;z-index:55;padding:12px 16px 12px 13px;border:1px solid var(--line);border-left:0;border-radius:0 999px 999px 0;background:var(--ink);color:var(--bg);font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.45)}
   .side-backdrop:not([hidden]){display:block;position:fixed;inset:0;z-index:59;background:rgba(0,0,0,.55);border:0}
   .viewer-stage{padding:0}
   .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
@@ -232,9 +246,9 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   <div class="wrap topbar-inner">
     <a class="brand" href="/site-gallery-template/">／Samples</a>
     <nav class="topnav" aria-label="メニュー">
-      <a href="/site-gallery-template/"><b>01</b>完成した見本から選ぶ<small>17</small></a>
-      <a href="/site-gallery-template/heroes/"><b>02</b>最初の画面を変える<small>20</small></a>
-      <a href="/site-gallery-template/sections/" aria-current="page"><b>03</b>料金表・写真などの部分を変える<small>27</small></a>
+      <a class="topnav-step" href="/site-gallery-template/"><b>01</b>完成した見本から選ぶ<small>17</small></a>
+      <a class="topnav-step" href="/site-gallery-template/heroes/"><b>02</b>最初の画面を変える<small>20</small></a>
+      <a class="topnav-step" href="/site-gallery-template/sections/" aria-current="page"><b>03</b>料金表・写真などの部分を変える<small>27</small></a>
       <button class="topnav-link" type="button" id="termsOpen">料金・納期</button>
       <button class="topnav-link" type="button" id="aboutOpen">つくる人</button>
       <button class="topnav-cta" type="button" data-consult="" data-consult-title="">相談する</button>
@@ -264,6 +278,13 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
         <details class="fgroup" data-fgroup="section" open><summary>部分<span class="fgroup-now"></span></summary><div class="group" data-group="section"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="concept" aria-pressed="false">考え方<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="method" aria-pressed="false">特徴・こだわり<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="training" aria-pressed="false">写真と一言<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="trainer" aria-pressed="false">人物紹介<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="flow" aria-pressed="false">流れ<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="price" aria-pressed="false">料金<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="menu" aria-pressed="false">メニュー表<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="gallery" aria-pressed="false">写真ギャラリー<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="visit" aria-pressed="false">アクセス<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="faq" aria-pressed="false">よくある質問<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="contact" aria-pressed="false">お問い合わせ<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="journal" aria-pressed="false">ブログ・お知らせ<span class="chip-n" aria-hidden="true"></span></button></div></details>
         <button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 保存した見本（<span id="favCount">0</span>）</button>
         <button class="side-reset" type="button" id="resetFilters">絞り込みを外す</button>
+        <nav class="side-links" aria-label="メニュー">
+          <a href="/site-gallery-template/">01 完成した見本から選ぶ</a>
+          <a href="/site-gallery-template/heroes/">02 最初の画面を変える</a>
+          <a href="/site-gallery-template/sections/" aria-current="page">03 料金表・写真などの部分を変える</a>
+          <button type="button" data-open="terms">料金・納期</button>
+          <button type="button" data-open="about">つくる人</button>
+        </nav>
       </div>
     </aside>
     <div class="grid" id="grid">
@@ -814,6 +835,10 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   const openSide = on => { side.classList.toggle('is-open', on); sideBack.hidden = !on; sideTab.setAttribute('aria-expanded', String(on)); document.body.style.overflow = on ? 'hidden' : ''; };
   sideTab.addEventListener('click', () => openSide(!side.classList.contains('is-open')));
   sideBack.addEventListener('click', () => openSide(false));
+  document.querySelectorAll('.side-links [data-open]').forEach(b => b.addEventListener('click', () => {
+    openSide(false);
+    document.getElementById(b.dataset.open === 'terms' ? 'termsOpen' : 'aboutOpen').click();
+  }));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') openSide(false); });
   const STUDIO = {"email":null,"instagram":null};
   const PAGE_URL = location.href.split('#')[0];
