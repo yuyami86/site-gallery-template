@@ -112,9 +112,15 @@ main{padding:34px 0 88px}
 .fgroup summary::after{content:"+";margin-left:auto;font:400 16px/1 var(--mono);color:var(--muted)}
 .fgroup[open] summary::after{content:"−"}
 .fgroup-now{font:500 11px/1 var(--mono);color:var(--hot)}
-.fgroup .group{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px}
-.fav-chip{margin-top:10px}
-.side-reset{margin-top:4px;padding:8px;border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
+/* 条件は縦に1つずつ並べる（横に読ませない） */
+.fgroup .group{display:flex;flex-direction:column;gap:1px;padding:0 0 8px}
+.side .chip{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:9px 10px;border:0;border-radius:9px;background:transparent;font-size:13.5px;font-weight:600;text-align:left}
+.side .chip:hover:not([disabled]){background:var(--chip)}
+.side .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.side .chip-n{margin-left:auto;font:500 11px/1 var(--mono);opacity:.65}
+.side .fav-chip{margin-top:10px;border:1px solid var(--line);border-radius:9px;justify-content:center}
+.side-reset{margin-top:6px;padding:8px;border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
+.filter-tab,.side-backdrop{display:none}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding:0}
 .card{display:flex;flex-direction:column;min-width:0;padding:14px;background:var(--surface);border-radius:18px;outline:1px solid var(--line)}
 .card[hidden]{display:none}
@@ -208,8 +214,13 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   .filter-box[open] summary::after{content:"−"}
   .filter-box summary span{font-weight:500;font-size:12px;color:var(--muted)}
   .layout{grid-template-columns:minmax(0,1fr);gap:16px}
-  .side-inner{position:static;padding:10px 12px}
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
+  /* スマホでは左端から引き出す */
+  .side{position:fixed;left:0;top:0;bottom:0;width:min(300px,86vw);z-index:60;transform:translateX(-100%);transition:transform .24s ease;overflow:auto;background:var(--surface);border-right:1px solid var(--line);box-shadow:0 0 40px rgba(0,0,0,.4)}
+  .side.is-open{transform:none}
+  .side-inner{position:static;height:100%;border:0;border-radius:0;padding:14px 14px 32px}
+  .filter-tab{display:flex;align-items:center;gap:6px;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:55;padding:14px 10px;border:1px solid var(--line);border-left:0;border-radius:0 12px 12px 0;background:var(--ink);color:var(--bg);font-size:12px;font-weight:700;writing-mode:vertical-rl;letter-spacing:.14em;cursor:pointer}
+  .side-backdrop{display:block;position:fixed;inset:0;z-index:59;background:rgba(0,0,0,.55);border:0}
   .viewer-stage{padding:0}
   .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
   .viewer-mode{display:none}
@@ -244,8 +255,10 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
 </header>
 
 <main>
+  <button class="filter-tab" type="button" id="filterTab" aria-controls="side" aria-expanded="false">絞り込む</button>
+  <button class="side-backdrop" type="button" id="sideBackdrop" aria-label="絞り込みを閉じる" hidden></button>
   <div class="wrap layout">
-    <aside class="side" aria-label="絞り込み">
+    <aside class="side" id="side" aria-label="絞り込み">
       <div class="side-inner">
         <div class="side-head"><span>絞り込む</span><span class="result" id="result"></span></div>
         <details class="fgroup" data-fgroup="section" open><summary>部分<span class="fgroup-now"></span></summary><div class="group" data-group="section"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="concept" aria-pressed="false">考え方<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="method" aria-pressed="false">特徴・こだわり<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="training" aria-pressed="false">写真と一言<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="trainer" aria-pressed="false">人物紹介<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="flow" aria-pressed="false">流れ<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="price" aria-pressed="false">料金<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="menu" aria-pressed="false">メニュー表<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="gallery" aria-pressed="false">写真ギャラリー<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="visit" aria-pressed="false">アクセス<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="faq" aria-pressed="false">よくある質問<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="contact" aria-pressed="false">お問い合わせ<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="journal" aria-pressed="false">ブログ・お知らせ<span class="chip-n" aria-hidden="true"></span></button></div></details>
@@ -796,6 +809,12 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
 (() => {
   // スマホでは、最初はすべて閉じておく（タップで開く）
   if (!window.matchMedia('(min-width: 761px)').matches) document.querySelectorAll('.fgroup[open]').forEach(d => { d.open = false; });
+  // 左端の「絞り込む」で開け閉めする（スマホ）
+  const side = document.getElementById('side'), sideTab = document.getElementById('filterTab'), sideBack = document.getElementById('sideBackdrop');
+  const openSide = on => { side.classList.toggle('is-open', on); sideBack.hidden = !on; sideTab.setAttribute('aria-expanded', String(on)); document.body.style.overflow = on ? 'hidden' : ''; };
+  sideTab.addEventListener('click', () => openSide(!side.classList.contains('is-open')));
+  sideBack.addEventListener('click', () => openSide(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') openSide(false); });
   const STUDIO = {"email":null,"instagram":null};
   const PAGE_URL = location.href.split('#')[0];
   // 候補（この端末のブラウザにだけ保存）
