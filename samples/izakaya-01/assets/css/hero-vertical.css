@@ -1,0 +1,20 @@
+/* 縦書き（src/parts/hero/vertical） */
+.hv-vertical{padding:56px 0 80px}
+.hv-vertical-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,5vw,80px);align-items:start}
+.hv-vertical-photo{aspect-ratio:4/3}
+.hv-vertical-side{display:flex;flex-direction:row-reverse;align-items:flex-start;gap:20px}
+.hv-vertical-title{writing-mode:vertical-rl;margin:0;font-size:clamp(40px,4.4vw,66px);line-height:1.45;letter-spacing:.12em}
+.hv-vertical-title .mobile-line{display:block}
+.hv-vertical-place{writing-mode:vertical-rl;margin:0;padding-top:.4em;font-size:13px;letter-spacing:.3em;color:var(--muted)}
+.hv-vertical-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 56px;margin-top:44px}
+.hv-vertical-foot .hv-lead{margin-top:10px}
+.hv-vertical-foot .hv-actions{margin-top:0}
+@media(max-width:860px){
+  .hv-vertical-grid{grid-template-columns:minmax(0,1fr)}
+  .hv-vertical-side{order:-1;justify-content:center}
+}
+@media(max-width:700px){
+  .hv-vertical{padding:40px 0 64px}
+  .hv-vertical-title{font-size:clamp(32px,9vw,44px)}
+  .hv-vertical-foot{margin-top:32px}
+}

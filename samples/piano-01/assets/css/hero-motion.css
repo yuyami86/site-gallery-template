@@ -1,0 +1,20 @@
+/* ゆっくり動く（src/parts/hero/motion） */
+.hv-motion{display:grid;grid-template-columns:minmax(0,1fr);place-items:center;min-height:calc(100svh - 70px);text-align:center}
+.hv-motion-media{position:absolute;inset:0;background:#111}
+.hv-motion-media img,.hv-motion-media video{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.72);animation:hvMotionZoom 20s ease-out both}
+.hv-motion-media::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(8,8,8,.42),rgba(8,8,8,.12) 70%)}
+.hv-motion-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:96px 0}
+/* 中央寄せでも、長い文章は枠の幅で折り返す */
+.hv-motion-inner>*{max-width:100%}
+.hv-motion .hv-context{justify-content:center}
+.hv-motion .hv-title{font-size:clamp(46px,6.6vw,100px)}
+.hv-motion .hv-lead{margin:0 auto}
+.hv-motion .hv-actions{justify-content:center}
+.hv-motion-inner>*{animation:hvMotionRise 1.1s var(--ease) both}
+.hv-motion-inner>:nth-child(2){animation-delay:.25s}
+.hv-motion-inner>:nth-child(3){animation-delay:.55s}
+.hv-motion-inner>:nth-child(4){animation-delay:.8s}
+@keyframes hvMotionZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
+@keyframes hvMotionRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.hv-motion-media img,.hv-motion-media video,.hv-motion-inner>*{animation:none}}
+@media(max-width:700px){.hv-motion-inner{padding:72px 0}.hv-motion .hv-title{font-size:clamp(38px,10.6vw,52px)}.hv-motion .hv-context{text-align:center}}

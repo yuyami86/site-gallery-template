@@ -1,0 +1,18 @@
+/* スライド（src/parts/hero/slideshow） */
+.hv-slides{display:flex;align-items:flex-end;min-height:calc(100svh - 70px)}
+.hv-slides-media{position:absolute;inset:0;background:#111}
+.hv-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.hv-slide.is-active{opacity:1}
+.hv-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.hv-slide.is-active img{animation:hvSlideZoom 8s ease-out both}
+@keyframes hvSlideZoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+.hv-slides-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,8,.05) 0%,rgba(8,10,8,.2) 45%,rgba(8,10,8,.82) 100%)}
+.hv-slides-inner{position:relative;z-index:1;padding:96px 0 56px}
+.hv-slides .hv-title{font-size:clamp(46px,6.8vw,100px)}
+.hv-slides-dots{display:flex;gap:6px;margin-top:32px}
+/* 押しやすいように、ボタン自体は高さ24px。見た目は細い線 */
+.hv-slides-dots button{position:relative;width:38px;height:24px;padding:0;border:0;background:none;cursor:pointer}
+.hv-slides-dots button::before{content:"";position:absolute;left:2px;right:2px;top:11px;height:3px;border-radius:2px;background:rgba(255,255,255,.35)}
+.hv-slides-dots button[aria-current="true"]::before{background:#fff}
+@media(prefers-reduced-motion:reduce){.hv-slide{transition:none}.hv-slide.is-active img{animation:none}}
+@media(max-width:700px){.hv-slides-inner{padding:64px 0 40px}.hv-slides .hv-title{font-size:clamp(38px,10.6vw,52px)}}
