@@ -65,6 +65,27 @@ h1 span{display:inline-block;max-width:100%}
 .facts dt{font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .facts dd{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em}
 .title-row{padding-bottom:30px}
+.title-row.is-offer{grid-template-columns:minmax(0,1fr);gap:0;align-items:start;padding:30px 0 28px}
+.wordmark{margin:0 0 14px;font:600 11px/1 var(--mono);letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+h1.ja{font-size:clamp(27px,4.1vw,54px);line-height:1.18;letter-spacing:-.02em;font-weight:800}
+.title-row.is-offer .lead{justify-self:start;margin-top:16px;max-width:640px}
+.offer-facts{display:flex;flex-wrap:wrap;gap:8px 30px;margin:18px 0 0}
+.offer-facts>div{display:flex;align-items:baseline;gap:8px;min-width:0}
+.offer-facts dt{font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.offer-facts dd{margin:0;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.offer-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.offer-cta .button{font-size:13px}
+.picks{border-bottom:1px solid var(--line);background:var(--surface)}
+.picks .wrap{padding:16px 0}
+.picks-title{margin:0 0 10px;font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.picks-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pick{display:flex;gap:10px;align-items:center;min-width:0;padding:8px;border:1px solid var(--line);background:var(--bg);text-decoration:none;color:inherit}
+.pick:hover{border-color:var(--ink)}
+.pick-thumb{flex:0 0 84px;aspect-ratio:16/10;overflow:hidden;background:var(--chip)}
+.pick-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.pick-body{min-width:0;display:flex;flex-direction:column;gap:2px}
+.pick-body b{font-size:13px;font-weight:700;overflow-wrap:anywhere}
+.pick-body span{font:500 11px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
 /* 絞り込み */
 .filters{border-bottom:1px solid var(--line)}
 .filters .wrap{display:flex;flex-direction:column;gap:8px;padding:12px 0}
@@ -112,7 +133,18 @@ main{padding:28px 0 80px}
 .button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font-size:12.5px;font-weight:700;text-decoration:none;cursor:pointer;text-align:center}
 .button.primary{background:var(--accent);color:var(--accent-ink)}
 .link{border:0;background:none;padding:6px 2px;font-size:12px;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.card-more{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.card-more summary{cursor:pointer;list-style:none;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card-more summary::-webkit-details-marker{display:none}
+.card-more summary::after{content:" +"}
+.card-more[open] summary::after{content:" −"}
+.card-more>div{margin-top:8px}
 .empty{grid-column:1/-1;margin:0;padding:48px 16px;text-align:center;color:var(--muted);background:var(--surface);outline:1px solid var(--line)}
+.empty p{margin:0}
+.empty-sub{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;font-size:13px}
+.chip-n{margin-left:6px;font:500 11px/1 var(--mono);color:var(--muted)}
+.chip[disabled]{opacity:.38;cursor:not-allowed}
+.chip[aria-pressed="true"] .chip-n{color:inherit;opacity:.7}
 footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 /* プレビュー・相談 */
 dialog{padding:0;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink)}
@@ -138,6 +170,9 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
 @media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){
   .title-row{grid-template-columns:minmax(0,1fr);padding:22px 0 16px}
+  .title-row.is-offer{padding:20px 0 20px}
+  .offer-cta .button{width:100%;justify-content:center}
+  .picks-row{grid-template-columns:minmax(0,1fr)}
   .bar span:last-child{display:none}
   .topbar{position:static}
   .topbar-inner{flex-wrap:wrap;gap:4px 12px;padding:8px 0}
@@ -183,15 +218,19 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   <div class="wrap">
     <div class="bar"><span>Step 3 — Sections</span><span>17 sites · 20 first views · 27 sections</span></div>
     <div class="title-row">
+      
       <h1><span>SECTIONS</span></h1>
       <p class="lead">料金表・写真・流れ・アクセスなど、最初の画面より下の部分の見本です。部分ごとに入れ替えられます（希望があれば、で大丈夫です）。<br><span class="lead-note">02と03は、希望があれば変えられます。まずは01から選ぶだけで大丈夫です。</span></p>
+      
+      
     </div>
   </div>
 </header>
+
 <nav class="filters" aria-label="絞り込み">
   <div class="wrap">
     <details class="filter-box" id="filterBox"><summary>絞り込む<span>部分</span></summary>
-    <div class="group" data-group="section"><span class="group-label">部分</span><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="concept" aria-pressed="false">考え方</button><button class="chip" type="button" data-value="method" aria-pressed="false">特徴・こだわり</button><button class="chip" type="button" data-value="training" aria-pressed="false">写真と一言</button><button class="chip" type="button" data-value="trainer" aria-pressed="false">人物紹介</button><button class="chip" type="button" data-value="flow" aria-pressed="false">流れ</button><button class="chip" type="button" data-value="price" aria-pressed="false">料金</button><button class="chip" type="button" data-value="menu" aria-pressed="false">メニュー表</button><button class="chip" type="button" data-value="gallery" aria-pressed="false">写真ギャラリー</button><button class="chip" type="button" data-value="visit" aria-pressed="false">アクセス</button><button class="chip" type="button" data-value="faq" aria-pressed="false">よくある質問</button><button class="chip" type="button" data-value="contact" aria-pressed="false">お問い合わせ</button><button class="chip" type="button" data-value="journal" aria-pressed="false">ブログ・お知らせ</button></div>
+    <div class="group" data-group="section"><span class="group-label">部分</span><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="concept" aria-pressed="false">考え方<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="method" aria-pressed="false">特徴・こだわり<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="training" aria-pressed="false">写真と一言<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="trainer" aria-pressed="false">人物紹介<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="flow" aria-pressed="false">流れ<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="price" aria-pressed="false">料金<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="menu" aria-pressed="false">メニュー表<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="gallery" aria-pressed="false">写真ギャラリー<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="visit" aria-pressed="false">アクセス<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="faq" aria-pressed="false">よくある質問<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="contact" aria-pressed="false">お問い合わせ<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="journal" aria-pressed="false">ブログ・お知らせ<span class="chip-n" aria-hidden="true"></span></button></div>
     </details>
     <div class="group"><span class="group-label">Saved</span><button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 候補だけ見る（<span id="favCount">0</span>）</button><span class="result" id="result"></span></div>
   </div>
@@ -208,7 +247,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="concept-standard" aria-pressed="false" aria-label="標準 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>標準</h2>
     <p class="pitch">見出しを左、3つの段落を右に並べる基本の形。</p>
-    
     
     
     <div class="card-actions">
@@ -228,9 +266,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="concept-photo" aria-pressed="false" aria-label="写真つき を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>写真つき</h2>
     <p class="pitch">考え方の文章の横に、お店の雰囲気が伝わる写真を大きく置く。文章だけより、人柄や空気感が伝わる形。</p>
-    <p class="meta">向いているお店：飲食店・美容室・工務店・教室</p>
     <p class="need"><span>準備するもの</span>縦長の写真1枚</p>
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：飲食店・美容室・工務店・教室</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/beauty-01/#concept">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="concept-photo" data-consult-title="写真つき">このデザインで相談</button>
@@ -248,9 +285,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="concept-centered" aria-pressed="false" aria-label="中央寄せ を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>中央寄せ</h2>
     <p class="pitch">見出しと文章を中央にそろえ、上下の余白を大きくとる。想いを一つずつ、静かに伝える形。</p>
-    <p class="meta">向いているお店：アパレル・和菓子・工芸・ネイル・士業</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：アパレル・和菓子・工芸・ネイル・士業</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/apparel-01/#concept">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="concept-centered" data-consult-title="中央寄せ">このデザインで相談</button>
@@ -270,7 +306,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">3つの特徴を、番号つきのカードで横に並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#method">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="method-standard" data-consult-title="カード">このデザインで相談</button>
@@ -288,9 +323,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="method-zigzag" aria-pressed="false" aria-label="写真と交互 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>写真と交互</h2>
     <p class="pitch">特徴ごとに写真を付け、左右を入れ替えながら並べる。こだわりやサービス内容を、写真でしっかり見せる形。</p>
-    <p class="meta">向いているお店：不動産・飲食店・工務店・美容室</p>
     <p class="need"><span>準備するもの</span>特徴ごとの写真3枚</p>
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：不動産・飲食店・工務店・美容室</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/realestate-01/#method">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="method-zigzag" data-consult-title="写真と交互">このデザインで相談</button>
@@ -308,9 +342,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="method-list" aria-pressed="false" aria-label="番号リスト を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>番号リスト</h2>
     <p class="pitch">大きな番号・見出し・説明を、線で区切って1行ずつ並べる。飾りを抑えた、シンプルで読みやすい形。</p>
-    <p class="meta">向いているお店：士業・アパレル・設計事務所・コンサル</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：士業・アパレル・設計事務所・コンサル</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/apparel-01/#method">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="method-list" data-consult-title="番号リスト">このデザインで相談</button>
@@ -328,7 +361,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="training-standard" aria-pressed="false" aria-label="写真と一言 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>写真と一言</h2>
     <p class="pitch">縦長の写真と短い一言を、テーマ色の帯の上に並べる。</p>
-    
     
     
     <div class="card-actions">
@@ -350,7 +382,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">写真の横に、名前・経歴・一言・想い（開閉式）を並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#trainer">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="trainer-standard" data-consult-title="写真と紹介">このデザインで相談</button>
@@ -368,9 +399,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="trainer-message" aria-pressed="false" aria-label="代表あいさつ を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>代表あいさつ</h2>
     <p class="pitch">手紙のように、一言・あいさつ文・想いを中央にまとめ、最後に写真と名前を添える。信頼感を大切にしたい業種に。</p>
-    <p class="meta">向いているお店：士業・不動産・工務店・整体・クリニック</p>
     <p class="need"><span>準備するもの</span>代表の写真1枚（小さく表示）</p>
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：士業・不動産・工務店・整体・クリニック</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/realestate-01/#trainer">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="trainer-message" data-consult-title="代表あいさつ">このデザインで相談</button>
@@ -390,7 +420,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">ステップを3列の枠で横に並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/beauty-01/#flow">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="flow-standard" data-consult-title="3列">このデザインで相談</button>
@@ -408,9 +437,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="flow-timeline" aria-pressed="false" aria-label="縦のタイムライン を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>縦のタイムライン</h2>
     <p class="pitch">ステップを縦の線でつないで、上から順に読ませる。手順が多くても、流れがひと目でわかる形。</p>
-    <p class="meta">向いているお店：整体・クリニック・リフォーム・ペットサロン・士業</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：整体・クリニック・リフォーム・ペットサロン・士業</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#flow">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="flow-timeline" data-consult-title="縦のタイムライン">このデザインで相談</button>
@@ -428,9 +456,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="flow-arrows" aria-pressed="false" aria-label="矢印でつなぐ を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>矢印でつなぐ</h2>
     <p class="pitch">ステップのカードを矢印でつないで並べる。予約から当日までの手順を、テンポよく見せる形。</p>
-    <p class="meta">向いているお店：学習塾・リフォーム・教室・ネット予約のお店</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：学習塾・リフォーム・教室・ネット予約のお店</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/reform-01/#flow">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="flow-arrows" data-consult-title="矢印でつなぐ">このデザインで相談</button>
@@ -450,7 +477,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">暗い背景に、料金プランのカードを並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/bodycare-01/#price">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="price-standard" data-consult-title="暗い背景のカード">このデザインで相談</button>
@@ -468,9 +494,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="price-table" aria-pressed="false" aria-label="料金表 を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>料金表</h2>
     <p class="pitch">プラン名・内容・金額を、明るい背景の表で並べる。クリニックやサロンのような、きちんとした印象に。</p>
-    <p class="meta">向いているお店：美容室・エステ・整体・士業・クリニック</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：美容室・エステ・整体・士業・クリニック</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/beauty-01/#price">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="price-table" data-consult-title="料金表">このデザインで相談</button>
@@ -488,9 +513,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="price-simple" aria-pressed="false" aria-label="明るいカード を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>明るいカード</h2>
     <p class="pitch">明るい背景に白いカードで料金を並べ、おすすめのプランに帯を付ける。親しみやすく選びやすい形。</p>
-    <p class="meta">向いているお店：ジム・教室・学習塾・ペットサロン・カフェの教室</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：ジム・教室・学習塾・ペットサロン・カフェの教室</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#price">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="price-simple" data-consult-title="明るいカード">このデザインで相談</button>
@@ -508,7 +532,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="menu-standard" aria-pressed="false" aria-label="お品書き を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>お品書き</h2>
     <p class="pitch">カテゴリごとに、品名と金額を点線でつないで並べる。</p>
-    
     
     
     <div class="card-actions">
@@ -530,7 +553,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">写真と説明を、同じ大きさの格子状に並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/food-01/#gallery">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="gallery-standard" data-consult-title="格子">このデザインで相談</button>
@@ -548,9 +570,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="gallery-masonry" aria-pressed="false" aria-label="高さ違いのタイル を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>高さ違いのタイル</h2>
     <p class="pitch">写真の高さを少しずつ変えて、ずらして並べる。SNSのような、にぎやかで楽しい印象。</p>
-    <p class="meta">向いているお店：アパレル・ネイル・美容室・カフェ・写真館</p>
     <p class="need"><span>準備するもの</span>写真3〜9枚</p>
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：アパレル・ネイル・美容室・カフェ・写真館</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/apparel-01/#gallery">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="gallery-masonry" data-consult-title="高さ違いのタイル">このデザインで相談</button>
@@ -568,9 +589,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="gallery-carousel" aria-pressed="false" aria-label="横スクロール を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>横スクロール</h2>
     <p class="pitch">写真のカードを横一列に並べ、指でめくったり矢印で送ったりする。事例や商品が多くても場所をとらない形。</p>
-    <p class="meta">向いているお店：リフォーム・工務店・不動産・アパレル・旅館</p>
     <p class="need"><span>準備するもの</span>写真3枚以上</p>
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：リフォーム・工務店・不動産・アパレル・旅館</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/beauty-01/#gallery">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="gallery-carousel" data-consult-title="横スクロール">このデザインで相談</button>
@@ -590,7 +610,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">所在地・営業時間などの一覧と、地図を左右に並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#visit">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="visit-standard" data-consult-title="地図と並べる">このデザインで相談</button>
@@ -608,9 +627,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="visit-schedule" aria-pressed="false" aria-label="営業時間表つき を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>営業時間表つき</h2>
     <p class="pitch">曜日ごとの営業時間を○×の表で見せ、その下に地図を大きく置く。午前・午後で受付が違うお店に。</p>
-    <p class="meta">向いているお店：整体・整骨院・クリニック・歯科・美容室・教室</p>
     <p class="need"><span>準備するもの</span>曜日ごとの営業時間</p>
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：整体・整骨院・クリニック・歯科・美容室・教室</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/bodycare-01/#visit">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="visit-schedule" data-consult-title="営業時間表つき">このデザインで相談</button>
@@ -630,7 +648,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">質問を押すと答えが開く一覧。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#faq">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="faq-standard" data-consult-title="開閉式">このデザインで相談</button>
@@ -648,9 +665,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="faq-cards" aria-pressed="false" aria-label="2列カード を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>2列カード</h2>
     <p class="pitch">質問と答えを、最初から開いた状態のカードで2列に並べる。押さなくても読めるので、よく読まれる形。最大6件。</p>
-    <p class="meta">向いているお店：学習塾・ペットサロン・リフォーム・アパレル</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：学習塾・ペットサロン・リフォーム・アパレル</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/apparel-01/#faq">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="faq-cards" data-consult-title="2列カード">このデザインで相談</button>
@@ -670,7 +686,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">案内の項目と、問い合わせボタンを並べる。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#contact">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="contact-standard" data-consult-title="標準">このデザインで相談</button>
@@ -688,9 +703,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="contact-band" aria-pressed="false" aria-label="電話を大きく を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>電話を大きく</h2>
     <p class="pitch">濃い色の帯に、電話番号と受付時間を大きく表示し、その下にほかのボタンを並べる。電話でのご予約・ご相談が多いお店に。</p>
-    <p class="meta">向いているお店：飲食店・整体・クリニック・工務店・士業</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：飲食店・整体・クリニック・工務店・士業</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/food-01/#contact">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="contact-band" data-consult-title="電話を大きく">このデザインで相談</button>
@@ -710,7 +724,6 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     <p class="pitch">ブログ記事をカードで横に並べ、矢印で送る。</p>
     
     
-    
     <div class="card-actions">
       <a class="button" href="../samples/fitness-01/#journal">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="journal-standard" data-consult-title="横スクロールのカード">このデザインで相談</button>
@@ -728,9 +741,8 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
       <button class="fav" type="button" data-fav="journal-list" aria-pressed="false" aria-label="お知らせリスト を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
     <h2>お知らせリスト</h2>
     <p class="pitch">日付・カテゴリ・タイトルを1行ずつ並べる、すっきりしたお知らせ欄。営業日や入荷のお知らせが中心のお店に。</p>
-    <p class="meta">向いているお店：飲食店・カフェ・士業・クリニック・教室</p>
     
-    
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta">向いているお店：飲食店・カフェ・士業・クリニック・教室</p></div></details>
     <div class="card-actions">
       <a class="button" href="../samples/food-01/#journal">使用例を見る<span aria-hidden="true">→</span></a>
       <button class="button primary" type="button" data-consult="journal-list" data-consult-title="お知らせリスト">このデザインで相談</button>
@@ -738,7 +750,7 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     </div>
   </div>
 </article>
-    <p class="empty" id="empty" hidden>条件に合う見本がありません。絞り込みを変えてみてください。</p>
+    <div class="empty" id="empty" hidden><p>この組み合わせに合う見本は、まだありません。</p><p class="empty-sub">近いものをお探しします。<button class="chip" type="button" id="resetFilters">絞り込みをすべて外す</button>か、<button class="chip" type="button" data-consult="" data-consult-title="">そのまま相談する</button>をどうぞ。</p></div>
   </div>
 </main>
 <footer><div class="wrap">掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</div></footer>
@@ -821,7 +833,36 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     });
     document.getElementById('empty').hidden = shown > 0;
     document.getElementById('result').textContent = shown + ' / ' + cards.length;
+    paintCounts();
   };
+  // それぞれの条件を押したら何件になるかを出し、0件になる条件は押せなくする
+  const paintCounts = () => {
+    document.querySelectorAll('.group[data-group]').forEach(group => {
+      const key = group.dataset.group;
+      group.querySelectorAll('.chip[data-value]').forEach(chip => {
+        const v = chip.dataset.value;
+        const test = { ...state, [key]: v };
+        let n = 0;
+        cards.forEach(card => {
+          let ok = Object.entries(test).every(([g, val]) => !val || (card.dataset[g] || '').split('|').includes(val));
+          if (favOnly.getAttribute('aria-pressed') === 'true') ok = ok && favs.has(card.dataset.id);
+          if (ok) n++;
+        });
+        const badge = chip.querySelector('.chip-n');
+        if (badge) badge.textContent = v ? String(n) : '';
+        chip.disabled = !!v && n === 0;
+      });
+    });
+  };
+  const resetBtn = document.getElementById('resetFilters');
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    document.querySelectorAll('.group[data-group]').forEach(group => {
+      delete state[group.dataset.group];
+      group.querySelectorAll('.chip[data-value]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.value === '')));
+    });
+    if (favOnly.getAttribute('aria-pressed') === 'true') favOnly.setAttribute('aria-pressed', 'false');
+    apply();
+  });
   document.querySelectorAll('.group[data-group]').forEach(group => {
     const key = group.dataset.group;
     group.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => {
