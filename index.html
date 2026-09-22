@@ -46,10 +46,13 @@ p{margin:0}
 /* 最初の画面 */
 .hero{padding:56px 0 64px}
 .hero .wordmark{font:600 11px/1 var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.hero h1{margin:18px 0 0;font-size:clamp(30px,5.2vw,58px);font-weight:800;letter-spacing:-.025em}
-.hero h1 span{display:block}
-.hero .lead{max-width:620px;margin-top:20px;font-size:15.5px;color:var(--muted)}
-.hero .cta-row{margin-top:26px}
+/* 見出しは1行が基本。入りきらない幅でだけ、まとまりの切れ目で折り返す */
+.hero h1{margin:16px 0 0;font-size:clamp(24px,4.6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.3}
+/* 前半は途中で折らない。後半は幅が足りないときだけ自然に折り返す（句点は日本語の禁則で行頭に来ない） */
+.hero h1 span{display:inline-block;max-width:100%;white-space:nowrap}
+.hero h1 span:last-child{white-space:normal}
+.hero .lead{max-width:620px;margin-top:18px;font-size:15.5px;color:var(--muted)}
+.hero .cta-row{margin-top:24px}
 .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:40px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .facts>div{padding:16px 18px;background:var(--surface)}
 .facts dt{font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -151,7 +154,7 @@ footer{padding:52px 0 56px;border-top:1px solid var(--line);color:var(--muted);f
 <body>
 <div class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="/site-gallery-template/">まちの制作室<small>HOMEPAGE FOR SMALL SHOPS</small></a>
+    <a class="brand" href="/site-gallery-template/">まちの制作室<small>WEB DESIGN FOR LOCAL SHOPS</small></a>
     <nav class="topnav" aria-label="メニュー">
       <a href="#works">制作したサンプル</a>
       <a href="#price">料金</a>
@@ -164,8 +167,8 @@ footer{padding:52px 0 56px;border-top:1px solid var(--line);color:var(--muted);f
 
 <header class="hero">
   <div class="wrap">
-    <p class="wordmark">HOMEPAGE FOR SMALL SHOPS</p>
-    <h1><span>小さなお店の</span><span>ホームページを</span><span>1ページで作ります</span></h1>
+    <p class="wordmark">WEB DESIGN FOR LOCAL SHOPS</p>
+    <h1><span>お店に、</span><span>ちょうどいいホームページを。</span></h1>
     <p class="lead">美容室・食堂・出張仕事など、ひとりか少人数で営むお店のホームページを作っています。写真や文章がそろっていなくても、原案から一緒に整えます。</p>
     <div class="cta-row">
       <a class="button primary" href="/site-gallery-template/samples/">制作サンプルを見る</a>
