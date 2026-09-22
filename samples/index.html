@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Design Collection｜業種別ウェブサイトデザイン</title>
+<meta name="description" content="全国対応。写真や文章がそろっていなくても大丈夫です。">
+<meta name="theme-color" content="#f3f2ee">
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --bg:#e8e5dd;--surface:#ffffff;--ink:#141412;--muted:#57564f;--line:#d6d2c8;--chip:#dedbd2;--accent:#141412;--accent-ink:#ffffff;--hot:#e2552d;--shadow:0 6px 20px rgba(20,20,18,.08);--shadow-hover:0 12px 28px rgba(20,20,18,.14);
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f0f0d;--surface:#201f1c;--ink:#efeee8;--muted:#9d9b93;--line:#38372f;--chip:#2a2926;--accent:#efeee8;--accent-ink:#0f0f0d;--hot:#ff7a52;--shadow:0 8px 24px rgba(0,0,0,.45);--shadow-hover:0 14px 34px rgba(0,0,0,.55)}
+}
+:root[data-theme="dark"]{--bg:#0f0f0d;--surface:#201f1c;--ink:#efeee8;--muted:#9d9b93;--line:#38372f;--chip:#2a2926;--accent:#efeee8;--accent-ink:#0f0f0d;--hot:#ff7a52;--shadow:0 8px 24px rgba(0,0,0,.45);--shadow-hover:0 14px 34px rgba(0,0,0,.55)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;line-height:1.7;overflow-wrap:anywhere}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{width:min(1320px,calc(100% - 32px));margin:0 auto}
+.mono{font-family:var(--mono)}
+/* 上部：題字・3ステップ・案内 */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px}
+.brand{font-size:17px;font-weight:800;letter-spacing:-.03em;text-decoration:none}
+.topnav{display:flex;align-items:center;gap:6px 22px;flex-wrap:wrap;justify-content:flex-end}
+.topnav a{display:inline-flex;align-items:baseline;gap:6px;padding:4px 0;color:var(--muted);text-decoration:none;font-size:13px;font-weight:700}
+.topnav a b{font:500 10px/1 var(--mono);color:var(--muted)}
+.topnav a small{font:500 10px/1 var(--mono);opacity:.7}
+.topnav a[aria-current="page"]{color:var(--ink)}
+.topnav a[aria-current="page"] b{color:var(--hot)}
+.topnav a:hover{color:var(--ink)}
+.topnav-link{border:0;background:none;padding:4px 0;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.topnav-link:hover{color:var(--ink)}
+.topnav-cta{border:1px solid var(--ink);background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:7px 16px;font-size:12.5px;font-weight:700;cursor:pointer}
+.facts-block{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.consult h4{margin:18px 0 8px;font-size:13px;letter-spacing:.02em}
+.term-list{margin:0;display:grid;gap:8px}
+.term-list>div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;font-size:12.5px;line-height:1.7}
+.term-list dt{color:var(--muted)}
+.term-list dd{margin:0}
+.about-name{margin:4px 0 10px;font-size:20px;font-weight:800}
+.about-name span{display:block;margin-top:2px;font-size:12px;font-weight:600;color:var(--muted)}
+.flow-list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.flow-list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:baseline}
+.flow-list b{font:500 11px/1.6 var(--mono);color:var(--hot)}
+.flow-list strong{display:block;font-size:13.5px}
+.flow-list span{display:block;font-size:12.5px;color:var(--muted);line-height:1.7}
+.lead-note{display:inline-block;margin-top:6px;font-size:12.5px}
+.facts-block dd{font-size:20px}
+.term-points{margin:0 0 14px;padding-left:1.1em;color:var(--muted);font-size:13px;line-height:1.9}
+.masthead{border-bottom:1px solid var(--ink)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font:500 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bar span{min-width:0}
+.title-row{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:16px 48px;align-items:end;padding:34px 0 26px}
+h1{margin:0;font-size:clamp(44px,7.4vw,104px);line-height:.86;letter-spacing:-.055em;font-weight:800}
+h1 span{display:inline-block;max-width:100%}
+.lead{max-width:560px;margin:0;color:var(--muted);font-size:14.5px;justify-self:end}
+.facts{display:flex;flex-wrap:wrap;gap:8px 32px;margin:0}
+.facts>div{display:flex;align-items:baseline;gap:8px;min-width:0}
+.facts dt{font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.title-row{padding-bottom:30px}
+.title-row.is-offer{grid-template-columns:minmax(0,1fr);gap:0;align-items:start;padding:30px 0 28px}
+.wordmark{margin:0 0 14px;font:600 11px/1 var(--mono);letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+h1.ja{font-size:clamp(27px,4.1vw,54px);line-height:1.18;letter-spacing:-.02em;font-weight:800}
+.title-row.is-offer .lead{justify-self:start;margin-top:16px;max-width:640px}
+.offer-facts{display:flex;flex-wrap:wrap;gap:8px 30px;margin:18px 0 0}
+.offer-facts>div{display:flex;align-items:baseline;gap:8px;min-width:0}
+.offer-facts dt{font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.offer-facts dd{margin:0;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.offer-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.offer-cta .button{font-size:13px}
+.picks{border-bottom:1px solid var(--line);background:var(--surface)}
+.picks .wrap{padding:16px 0}
+.picks-title{margin:0 0 10px;font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.picks-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pick{display:flex;gap:10px;align-items:center;min-width:0;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);text-decoration:none;color:inherit}
+.pick:hover{border-color:var(--ink)}
+.pick-thumb{flex:0 0 84px;aspect-ratio:16/10;overflow:hidden;border-radius:7px;background:var(--chip)}
+.pick-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.pick-body{min-width:0;display:flex;flex-direction:column;gap:2px}
+.pick-body b{font-size:13px;font-weight:700;overflow-wrap:anywhere}
+.pick-body span{font:500 11px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+/* 絞り込み */
+.filters{border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;flex-direction:column;gap:8px;padding:12px 0}
+.group{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.filter-box{display:flex;flex-direction:column;gap:8px}
+.filter-box[open]{gap:8px}
+.filter-box summary{display:none}
+.filter-box .group+.group{margin-top:8px}
+.group-label{flex:none;width:52px;font:500 10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;line-height:1.5}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip.fav-chip[aria-pressed="true"]{background:var(--hot);border-color:var(--hot);color:#fff}
+.chip:focus-visible,.button:focus-visible,.preview:focus-visible,.steps a:focus-visible,.fav:focus-visible,.link:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.result{font:500 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.06em}
+/* カード */
+main{padding:34px 0 88px}
+/* 左に絞り込み、右に見本を並べる */
+.layout{display:grid;grid-template-columns:232px minmax(0,1fr);gap:32px;align-items:start}
+.side-inner{position:sticky;top:64px;display:flex;flex-direction:column;gap:6px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow)}
+.side-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:2px 2px 8px;font:600 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fgroup{border-top:1px solid var(--line)}
+.fgroup summary{display:flex;align-items:center;gap:8px;padding:11px 2px;font-size:14px;font-weight:700;cursor:pointer;list-style:none}
+.fgroup summary::-webkit-details-marker{display:none}
+.fgroup summary::after{content:"+";margin-left:auto;font:400 16px/1 var(--mono);color:var(--muted)}
+.fgroup[open] summary::after{content:"−"}
+.fgroup-now{font:500 11px/1 var(--mono);color:var(--hot)}
+/* 条件は縦に1つずつ並べる（横に読ませない） */
+.fgroup .group{display:flex;flex-direction:column;gap:1px;padding:0 0 8px}
+.side .chip{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:9px 10px;border:0;border-radius:9px;background:transparent;font-size:13.5px;font-weight:600;text-align:left}
+.side .chip:hover:not([disabled]){background:var(--chip)}
+.side .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.side .chip-n{margin-left:auto;font:500 11px/1 var(--mono);opacity:.65}
+.side .fav-chip{margin-top:10px;border:1px solid var(--line);border-radius:9px;justify-content:center}
+.side-reset{margin-top:6px;padding:8px;border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;cursor:pointer}
+.filter-tab,.side-backdrop,.side-links{display:none}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding:0}
+.card{display:flex;flex-direction:column;min-width:0;padding:14px;background:var(--surface);border-radius:18px;outline:1px solid var(--line);box-shadow:var(--shadow);transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.card[hidden]{display:none}
+.preview{position:relative;display:block;aspect-ratio:16/9.5;background:var(--chip);overflow:hidden;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line)}
+.shot-pc{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.22,.72,.2,1)}
+.preview:hover .shot-pc{transform:scale(1.03)}
+.shot-empty{display:grid;place-items:center;height:100%;font-weight:700;color:var(--muted)}
+.phone{position:absolute;right:5%;bottom:-16%;width:21%;aspect-ratio:390/844;border:4px solid #111;border-radius:16px;overflow:hidden;background:#111;box-shadow:0 16px 32px rgba(0,0,0,.28);transition:transform .7s cubic-bezier(.22,.72,.2,1)}
+.preview:hover .phone{transform:translateY(-6%)}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.card-body{display:flex;flex-direction:column;gap:10px;padding:18px 6px 6px;flex:1}
+.card-meta{display:flex;align-items:center;gap:10px;min-width:0;font:500 11px/1.4 var(--mono);color:var(--muted);letter-spacing:.04em}
+.card-meta .no{color:var(--hot)}
+.card-meta .eyebrow{min-width:0;font-family:inherit}
+.fav{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid color-mix(in srgb,var(--ink) 35%,transparent);border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.fav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+.fav[aria-pressed="true"]{border-color:var(--hot);color:var(--hot)}
+.fav[aria-pressed="true"] svg{fill:currentColor}
+/* カードの見出し */
+.card h2{margin:2px 0 0;font-size:21px;line-height:1.45;letter-spacing:-.01em}
+.card p{margin:0}
+.pitch{color:var(--muted);font-size:14.5px;line-height:1.75}
+.meta{font-size:12px;color:var(--muted)}
+.meta.shop{font-size:11.5px;opacity:.85}
+.need{font-size:12.5px}
+.need span{display:inline-block;margin-right:8px;padding:1px 8px;border-radius:4px;background:var(--chip);font-size:11px;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
+.tags li{font-size:11.5px;padding:2px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto;padding-top:10px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font-size:12.5px;font-weight:700;text-decoration:none;cursor:pointer;text-align:center}
+.button.primary{background:var(--accent);color:var(--accent-ink)}
+.link{border:0;background:none;padding:6px 2px;font-size:12px;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.card-more{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.card-more summary{cursor:pointer;list-style:none;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card-more summary::-webkit-details-marker{display:none}
+.card-more summary::after{content:" +"}
+.card-more[open] summary::after{content:" −"}
+.card-more>div{margin-top:8px}
+.empty{grid-column:1/-1;margin:0;padding:48px 16px;text-align:center;color:var(--muted);background:var(--surface);outline:1px solid var(--line)}
+.empty p{margin:0}
+.empty-sub{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;font-size:13px}
+.chip-n{margin-left:6px;font:500 11px/1 var(--mono);color:var(--muted)}
+.chip[disabled]{opacity:.38;cursor:not-allowed}
+.chip[aria-pressed="true"] .chip-n{color:inherit;opacity:.7}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+footer a{font-weight:700}
+/* プレビュー・相談 */
+dialog{padding:0;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink)}
+dialog::backdrop{background:rgba(10,10,8,.55)}
+#viewer{width:min(1280px,calc(100% - 24px));height:calc(100dvh - 24px);max-height:none}
+.viewer{display:flex;flex-direction:column;height:100%}
+.viewer-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface)}
+.viewer-title{flex:1;min-width:0;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-bar .button{min-height:32px;padding:0 12px;font-size:12px}
+.viewer-bar .button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.viewer-stage{flex:1;display:flex;justify-content:center;overflow:auto;padding:16px;background:var(--chip)}
+.viewer-stage iframe{width:100%;height:100%;border:0;border-radius:10px;background:#fff}
+.viewer-stage.is-sp iframe{width:390px;max-width:100%;border-radius:28px;border:8px solid #111}
+#consult{width:min(480px,calc(100% - 24px))}
+.consult{padding:24px}
+.consult h3{margin:6px 0 4px;font-size:20px;line-height:1.4}
+.consult .small{margin:0 0 16px;color:var(--muted);font-size:13px}
+.consult-id{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 16px;padding:10px 14px;border:1px dashed var(--line);border-radius:10px;font:600 15px/1.4 var(--mono)}
+.consult-id button{border:1px solid var(--line);border-radius:999px;background:transparent;padding:4px 10px;font:600 11px/1.4 var(--mono);cursor:pointer}
+.consult-actions{display:grid;gap:10px}
+.consult-actions .button{width:100%;min-height:48px}
+.consult-close{margin-top:14px;width:100%}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .title-row{grid-template-columns:minmax(0,1fr);padding:22px 0 16px}
+  .title-row.is-offer{padding:20px 0 20px}
+  .offer-cta .button{width:100%;justify-content:center}
+  .picks-row{grid-template-columns:minmax(0,1fr)}
+  .bar span:last-child{display:none}
+  .topbar{position:static}
+  .topbar-inner{flex-wrap:wrap;gap:4px 12px;padding:8px 0}
+  .brand{font-size:15px}
+  .topnav{width:100%;justify-content:flex-start;gap:4px 14px}
+  .topnav a,.topnav-link{font-size:12px}
+  .topnav a small{display:none}
+  .topnav-cta{margin-left:auto;padding:6px 13px;font-size:12px}
+  .facts-block{grid-template-columns:minmax(0,1fr)}
+  .lead{font-size:13.5px}
+  .lead{justify-self:start}
+  .steps{flex-direction:column}
+  .steps a{border-right:0;border-bottom:1px solid var(--line);padding:12px 0}
+  .steps a:last-child{border-bottom:0}
+  .group-label{width:100%}
+  .filter-box summary{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;font-weight:700;cursor:pointer;list-style:none}
+  .filter-box summary::-webkit-details-marker{display:none}
+  .filter-box summary::after{content:"+";margin-left:auto;font:500 16px/1 var(--mono)}
+  .filter-box[open] summary::after{content:"−"}
+  .filter-box summary span{font-weight:500;font-size:12px;color:var(--muted)}
+  .layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  .grid{grid-template-columns:minmax(0,1fr);gap:16px}
+  /* 上のメニューは「相談する」だけにして、他は引き出しの中へ */
+  .topnav a.topnav-step,.topnav .topnav-link{display:none}
+  .topbar-inner{padding:10px 0}
+  .side-links{display:flex;flex-direction:column;gap:2px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .side-links a,.side-links button{padding:9px 10px;border:0;border-radius:9px;background:transparent;color:var(--ink);font-size:13.5px;font-weight:600;text-align:left;text-decoration:none;cursor:pointer}
+  h1.ja{font-size:26px}
+  .title-row.is-offer .lead{margin-top:12px}
+  .offer-cta{margin-top:16px}
+  .offer-cta .button{font-size:13px;padding:11px 14px}
+  .picks .wrap{padding:12px 0}
+  .card{padding:10px}
+  .card h2{font-size:18px}
+  .pitch{font-size:13.5px}
+  /* スマホでは左端から引き出す */
+  .side{position:fixed;left:0;top:0;bottom:0;width:min(300px,86vw);z-index:60;transform:translateX(-100%);transition:transform .24s ease;overflow:auto;background:var(--surface);border-right:1px solid var(--line);box-shadow:0 0 40px rgba(0,0,0,.4)}
+  .side.is-open{transform:none}
+  .side-inner{position:static;height:100%;border:0;border-radius:0;padding:14px 14px 32px}
+  /* 絞り込みは本文に重ならないよう、左下に丸いボタンで置く */
+  .filter-tab{display:flex;align-items:center;gap:6px;position:fixed;left:0;bottom:18px;z-index:55;padding:12px 16px 12px 13px;border:1px solid var(--line);border-left:0;border-radius:0 999px 999px 0;background:var(--ink);color:var(--bg);font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  .side-backdrop:not([hidden]){display:block;position:fixed;inset:0;z-index:59;background:rgba(0,0,0,.55);border:0}
+  .viewer-stage{padding:0}
+  .viewer-stage iframe,.viewer-stage.is-sp iframe{width:100%;border:0;border-radius:0}
+  .viewer-mode{display:none}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/site-gallery-template/">← トップ</a>
+    <nav class="topnav" aria-label="メニュー">
+      <a class="topnav-step" href="/site-gallery-template/samples/" aria-current="page"><b>01</b>完成した見本から選ぶ<small>17</small></a>
+      <a class="topnav-step" href="/site-gallery-template/heroes/"><b>02</b>最初の画面を変える<small>20</small></a>
+      <a class="topnav-step" href="/site-gallery-template/sections/"><b>03</b>料金表・写真などの部分を変える<small>27</small></a>
+      <button class="topnav-link" type="button" id="termsOpen">料金・納期</button>
+      <button class="topnav-link" type="button" id="aboutOpen">つくる人</button>
+      <button class="topnav-cta" type="button" data-consult="" data-consult-title="">相談する</button>
+    </nav>
+  </div>
+</div>
+<header class="masthead">
+  <div class="wrap">
+    <div class="bar"><span>Site Samples for Local Shops</span><span>17 sites · 20 first views · 27 sections</span></div>
+    <div class="title-row is-offer">
+      <p class="wordmark">SAMPLES</p>
+      <h1 class="ja"><span>お店のホームページを、</span><span>5万円から。</span></h1>
+      <p class="lead">全国対応。写真や文章がそろっていなくても大丈夫です。</p>
+      <dl class="offer-facts"><div><dt>制作費</dt><dd>5万円〜</dd></div><div><dt>納期</dt><dd>1〜2週間</dd></div><div><dt>つくるもの</dt><dd>1ページ・スマホ対応</dd></div></dl>
+      <div class="offer-cta"><button class="button primary" type="button" data-consult="" data-consult-title="">まず相談する</button><a class="button" href="#grid">見本を見る<span aria-hidden="true">↓</span></a></div>
+    </div>
+  </div>
+</header>
+<section class="picks" aria-label="迷ったら、この3つ">
+  <div class="wrap">
+    <p class="picks-title">迷ったら、この3つ</p>
+    <div class="picks-row">
+      <a class="pick" href="beauty-01/"><span class="pick-thumb"><img src="beauty-01/thumb-pc.jpg" alt="" loading="lazy"></span><span class="pick-body"><b>予約を増やしたいお店に</b><span>hair atelier KOMOREBI</span></span></a>
+      <a class="pick" href="food-01/"><span class="pick-thumb"><img src="food-01/thumb-pc.jpg" alt="" loading="lazy"></span><span class="pick-body"><b>来店と電話につなげたいお店に</b><span>町の食堂 こめとゆげ</span></span></a>
+      <a class="pick" href="clean-01/"><span class="pick-thumb"><img src="clean-01/thumb-pc.jpg" alt="" loading="lazy"></span><span class="pick-body"><b>料金を先に見せたい出張仕事に</b><span>おそうじ屋 みずいろ</span></span></a>
+    </div>
+  </div>
+</section>
+<main>
+  <button class="filter-tab" type="button" id="filterTab" aria-controls="side" aria-expanded="false">絞り込む</button>
+  <button class="side-backdrop" type="button" id="sideBackdrop" aria-label="絞り込みを閉じる" hidden></button>
+  <div class="wrap layout">
+    <aside class="side" id="side" aria-label="絞り込み">
+      <div class="side-inner">
+        <div class="side-head"><span>絞り込む</span><span class="result" id="result"></span></div>
+        <details class="fgroup" data-fgroup="industry" open><summary>業種<span class="fgroup-now"></span></summary><div class="group" data-group="industry"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="fitness" aria-pressed="false">運動・フィットネス<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="beauty" aria-pressed="false">美容<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="food" aria-pressed="false">飲食<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="apparel" aria-pressed="false">アパレル<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="realestate" aria-pressed="false">不動産<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="bodycare" aria-pressed="false">整体・治療院<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="home" aria-pressed="false">住まい・リフォーム<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="school" aria-pressed="false">教育・スクール<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="office" aria-pressed="false">士業・事務所<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="pet" aria-pressed="false">ペット<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="clean" aria-pressed="false">掃除・修理<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="shop" aria-pressed="false">花・ギフト<span class="chip-n" aria-hidden="true"></span></button></div></details>
+        <details class="fgroup" data-fgroup="mood"><summary>雰囲気<span class="fgroup-now"></span></summary><div class="group" data-group="mood"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="元気・力強い" aria-pressed="false">元気・力強い<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="やさしい・ナチュラル" aria-pressed="false">やさしい・ナチュラル<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="上品・落ち着き" aria-pressed="false">上品・落ち着き<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="親しみ・かわいい" aria-pressed="false">親しみ・かわいい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="おしゃれ・個性的" aria-pressed="false">おしゃれ・個性的<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="誠実・信頼" aria-pressed="false">誠実・信頼<span class="chip-n" aria-hidden="true"></span></button></div></details>
+        <details class="fgroup" data-fgroup="goal"><summary>目的<span class="fgroup-now"></span></summary><div class="group" data-group="goal"><button class="chip" type="button" data-value="" aria-pressed="true">すべて</button><button class="chip" type="button" data-value="予約を増やしたい" aria-pressed="false">予約を増やしたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="来店してほしい" aria-pressed="false">来店してほしい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="電話・相談を受けたい" aria-pressed="false">電話・相談を受けたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="商品を見せたい" aria-pressed="false">商品を見せたい<span class="chip-n" aria-hidden="true"></span></button><button class="chip" type="button" data-value="信頼を伝えたい" aria-pressed="false">信頼を伝えたい<span class="chip-n" aria-hidden="true"></span></button></div></details>
+        <button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 保存した見本（<span id="favCount">0</span>）</button>
+        <button class="side-reset" type="button" id="resetFilters">絞り込みを外す</button>
+        <nav class="side-links" aria-label="メニュー">
+          <a href="/site-gallery-template/samples/" aria-current="page">01 完成した見本から選ぶ</a>
+          <a href="/site-gallery-template/heroes/">02 最初の画面を変える</a>
+          <a href="/site-gallery-template/sections/">03 料金表・写真などの部分を変える</a>
+          <button type="button" data-open="terms">料金・納期</button>
+          <button type="button" data-open="about">つくる人</button>
+        </nav>
+      </div>
+    </aside>
+    <div class="grid" id="grid">
+<article class="card" data-industry="fitness" data-mood="元気・力強い|やさしい・ナチュラル" data-goal="予約を増やしたい" data-id="fitness-01">
+  <a class="preview" href="fitness-01/" aria-label="少人数の、体験から始めるスタジオ向け の見本を開く">
+    <img class="shot-pc" src="fitness-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="fitness-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">運動・フィットネス</span>
+      <button class="fav" type="button" data-fav="fitness-01" aria-pressed="false" aria-label="少人数の、体験から始めるスタジオ向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>少人数の、体験から始めるスタジオ向け</h2>
+    <p class="pitch">体験レッスンから通ってもらいたい、ジム・ヨガ・ピラティスに。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：Pilates Studio NAGI</p><p class="meta">グリーン系／ゴシック体／LINE予約</p><ul class="tags"><li>元気・力強い</li><li>やさしい・ナチュラル</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="fitness-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="fitness-01" data-consult-title="少人数の、体験から始めるスタジオ向け">相談する</button>
+      <button class="link" type="button" data-preview="fitness-01/" data-title="fitness-01　少人数の、体験から始めるスタジオ向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="beauty" data-mood="上品・落ち着き" data-goal="予約を増やしたい" data-id="beauty-01">
+  <a class="preview" href="beauty-01/" aria-label="落ち着いた、一人サロン向け の見本を開く">
+    <img class="shot-pc" src="beauty-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="beauty-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">美容</span>
+      <button class="fav" type="button" data-fav="beauty-01" aria-pressed="false" aria-label="落ち着いた、一人サロン向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>落ち着いた、一人サロン向け</h2>
+    <p class="pitch">お店の雰囲気と美容師の人柄を伝えたい方に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：hair atelier KOMOREBI</p><p class="meta">ベージュ系／明朝体／LINE・電話予約</p><ul class="tags"><li>上品・落ち着き</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="beauty-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="beauty-01" data-consult-title="落ち着いた、一人サロン向け">相談する</button>
+      <button class="link" type="button" data-preview="beauty-01/" data-title="beauty-01　落ち着いた、一人サロン向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="food" data-mood="やさしい・ナチュラル|親しみ・かわいい" data-goal="来店してほしい|電話・相談を受けたい" data-id="food-01">
+  <a class="preview" href="food-01/" aria-label="毎日通ってもらう、町の食堂向け の見本を開く">
+    <img class="shot-pc" src="food-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="food-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">飲食</span>
+      <button class="fav" type="button" data-fav="food-01" aria-pressed="false" aria-label="毎日通ってもらう、町の食堂向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>毎日通ってもらう、町の食堂向け</h2>
+    <p class="pitch">お品書きと営業時間を、ひと目で伝えたい飲食店に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：町の食堂 こめとゆげ</p><p class="meta">れんが色／明朝体／電話・地図</p><ul class="tags"><li>やさしい・ナチュラル</li><li>親しみ・かわいい</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="food-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="food-01" data-consult-title="毎日通ってもらう、町の食堂向け">相談する</button>
+      <button class="link" type="button" data-preview="food-01/" data-title="food-01　毎日通ってもらう、町の食堂向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="apparel" data-mood="おしゃれ・個性的|上品・落ち着き" data-goal="商品を見せたい" data-id="apparel-01">
+  <a class="preview" href="apparel-01/" aria-label="余白を生かした、セレクトショップ向け の見本を開く">
+    <img class="shot-pc" src="apparel-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="apparel-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">アパレル</span>
+      <button class="fav" type="button" data-fav="apparel-01" aria-pressed="false" aria-label="余白を生かした、セレクトショップ向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>余白を生かした、セレクトショップ向け</h2>
+    <p class="pitch">商品の写真を主役に、通販や在庫の問い合わせへつなげたい方に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：YOHAKU</p><p class="meta">白黒／ゴシック体／通販・LINE</p><ul class="tags"><li>おしゃれ・個性的</li><li>上品・落ち着き</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="apparel-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="apparel-01" data-consult-title="余白を生かした、セレクトショップ向け">相談する</button>
+      <button class="link" type="button" data-preview="apparel-01/" data-title="apparel-01　余白を生かした、セレクトショップ向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="realestate" data-mood="誠実・信頼" data-goal="電話・相談を受けたい|信頼を伝えたい" data-id="realestate-01">
+  <a class="preview" href="realestate-01/" aria-label="相談から始める、地域の不動産会社向け の見本を開く">
+    <img class="shot-pc" src="realestate-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="realestate-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">不動産</span>
+      <button class="fav" type="button" data-fav="realestate-01" aria-pressed="false" aria-label="相談から始める、地域の不動産会社向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>相談から始める、地域の不動産会社向け</h2>
+    <p class="pitch">物件検索ではなく、売却・購入・空き家の相談を受けたい会社に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：まちのわ不動産</p><p class="meta">紺系／ゴシック体／電話・メール</p><ul class="tags"><li>誠実・信頼</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="realestate-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="realestate-01" data-consult-title="相談から始める、地域の不動産会社向け">相談する</button>
+      <button class="link" type="button" data-preview="realestate-01/" data-title="realestate-01　相談から始める、地域の不動産会社向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="bodycare" data-mood="誠実・信頼|やさしい・ナチュラル" data-goal="予約を増やしたい|電話・相談を受けたい" data-id="bodycare-01">
+  <a class="preview" href="bodycare-01/" aria-label="お悩みから入る、整体・治療院向け の見本を開く">
+    <img class="shot-pc" src="bodycare-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="bodycare-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">整体・治療院</span>
+      <button class="fav" type="button" data-fav="bodycare-01" aria-pressed="false" aria-label="お悩みから入る、整体・治療院向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>お悩みから入る、整体・治療院向け</h2>
+    <p class="pitch">「こんなお悩みありませんか？」から始めて、初回の予約につなげたい方に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：ととのえ整体院</p><p class="meta">青緑系／ゴシック体／電話・LINE</p><ul class="tags"><li>誠実・信頼</li><li>やさしい・ナチュラル</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="bodycare-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="bodycare-01" data-consult-title="お悩みから入る、整体・治療院向け">相談する</button>
+      <button class="link" type="button" data-preview="bodycare-01/" data-title="bodycare-01　お悩みから入る、整体・治療院向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="home" data-mood="誠実・信頼|親しみ・かわいい" data-goal="電話・相談を受けたい|信頼を伝えたい" data-id="reform-01">
+  <a class="preview" href="reform-01/" aria-label="仕上がりを見せたい、工務店・リフォーム向け の見本を開く">
+    <img class="shot-pc" src="reform-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="reform-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">住まい・リフォーム</span>
+      <button class="fav" type="button" data-fav="reform-01" aria-pressed="false" aria-label="仕上がりを見せたい、工務店・リフォーム向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>仕上がりを見せたい、工務店・リフォーム向け</h2>
+    <p class="pitch">施工前と施工後、事例の写真で、腕の良さを伝えたい方に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：やまき工務店</p><p class="meta">木の茶色／ゴシック体／電話・LINE・メール</p><ul class="tags"><li>誠実・信頼</li><li>親しみ・かわいい</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="reform-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="reform-01" data-consult-title="仕上がりを見せたい、工務店・リフォーム向け">相談する</button>
+      <button class="link" type="button" data-preview="reform-01/" data-title="reform-01　仕上がりを見せたい、工務店・リフォーム向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="beauty" data-mood="上品・落ち着き|やさしい・ナチュラル" data-goal="予約を増やしたい" data-id="nail-01">
+  <a class="preview" href="nail-01/" aria-label="初回の特典で集客する、ネイル・エステ向け の見本を開く">
+    <img class="shot-pc" src="nail-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="nail-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">美容</span>
+      <button class="fav" type="button" data-fav="nail-01" aria-pressed="false" aria-label="初回の特典で集客する、ネイル・エステ向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>初回の特典で集客する、ネイル・エステ向け</h2>
+    <p class="pitch">広告やチラシから来た人を、初回の予約につなげたい方に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：nail room Ciel</p><p class="meta">ローズ系／明朝体／LINE予約</p><ul class="tags"><li>上品・落ち着き</li><li>やさしい・ナチュラル</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="nail-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="nail-01" data-consult-title="初回の特典で集客する、ネイル・エステ向け">相談する</button>
+      <button class="link" type="button" data-preview="nail-01/" data-title="nail-01　初回の特典で集客する、ネイル・エステ向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="school" data-mood="元気・力強い" data-goal="予約を増やしたい|信頼を伝えたい" data-id="school-01">
+  <a class="preview" href="school-01/" aria-label="保護者に安心を伝える、塾・教室向け の見本を開く">
+    <img class="shot-pc" src="school-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="school-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">教育・スクール</span>
+      <button class="fav" type="button" data-fav="school-01" aria-pressed="false" aria-label="保護者に安心を伝える、塾・教室向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>保護者に安心を伝える、塾・教室向け</h2>
+    <p class="pitch">料金と入塾までの流れを分かりやすく見せたい塾・習い事に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：個別指導 あおば塾</p><p class="meta">青とオレンジ／ゴシック体／LINE・電話</p><ul class="tags"><li>元気・力強い</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="school-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="school-01" data-consult-title="保護者に安心を伝える、塾・教室向け">相談する</button>
+      <button class="link" type="button" data-preview="school-01/" data-title="school-01　保護者に安心を伝える、塾・教室向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="office" data-mood="誠実・信頼|上品・落ち着き" data-goal="電話・相談を受けたい|信頼を伝えたい" data-id="office-01">
+  <a class="preview" href="office-01/" aria-label="相談しやすさを伝える、士業・事務所向け の見本を開く">
+    <img class="shot-pc" src="office-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="office-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">士業・事務所</span>
+      <button class="fav" type="button" data-fav="office-01" aria-pressed="false" aria-label="相談しやすさを伝える、士業・事務所向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>相談しやすさを伝える、士業・事務所向け</h2>
+    <p class="pitch">お客様の声と料金の目安で、最初の相談の不安をなくしたい方に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：みなと税理士事務所</p><p class="meta">紺グレー／明朝体／電話・予約フォーム</p><ul class="tags"><li>誠実・信頼</li><li>上品・落ち着き</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="office-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="office-01" data-consult-title="相談しやすさを伝える、士業・事務所向け">相談する</button>
+      <button class="link" type="button" data-preview="office-01/" data-title="office-01　相談しやすさを伝える、士業・事務所向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="food" data-mood="やさしい・ナチュラル|おしゃれ・個性的" data-goal="来店してほしい|商品を見せたい" data-id="cafe-01">
+  <a class="preview" href="cafe-01/" aria-label="写真で雰囲気を伝える、カフェ・パン屋向け の見本を開く">
+    <img class="shot-pc" src="cafe-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="cafe-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">飲食</span>
+      <button class="fav" type="button" data-fav="cafe-01" aria-pressed="false" aria-label="写真で雰囲気を伝える、カフェ・パン屋向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>写真で雰囲気を伝える、カフェ・パン屋向け</h2>
+    <p class="pitch">たくさんの写真で、行ってみたくなる気持ちを引き出したいお店に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：bakery &amp; coffee KOMUGI</p><p class="meta">ミルクティー色／明朝体／地図・電話</p><ul class="tags"><li>やさしい・ナチュラル</li><li>おしゃれ・個性的</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="cafe-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="cafe-01" data-consult-title="写真で雰囲気を伝える、カフェ・パン屋向け">相談する</button>
+      <button class="link" type="button" data-preview="cafe-01/" data-title="cafe-01　写真で雰囲気を伝える、カフェ・パン屋向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="pet" data-mood="親しみ・かわいい|やさしい・ナチュラル" data-goal="予約を増やしたい" data-id="pet-01">
+  <a class="preview" href="pet-01/" aria-label="やさしさを伝える、ペット・こども向け の見本を開く">
+    <img class="shot-pc" src="pet-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="pet-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">ペット</span>
+      <button class="fav" type="button" data-fav="pet-01" aria-pressed="false" aria-label="やさしさを伝える、ペット・こども向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>やさしさを伝える、ペット・こども向け</h2>
+    <p class="pitch">丸い形とやわらかい色で、はじめての方の不安をやわらげたいお店に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：dog salon こはる</p><p class="meta">ピーチ系／丸ゴシック／LINE・電話</p><ul class="tags"><li>親しみ・かわいい</li><li>やさしい・ナチュラル</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="pet-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="pet-01" data-consult-title="やさしさを伝える、ペット・こども向け">相談する</button>
+      <button class="link" type="button" data-preview="pet-01/" data-title="pet-01　やさしさを伝える、ペット・こども向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="clean" data-mood="誠実・信頼|やさしい・ナチュラル" data-goal="電話・相談を受けたい|信頼を伝えたい" data-id="clean-01">
+  <a class="preview" href="clean-01/" aria-label="見積もりの相談がほしい、出張仕事の業種向け の見本を開く">
+    <img class="shot-pc" src="clean-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="clean-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">掃除・修理</span>
+      <button class="fav" type="button" data-fav="clean-01" aria-pressed="false" aria-label="見積もりの相談がほしい、出張仕事の業種向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>見積もりの相談がほしい、出張仕事の業種向け</h2>
+    <p class="pitch">料金と対応エリアを最初に伝えて、問い合わせのハードルを下げたいお店に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：おそうじ屋 みずいろ</p><p class="meta">深緑／ゴシック体／LINE・電話</p><ul class="tags"><li>誠実・信頼</li><li>やさしい・ナチュラル</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="clean-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="clean-01" data-consult-title="見積もりの相談がほしい、出張仕事の業種向け">相談する</button>
+      <button class="link" type="button" data-preview="clean-01/" data-title="clean-01　見積もりの相談がほしい、出張仕事の業種向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="shop" data-mood="やさしい・ナチュラル|上品・落ち着き" data-goal="来店してほしい|商品を見せたい" data-id="flower-01">
+  <a class="preview" href="flower-01/" aria-label="季節の商品を、写真で見せたいお店向け の見本を開く">
+    <img class="shot-pc" src="flower-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="flower-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">花・ギフト</span>
+      <button class="fav" type="button" data-fav="flower-01" aria-pressed="false" aria-label="季節の商品を、写真で見せたいお店向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>季節の商品を、写真で見せたいお店向け</h2>
+    <p class="pitch">季節ごとに見せたいものが変わるお店に。写真を入れ替えるだけで印象が変わります。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：花屋 ハルノヒ</p><p class="meta">若草色／明朝体／電話・Instagram</p><ul class="tags"><li>やさしい・ナチュラル</li><li>上品・落ち着き</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="flower-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="flower-01" data-consult-title="季節の商品を、写真で見せたいお店向け">相談する</button>
+      <button class="link" type="button" data-preview="flower-01/" data-title="flower-01　季節の商品を、写真で見せたいお店向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="food" data-mood="上品・落ち着き|おしゃれ・個性的" data-goal="予約を増やしたい|来店してほしい" data-id="izakaya-01">
+  <a class="preview" href="izakaya-01/" aria-label="夜のお店・和の落ち着きを出したいお店向け の見本を開く">
+    <img class="shot-pc" src="izakaya-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="izakaya-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">飲食</span>
+      <button class="fav" type="button" data-fav="izakaya-01" aria-pressed="false" aria-label="夜のお店・和の落ち着きを出したいお店向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>夜のお店・和の落ち着きを出したいお店向け</h2>
+    <p class="pitch">料理の写真と営業時間を、落ち着いた雰囲気のまま伝えたい飲食店に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：炭火と酒 いろり</p><p class="meta">墨色／明朝体／電話・Instagram</p><ul class="tags"><li>上品・落ち着き</li><li>おしゃれ・個性的</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="izakaya-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="izakaya-01" data-consult-title="夜のお店・和の落ち着きを出したいお店向け">相談する</button>
+      <button class="link" type="button" data-preview="izakaya-01/" data-title="izakaya-01　夜のお店・和の落ち着きを出したいお店向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="school" data-mood="やさしい・ナチュラル|親しみ・かわいい" data-goal="予約を増やしたい|電話・相談を受けたい" data-id="piano-01">
+  <a class="preview" href="piano-01/" aria-label="先生ひとりの、個人の教室向け の見本を開く">
+    <img class="shot-pc" src="piano-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="piano-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">教育・スクール</span>
+      <button class="fav" type="button" data-fav="piano-01" aria-pressed="false" aria-label="先生ひとりの、個人の教室向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>先生ひとりの、個人の教室向け</h2>
+    <p class="pitch">月謝と体験レッスンを分かりやすく見せて、問い合わせを増やしたい教室に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：ピアノ教室 ひなた</p><p class="meta">藤色／丸ゴシック／LINE・電話</p><ul class="tags"><li>やさしい・ナチュラル</li><li>親しみ・かわいい</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="piano-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="piano-01" data-consult-title="先生ひとりの、個人の教室向け">相談する</button>
+      <button class="link" type="button" data-preview="piano-01/" data-title="piano-01　先生ひとりの、個人の教室向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+<article class="card" data-industry="food" data-mood="上品・落ち着き|誠実・信頼" data-goal="来店してほしい|商品を見せたい" data-id="wagashi-01">
+  <a class="preview" href="wagashi-01/" aria-label="老舗・工芸など、格を伝えたいお店向け の見本を開く">
+    <img class="shot-pc" src="wagashi-01/thumb-pc.jpg" alt="" loading="lazy" width="1440" height="900">
+    <span class="phone"><img src="wagashi-01/thumb-sp.jpg" alt="" loading="lazy" width="390" height="844"></span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta"><span class="eyebrow">飲食</span>
+      <button class="fav" type="button" data-fav="wagashi-01" aria-pressed="false" aria-label="老舗・工芸など、格を伝えたいお店向け を候補に保存"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z"/></svg></button></div>
+    <h2>老舗・工芸など、格を伝えたいお店向け</h2>
+    <p class="pitch">長く続けてきたことを、落ち着いた見た目で伝えたいお店に。</p>
+    <details class="card-more"><summary>くわしく</summary><div><p class="meta shop">見本の店名：御菓子司 みどりや</p><p class="meta">抹茶色／明朝体／電話・Instagram</p><ul class="tags"><li>上品・落ち着き</li><li>誠実・信頼</li></ul></div></details>
+    <div class="card-actions">
+      <a class="button" href="wagashi-01/">見本を見る<span aria-hidden="true">→</span></a>
+      <button class="button primary" type="button" data-consult="wagashi-01" data-consult-title="老舗・工芸など、格を伝えたいお店向け">相談する</button>
+      <button class="link" type="button" data-preview="wagashi-01/" data-title="wagashi-01　老舗・工芸など、格を伝えたいお店向け">スマホ表示</button>
+    </div>
+  </div>
+</article>
+      <div class="empty" id="empty" hidden><p>この組み合わせに合う見本はありません。</p><p class="empty-sub"><button class="chip" type="button" data-consult="" data-consult-title="">そのまま相談する</button></p></div>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap"><span>掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</span><span><a href="/site-gallery-template/">料金・制作の流れ・作っている人</a>　/　<a href="/site-gallery-template/privacy/">プライバシーポリシー</a></span></div></footer>
+<dialog id="viewer" aria-label="見本の表示">
+  <div class="viewer">
+    <div class="viewer-bar">
+      <span class="viewer-title" id="viewerTitle"></span>
+      <button class="button viewer-mode" type="button" data-mode="pc" aria-pressed="false">PC</button>
+      <button class="button viewer-mode" type="button" data-mode="sp" aria-pressed="true">スマホ</button>
+      <a class="button" id="viewerOpen" href="#" target="_blank" rel="noopener">新しいタブ</a>
+      <button class="button" type="button" id="viewerClose">閉じる</button>
+    </div>
+    <div class="viewer-stage is-sp" id="viewerStage"><iframe id="viewerFrame" title="見本のサイト"></iframe></div>
+  </div>
+</dialog>
+<dialog id="terms" aria-labelledby="termsTitle">
+  <div class="consult">
+    <p class="result">Price &amp; Schedule</p>
+    <h3 id="termsTitle">料金・納期</h3>
+    <dl class="facts facts-block"><div><dt>制作費</dt><dd>5万円〜</dd></div><div><dt>納期</dt><dd>1〜2週間</dd></div></dl>
+    <p class="small">表示はすべて税込です。金額は内容によって変わります。お見積もりは無料です。 納期は、文章と写真がそろってから1〜2週間です。</p>
+    <h4>基本料金に含まれるもの</h4>
+    <dl class="term-list"><div><dt>ページ数</dt><dd>1ページ（お知らせのページは記事ごとに自動で作られます）</dd></div><div><dt>修正</dt><dd>公開前に2回まで無料（それ以降は1回 5,500円）</dd></div><div><dt>写真・文章</dt><dd>お店の写真と文章に差し替え。文章は原案からお手伝いします</dd></div><div><dt>スマホ対応</dt><dd>含まれます（PC・スマホどちらも確認して納品）</dd></div><div><dt>お知らせ機能</dt><dd>含まれます。公開後はご自身で記事を追加できます</dd></div><div><dt>公開</dt><dd>GitHub Pagesで公開（サーバー代 無料）</dd></div></dl>
+    <h4>別料金・対応していないこと</h4>
+    <dl class="term-list"><div><dt>独自ドメイン</dt><dd>取得・設定は 11,000円（ドメイン代 年1,500円前後は実費）</dd></div><div><dt>公開後の更新代行</dt><dd>1回 3,300円〜（ご自身での更新は無料）</dd></div><div><dt>予約・決済の機能</dt><dd>外部サービス（LINE・予約サイトなど）へのボタン設置まで</dd></div><div><dt>写真撮影</dt><dd>行っていません。ご用意が難しい場合は無料素材でご提案します</dd></div></dl>
+    <button class="button consult-close" type="button" id="termsClose">閉じる</button>
+  </div>
+</dialog>
+<dialog id="about" aria-labelledby="aboutTitle">
+  <div class="consult">
+    <p class="result">About</p>
+    <h3 id="aboutTitle">つくる人と、進め方</h3>
+    <p class="about-name">まちの制作室<span>ホームページ制作（フリーランス）</span></p>
+    <p class="small">地域のお店のホームページを作っています。業種ごとの見本をもとに、お店の写真と文章に置き換えていく作り方です。写真や文章がそろっていなくても、何を用意すればよいかをお伝えしながら一緒に進められます。</p>
+    <dl class="term-list"><div><dt>対応地域</dt><dd>全国対応（打ち合わせはオンライン。訪問が必要な場合はご相談ください）</dd></div><div><dt>返信の目安</dt><dd>ご相談への返信は、24時間以内を目安にしています</dd></div></dl>
+    <h4>相談から公開までの流れ</h4>
+    <ol class="flow-list"><li><b>01</b><div><strong>相談</strong><span>見本の番号と、お店のことを教えてください</span></div></li><li><b>02</b><div><strong>見積もり</strong><span>内容を伺い、金額と納期をお伝えします（無料）</span></div></li><li><b>03</b><div><strong>材料をお預かり</strong><span>写真・文章・ロゴなどをお預かりします</span></div></li><li><b>04</b><div><strong>制作・ご確認</strong><span>できたものを見てもらい、2回まで直します</span></div></li><li><b>05</b><div><strong>公開</strong><span>公開して完了。更新の方法もお伝えします</span></div></li></ol>
+    <button class="button consult-close" type="button" id="aboutClose">閉じる</button>
+  </div>
+</dialog>
+<dialog id="consult" aria-labelledby="consultTitle">
+  <div class="consult">
+    <p class="result">Consultation</p>
+    <h3 id="consultTitle">このデザインで相談する</h3>
+    <p class="small" id="consultLead"></p>
+    <div class="consult-id"><span id="consultId"></span><button type="button" id="consultCopy">番号をコピー</button></div>
+    <div class="consult-actions" id="consultActions"></div>
+    <button class="button consult-close" type="button" id="consultClose">閉じる</button>
+  </div>
+</dialog>
+<script>
+(() => {
+  // スマホでは、最初はすべて閉じておく（タップで開く）
+  if (!window.matchMedia('(min-width: 761px)').matches) document.querySelectorAll('.fgroup[open]').forEach(d => { d.open = false; });
+  // 左端の「絞り込む」で開け閉めする（スマホ）
+  const side = document.getElementById('side'), sideTab = document.getElementById('filterTab'), sideBack = document.getElementById('sideBackdrop');
+  const openSide = on => { side.classList.toggle('is-open', on); sideBack.hidden = !on; sideTab.setAttribute('aria-expanded', String(on)); document.body.style.overflow = on ? 'hidden' : ''; };
+  sideTab.addEventListener('click', () => openSide(!side.classList.contains('is-open')));
+  sideBack.addEventListener('click', () => openSide(false));
+  document.querySelectorAll('.side-links [data-open]').forEach(b => b.addEventListener('click', () => {
+    openSide(false);
+    document.getElementById(b.dataset.open === 'terms' ? 'termsOpen' : 'aboutOpen').click();
+  }));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') openSide(false); });
+  const STUDIO = {"email":null,"instagram":null};
+  const PAGE_URL = location.href.split('#')[0];
+  // 候補（この端末のブラウザにだけ保存）
+  const load = () => { try { return JSON.parse(localStorage.getItem('sg-favs') || '[]'); } catch { return []; } };
+  const save = v => { try { localStorage.setItem('sg-favs', JSON.stringify(v)); } catch {} };
+  let favs = new Set(load());
+  const cards = [...document.querySelectorAll('.card')];
+  const favOnly = document.getElementById('favOnly');
+  const paintFavs = () => {
+    document.querySelectorAll('[data-fav]').forEach(b => b.setAttribute('aria-pressed', String(favs.has(b.dataset.fav))));
+    document.getElementById('favCount').textContent = cards.filter(c => favs.has(c.dataset.id)).length;
+  };
+  document.querySelectorAll('[data-fav]').forEach(b => b.addEventListener('click', () => {
+    favs.has(b.dataset.fav) ? favs.delete(b.dataset.fav) : favs.add(b.dataset.fav);
+    save([...favs]); paintFavs(); apply();
+  }));
+  // 絞り込み（グループ同士は「かつ」）
+  const state = {};
+  const apply = () => {
+    let shown = 0;
+    cards.forEach(card => {
+      let ok = Object.entries(state).every(([g, v]) => !v || (card.dataset[g] || '').split('|').includes(v));
+      if (favOnly.getAttribute('aria-pressed') === 'true') ok = ok && favs.has(card.dataset.id);
+      card.hidden = !ok; if (ok) shown++;
+    });
+    document.getElementById('empty').hidden = shown > 0;
+    document.getElementById('result').textContent = shown + ' / ' + cards.length;
+    paintCounts();
+    document.querySelectorAll('.fgroup[data-fgroup]').forEach(d => {
+      const now = d.querySelector('.fgroup-now');
+      if (now) now.textContent = state[d.dataset.fgroup] || '';
+    });
+  };
+  // それぞれの条件を押したら何件になるかを出し、0件になる条件は押せなくする
+  const paintCounts = () => {
+    document.querySelectorAll('.group[data-group]').forEach(group => {
+      const key = group.dataset.group;
+      group.querySelectorAll('.chip[data-value]').forEach(chip => {
+        const v = chip.dataset.value;
+        const test = { ...state, [key]: v };
+        let n = 0;
+        cards.forEach(card => {
+          let ok = Object.entries(test).every(([g, val]) => !val || (card.dataset[g] || '').split('|').includes(val));
+          if (favOnly.getAttribute('aria-pressed') === 'true') ok = ok && favs.has(card.dataset.id);
+          if (ok) n++;
+        });
+        const badge = chip.querySelector('.chip-n');
+        if (badge) badge.textContent = v ? String(n) : '';
+        chip.disabled = !!v && n === 0;
+      });
+    });
+  };
+  const resetBtn = document.getElementById('resetFilters');
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    document.querySelectorAll('.group[data-group]').forEach(group => {
+      delete state[group.dataset.group];
+      group.querySelectorAll('.chip[data-value]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.value === '')));
+    });
+    if (favOnly.getAttribute('aria-pressed') === 'true') favOnly.setAttribute('aria-pressed', 'false');
+    apply();
+  });
+  document.querySelectorAll('.group[data-group]').forEach(group => {
+    const key = group.dataset.group;
+    group.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => {
+      state[key] = chip.dataset.value;
+      group.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+      apply();
+    }));
+  });
+  favOnly.addEventListener('click', () => { favOnly.setAttribute('aria-pressed', String(favOnly.getAttribute('aria-pressed') !== 'true')); apply(); });
+  paintFavs(); apply();
+  // スマホで見る
+  const viewer = document.getElementById('viewer'), frame = document.getElementById('viewerFrame'), stage = document.getElementById('viewerStage');
+  const modes = [...document.querySelectorAll('.viewer-mode')];
+  const setMode = mode => { stage.classList.toggle('is-sp', mode === 'sp'); modes.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode))); };
+  modes.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  document.querySelectorAll('[data-preview]').forEach(btn => btn.addEventListener('click', () => {
+    frame.src = btn.dataset.preview; document.getElementById('viewerTitle').textContent = btn.dataset.title;
+    document.getElementById('viewerOpen').href = btn.dataset.preview; setMode('sp');
+    if (typeof viewer.showModal === 'function') viewer.showModal(); else location.href = btn.dataset.preview;
+  }));
+  const closeViewer = () => { viewer.close(); frame.src = 'about:blank'; };
+  document.getElementById('viewerClose').addEventListener('click', closeViewer);
+  viewer.addEventListener('click', e => { if (e.target === viewer) closeViewer(); });
+  viewer.addEventListener('cancel', () => { frame.src = 'about:blank'; });
+  // このデザインで相談（見本の番号を自動で引き継ぐ）
+  const consult = document.getElementById('consult');
+  const copy = text => navigator.clipboard?.writeText(text).then(() => true, () => false) ?? Promise.resolve(false);
+  const about = document.getElementById('about');
+  document.getElementById('aboutOpen').addEventListener('click', () => { if (typeof about.showModal === 'function') about.showModal(); });
+  document.getElementById('aboutClose').addEventListener('click', () => about.close());
+  about.addEventListener('click', e => { if (e.target === about) about.close(); });
+  const terms = document.getElementById('terms');
+  document.getElementById('termsOpen').addEventListener('click', () => { if (typeof terms.showModal === 'function') terms.showModal(); });
+  document.getElementById('termsClose').addEventListener('click', () => terms.close());
+  terms.addEventListener('click', e => { if (e.target === terms) terms.close(); });
+  document.querySelectorAll('[data-consult]').forEach(btn => btn.addEventListener('click', () => {
+    const id = btn.dataset.consult, title = btn.dataset.consultTitle;
+    document.querySelector('.consult-id').hidden = !id;
+    document.getElementById('consultId').textContent = id;
+    document.getElementById('consultLead').textContent = id ? '「' + title + '」の見本をもとに、お店のホームページを作ります。' : '気になる見本が決まっていなくても、ご相談いただけます。';
+    const box = document.getElementById('consultActions'); box.innerHTML = '';
+    if (STUDIO.email) {
+      const subject = id ? '【見本 ' + id + '】ホームページ制作の相談' : 'ホームページ制作の相談';
+      const saved = [...favs].filter(f => f !== id);
+      const body = (id ? '見本の番号：' + id + '（' + title + '）\n' : '')
+        + (saved.length ? '候補に保存した見本：' + saved.join('、') + '\n' : '')
+        + '見本の一覧：' + PAGE_URL + '\n\n■ お店の名前：\n■ 業種：\n■ ご希望の公開時期：\n■ 気になっていること：\n';
+      const a = document.createElement('a'); a.className = 'button primary'; a.textContent = 'メールで相談する';
+      a.href = 'mailto:' + STUDIO.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); box.append(a);
+    }
+    if (STUDIO.instagram) {
+      const a = document.createElement('a'); a.className = 'button'; a.textContent = 'InstagramのDMで相談する（番号をコピーして開きます）';
+      a.href = STUDIO.instagram; a.target = '_blank'; a.rel = 'noopener';
+      a.addEventListener('click', () => { copy(id); }); box.append(a);
+    }
+    if (!box.children.length) { const p = document.createElement('p'); p.className = 'small'; p.textContent = 'ご相談の受付は準備中です。'; box.append(p); }
+    if (typeof consult.showModal === 'function') consult.showModal();
+  }));
+  document.getElementById('consultCopy').addEventListener('click', async e => { const ok = await copy(document.getElementById('consultId').textContent); e.target.textContent = ok ? 'コピーしました' : 'コピーできませんでした'; setTimeout(() => { e.target.textContent = '番号をコピー'; }, 1600); });
+  document.getElementById('consultClose').addEventListener('click', () => consult.close());
+  consult.addEventListener('click', e => { if (e.target === consult) consult.close(); });
+  // 見本のページから「この見本で制作を相談する」で戻ってきたとき（?consult=見本の番号）
+  const wanted = new URLSearchParams(location.search).get('consult');
+  if (wanted) {
+    const btn = document.querySelector('[data-consult="' + CSS.escape(wanted) + '"]');
+    (btn || document.querySelector('.topnav-cta'))?.click();
+    document.querySelector('.card[data-id="' + CSS.escape(wanted) + '"]')?.scrollIntoView({ block: 'center' });
+  }
+})();
+</script>
+</body>
+</html>

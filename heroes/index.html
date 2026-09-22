@@ -167,6 +167,8 @@ main{padding:34px 0 88px}
 .chip[disabled]{opacity:.38;cursor:not-allowed}
 .chip[aria-pressed="true"] .chip-n{color:inherit;opacity:.7}
 footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+footer a{font-weight:700}
 /* プレビュー・相談 */
 dialog{padding:0;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink)}
 dialog::backdrop{background:rgba(10,10,8,.55)}
@@ -245,9 +247,9 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
 <body>
 <div class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="/site-gallery-template/">／Samples</a>
+    <a class="brand" href="/site-gallery-template/">← トップ</a>
     <nav class="topnav" aria-label="メニュー">
-      <a class="topnav-step" href="/site-gallery-template/"><b>01</b>完成した見本から選ぶ<small>17</small></a>
+      <a class="topnav-step" href="/site-gallery-template/samples/"><b>01</b>完成した見本から選ぶ<small>17</small></a>
       <a class="topnav-step" href="/site-gallery-template/heroes/" aria-current="page"><b>02</b>最初の画面を変える<small>20</small></a>
       <a class="topnav-step" href="/site-gallery-template/sections/"><b>03</b>料金表・写真などの部分を変える<small>27</small></a>
       <button class="topnav-link" type="button" id="termsOpen">料金・納期</button>
@@ -280,7 +282,7 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
         <button class="chip fav-chip" type="button" id="favOnly" aria-pressed="false">♡ 保存した見本（<span id="favCount">0</span>）</button>
         <button class="side-reset" type="button" id="resetFilters">絞り込みを外す</button>
         <nav class="side-links" aria-label="メニュー">
-          <a href="/site-gallery-template/">01 完成した見本から選ぶ</a>
+          <a href="/site-gallery-template/samples/">01 完成した見本から選ぶ</a>
           <a href="/site-gallery-template/heroes/" aria-current="page">02 最初の画面を変える</a>
           <a href="/site-gallery-template/sections/">03 料金表・写真などの部分を変える</a>
           <button type="button" data-open="terms">料金・納期</button>
@@ -653,7 +655,7 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
     </div>
   </div>
 </main>
-<footer><div class="wrap">掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</div></footer>
+<footer><div class="wrap"><span>掲載しているサンプルの店舗・人物・写真・住所・電話番号は、すべて架空のものです。</span><span><a href="/site-gallery-template/">料金・制作の流れ・作っている人</a>　/　<a href="/site-gallery-template/privacy/">プライバシーポリシー</a></span></div></footer>
 <dialog id="viewer" aria-label="見本の表示">
   <div class="viewer">
     <div class="viewer-bar">
@@ -683,11 +685,11 @@ dialog::backdrop{background:rgba(10,10,8,.55)}
   <div class="consult">
     <p class="result">About</p>
     <h3 id="aboutTitle">つくる人と、進め方</h3>
-    <p class="about-name">【お名前】<span>ホームページ制作（フリーランス）</span></p>
-    <p class="small">地域のお店のホームページを、見本をもとに手早く・安く作っています。写真や文章がそろっていなくても、一緒に考えながら進められます。</p>
+    <p class="about-name">まちの制作室<span>ホームページ制作（フリーランス）</span></p>
+    <p class="small">地域のお店のホームページを作っています。業種ごとの見本をもとに、お店の写真と文章に置き換えていく作り方です。写真や文章がそろっていなくても、何を用意すればよいかをお伝えしながら一緒に進められます。</p>
     <dl class="term-list"><div><dt>対応地域</dt><dd>全国対応（打ち合わせはオンライン。訪問が必要な場合はご相談ください）</dd></div><div><dt>返信の目安</dt><dd>ご相談への返信は、24時間以内を目安にしています</dd></div></dl>
     <h4>相談から公開までの流れ</h4>
-    <ol class="flow-list"><li><b>01</b><div><strong>相談</strong><span>見本の番号と、お店のことを教えてください（メール・Instagram）</span></div></li><li><b>02</b><div><strong>見積もり</strong><span>内容を伺い、金額と納期をお伝えします（無料）</span></div></li><li><b>03</b><div><strong>材料をお預かり</strong><span>写真・文章・ロゴなどをお預かりします</span></div></li><li><b>04</b><div><strong>制作・ご確認</strong><span>できたものを見てもらい、2回まで直します</span></div></li><li><b>05</b><div><strong>公開</strong><span>公開して完了。更新の方法もお伝えします</span></div></li></ol>
+    <ol class="flow-list"><li><b>01</b><div><strong>相談</strong><span>見本の番号と、お店のことを教えてください</span></div></li><li><b>02</b><div><strong>見積もり</strong><span>内容を伺い、金額と納期をお伝えします（無料）</span></div></li><li><b>03</b><div><strong>材料をお預かり</strong><span>写真・文章・ロゴなどをお預かりします</span></div></li><li><b>04</b><div><strong>制作・ご確認</strong><span>できたものを見てもらい、2回まで直します</span></div></li><li><b>05</b><div><strong>公開</strong><span>公開して完了。更新の方法もお伝えします</span></div></li></ol>
     <button class="button consult-close" type="button" id="aboutClose">閉じる</button>
   </div>
 </dialog>
